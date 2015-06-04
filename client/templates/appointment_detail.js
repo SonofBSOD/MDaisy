@@ -139,7 +139,24 @@ Template.appointmentDetail.helpers({
 */
 Template.appointmentDetail.events({
 	'click .medical_information' : function(){
-		Session.set("appointment_proc_type", this.proc_type);
+		var medical_info_record = medicalInfo.findOne({proc_type:this.proc_type});
+
+		if(medical_info_record !== null){
+			IonModal.open("information_modal", medical_info_record);
+		}
+		else{
+				IonPopup.show({
+				title: 'Error',
+				template : "Sorry! Medical procedure information could not be loaded!",
+				buttons : [{
+					text: 'Ok',
+					type: 'button-positive',
+					onTap: function(){
+						IonPopup.close();
+					}
+				}]
+			});
+		}
 	},
 
 	'click .update_preparation' : function(e, tmp_inst){
