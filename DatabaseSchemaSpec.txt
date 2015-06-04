@@ -1,0 +1,54 @@
+Database Schema Specification
+This document lists the schema and purpose of all the
+collections used/shared across all versions of Meteoric Daisy
+
+Note that each document will have its own _id by default.
+
+TODO: proposed additions from the 6/3 meeting have not been fully
+transcribed.
+
+Meteor.user
+	added via useraccounts:core (i.e. useraccounts:ionic)
+	see https://github.com/meteor-useraccounts/core/blob/master/Guide.md
+	for full documentation
+
+	There are two types of users: patients and staff.
+	Patient Information:
+		name
+		email
+		phone #
+		medical record #
+		exam #
+		DOB
+
+appointments
+	contains detailed information for each appointment
+	Document Format :
+		user_id : the userId of the user who has this appointment
+		proc_type : 
+			a string representing the type of procedure. 
+			Current range of values: ["Lobotomy", "CT"]
+		date :
+			the appointment's scheduled date
+		department :
+		ordering_physician:
+		medical_record:
+		exam:
+
+medicalInfo
+	contains descriptions of medical procedures 
+	Document Format:
+		proc_type : 
+			contains the type of procedure
+			takes on one of the following values:
+		text :
+			contains textual description
+			NOTE: all text is escaped and rendered as is
+
+preparations
+	contains preparation requirements for each appointment
+	Document Format:
+		appointment_id : the _id of the appointment under which this preparation is grouped
+		completed: a boolean indicating whether the patient has fulfilled this requirement, either "true", "false"
+		text: the requirement, in text
+		date_by: the day this requirement is filed under, represented by a Javascript date object

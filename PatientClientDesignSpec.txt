@@ -1,0 +1,54 @@
+Meteoric Daisy Patient Client Design Doc, v1.0
+
+TODO: proposed additions from the 6/3 meeting have not been fully incorporated.
+
+1) Rationale/Overview
+The app's interface should be as simple and convenient as possible.
+Buttons, animations should be kept to a minimum, and medical information 
+takes priority.
+
+2) App Screens/States
+	2.0 User Login Screen
+	The app's initial log-in screen. The patient's account is created by
+	the medical staff's administrative interface. The account is identified
+	by an email address provided by the patient, along with a randomly generated
+	password. An email containing these credentials will be sent to the user.
+	Upon first login, the user will be prompted to set their own password.
+
+	This screen provides only a log-in button and a password reset feature.
+	Note that the password reset link will not be displayed/functional if the
+	user has not logged in once and changed their randomly assigned password.
+	Transitions: 2.1
+
+	2.1 Index/Home Page
+	Displays a list of the patient's upcoming appointments; each item
+	contains a "right arrow" to switch to a details page.
+
+	TODO: user logout
+	Transitions: 2.0, 2.2
+
+	2.2 Appointment Details Page
+	Provides:
+		-More detailed appointment location
+		-Preparation checklist
+
+	There is a back button to return to the appointment list.
+
+	There are 3 buttons on the bottom of this page for 3 actions the
+	user can perform, specific to this appointment. Each button will
+	trigger a backdrop/popup prompting the user for the task. Tap again
+	to cancel/remove the prompt.
+		-Update Status: send the current status of the preparation checklist 
+		to the staff program. Updates the "checked/unchecked" status of the current appointment. 
+		Returns a prompt to the user indicating whether or not the operation succeeded.
+		The updated state will be reflected on the medical staff's management application, and
+		they will also receive a notification.
+		-Contact: Bring up contact details of staff associated with
+		-Info: Bring up information on this appointment's medical procedure
+
+	Transitions: 2.1, 2.2
+
+3) Notifications
+	TODO: receive native notifications for checklist updates and requirements
+	sent by medical staff to a specific appointment.
+	

@@ -1,0 +1,12 @@
+/*
+	So far, this scss file is only used to install/include the ionic-sass base CSS styles,
+	along with icon media.
+
+	TODO: Customization via the package's SASS variables.
+
+	Details on both packages here: 
+	https://github.com/meteoric/ionic-sass
+	https://github.com/meteoric/ionicons-sass
+*/
+@import '.meteor/local/build/programs/server/assets/packages/meteoric_ionic-sass/ionic';
+@import '.meteor/local/build/programs/server/assets/packages/meteoric_ionicons-sass/ionicons';

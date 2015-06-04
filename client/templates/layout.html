@@ -1,0 +1,17 @@
+<!--
+	layout.html
+	is the default layout template for the root route in the application
+	side-menus are optional.
+-->
+
+<template name="layout">
+{{#ionBody}}
+
+	{{> ionNavBar}}
+
+	{{#ionNavView}}
+		{{> yield}}
+	{{/ionNavView}}
+
+{{/ionBody}}
+</template>

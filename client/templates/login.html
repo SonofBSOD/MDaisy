@@ -1,0 +1,22 @@
+<!--
+	This page contains the template for the root sign-in form.
+	AccountsTemplates atForm login template must be wrapped inside
+	ionContent for it to be styled correctly.
+-->
+<template name="login">
+	{{#contentFor "headerButtonRight"}}
+	{{/contentFor}}
+
+	{{#contentFor "headerButtonLeft"}}
+	{{/contentFor}}
+
+	{{#contentFor "headerTitle"}}
+		<h2 class="title">Meteoric Daisy</h2>
+	{{/contentFor}}
+
+	{{#ionView}}
+		{{#ionContent}}
+			{{> atForm}}
+		{{/ionContent}}
+	{{/ionView}}
+</template>

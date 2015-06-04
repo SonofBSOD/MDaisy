@@ -1,0 +1,62 @@
+<!--
+	appointment_detail.html
+	This file contains the template based on Ionic's "card" styling that shows
+	detailed information for a particular appointment.
+
+	Details described in 2.2 of "PatientClientDesignSpec"
+		
+-->
+
+<template name="appointmentDetail">
+	{{#contentFor "headerButtonLeft"}}
+		{{#ionItem path="list"}}
+		{{> ionIcon icon="ios-arrow-left"}}
+		{{/ionItem}}
+	{{/contentFor}}
+
+	{{#contentFor "headerButtonRight"}}
+		{{> atNavButton}}
+	{{/contentFor}}
+
+	{{#contentFor "headerTitle"}}
+		<h5 class="title" style="font-size:1em">{{title}}</h5>
+	{{/contentFor}}
+
+	{{#ionContent}}
+		{{#if has_obligations}}
+		{{#each obligations_exp}}
+			<div class="card">
+				<div class="item item-divider">
+					<h1 class="obligation_title">{{date_header}}</h1>
+				</div>
+				<div class="item item-text-wrap">
+					<ul>
+						{{#each date_obligations}}
+							<li class="item item-checkbox">
+								<label class="checkbox">
+									<input type="checkbox" class="test_class" {{obligation_checked}} obligation_id={{obligation_id}}>
+								</label>
+								{{text}}
+							</li>
+						{{/each}}
+					</ul>
+				</div>
+			</div>
+		{{/each}}
+		{{else}}
+			<div class="card">
+				<div class="item item-text-wrap">
+					This appointment has no preparation requirements.
+				</div>
+			</div>
+		{{/if}}
+			
+
+		<div class="button-bar">
+			<a class="button update_preparation">Update</a>
+			<a class="button medical_information" data-ion-modal="information_modal">Information</a>
+			<a class="button">Staff</a>
+		</div>
+
+	{{/ionContent}}
+</template>
