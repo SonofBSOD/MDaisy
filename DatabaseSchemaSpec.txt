@@ -4,22 +4,21 @@ collections used/shared across all versions of Meteoric Daisy
 
 Note that each document will have its own _id by default.
 
-TODO: proposed additions from the 6/3 meeting have not been fully
-transcribed.
-
 Meteor.user
 	added via useraccounts:core (i.e. useraccounts:ionic)
 	see https://github.com/meteor-useraccounts/core/blob/master/Guide.md
 	for full documentation
 
 	There are two types of users: patients and staff.
-	Patient Information:
+	Both types of accounts share the following fields:
 		name
 		email
 		phone #
+
+	Patient documents additionally contain:
 		medical record #
 		exam #
-		DOB
+		birth
 
 appointments
 	contains detailed information for each appointment
@@ -30,10 +29,16 @@ appointments
 			Current range of values: ["Lobotomy", "CT"]
 		date :
 			the appointment's scheduled date
-		department :
+		location:
+			a string indicating the appointment site
+		organization:
+			a string indicating the responsible organization
+		department:
+			a string indicating the relevant department of said responsible organization
 		ordering_physician:
-		medical_record:
-		exam:
+			the Mongo assigned _id of the staff account who ordered this appointment.
+		reason:
+			a string indicating why the appointment was ordered
 
 medicalInfo
 	contains descriptions of medical procedures 
@@ -48,7 +53,18 @@ medicalInfo
 preparations
 	contains preparation requirements for each appointment
 	Document Format:
-		appointment_id : the _id of the appointment under which this preparation is grouped
-		completed: a boolean indicating whether the patient has fulfilled this requirement, either "true", "false"
-		text: the requirement, in text
-		date_by: the day this requirement is filed under, represented by a Javascript date object
+		appointment_id : 
+			the Mongo assigned _id of the appointment under which this preparation is grouped
+		completed: 
+			a boolean indicating whether the patient has fulfilled this requirement, either "true", "false"
+		text: 
+			the requirement, in text
+		date_by: 
+			the day this requirement is filed under, represented by a Javascript date object
+		previous_value : 
+			holds the previous value of the checkbox, so that we can tell what changed
+			between multiple updates to this preparation requirement.
+			
+			on initialization, holds the Javascript value "null", and afterwards, will hold
+			the value of completed before an update operation is performed.
+
