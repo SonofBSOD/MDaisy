@@ -10,10 +10,17 @@ Meteor.user
 	for full documentation
 
 	There are two types of users: patients and staff.
-	Both types of accounts share the following fields:
-		name
-		email
-		phone #
+	Both types of accounts share the following fields.
+		email:
+			a string containing the user email
+	
+	**Note that these two are not separate fields in the document, but are contained
+	in the Meteor-supplied "profile" object.
+		name:
+			a space separated string of form "<first name> <last name>"
+		
+		phone #:
+			a string of form xxx-xxx-xxxx, where each x is a digit from 0 to 9.
 
 	Patient documents additionally contain:
 		medical record #
