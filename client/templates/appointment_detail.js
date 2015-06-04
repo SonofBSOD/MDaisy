@@ -177,5 +177,30 @@ Template.appointmentDetail.events({
 			}]
 		});
 
+	},
+
+	'click .contact_staff' : function(e, tmp_inst){
+		//Session.set("appointment_ordering_physician", this.ordering_physician);
+		var ordering_physician_record = Meteor.users.findOne({_id:this.ordering_physician});
+		
+		if(ordering_physician_record !== null){
+			//the second argument sets the modal's data context to an object containing
+			//the doctor's name and email.
+			IonModal.open("contact_modal", {name:ordering_physician_record.profile.name, 
+											email:ordering_physician_record.emails});
+		}
+		else{
+			IonPopup.show({
+				title: 'Error',
+				template : "Sorry! Staff information could not be loaded. Please try again.",
+				buttons : [{
+					text: 'Ok',
+					type: 'button-positive',
+					onTap: function(){
+						IonPopup.close();
+					}
+				}]
+			});
+		}
 	}
 });
