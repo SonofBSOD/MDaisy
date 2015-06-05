@@ -44,7 +44,8 @@ function startup_data(){
 			organization : "Weill Cornell Medical College",
 			department : "Radiology",
 			ordering_physician : doctor_id,
-			reason : "Lobotomy is cool, so you're the lab rat."
+			reason : "Lobotomy is cool, so you're the lab rat.",
+			last_checked : (new Date())
 		});
 
 		//along with fake sample information
@@ -64,7 +65,7 @@ function startup_data(){
 			completed:true,
 			text:"drink lots of water, by 9:00AM",
 			date_by:(new Date(2015, 4, 30, 9, 00)),
-			previous_value:null
+			last_updated:(new Date())
 		});
 
 		preparations.insert({
@@ -72,7 +73,7 @@ function startup_data(){
 			completed:true,
 			text:"stay up all night, by 11:00AM",
 			date_by:(new Date(2015, 4, 29, 11, 00)),
-			previous_value:null
+			last_updated:(new Date())
 		});
 
 		preparations.insert({
@@ -80,7 +81,7 @@ function startup_data(){
 			completed:false,
 			text:"discover the meaning of life, by 10:00AM",
 			date_by:(new Date(2015, 4, 29, 10, 30)),
-			previous_value:null
+			last_updated:(new Date())
 		});
 
 		//followed by an appointment with no preparation requirements
@@ -93,7 +94,8 @@ function startup_data(){
 			organization : "NYU Langone Medical Center",
 			department : "Neurology",
 			ordering_physician : doctor_id,
-			reason : "Post-lobotomy checkup."
+			reason : "Post-lobotomy checkup.",
+			last_checked : (new Date())
 		});
 	}
 }
