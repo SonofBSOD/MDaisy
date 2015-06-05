@@ -675,9 +675,9 @@
       "where": "client",
       "type": "js",
       "cacheable": true,
-      "url": "/client/templates/template.appointment_detail.js?b3f6dd828adb15aa0ec68a54e3c0823fe88f83fb",
-      "size": 3816,
-      "hash": "b3f6dd828adb15aa0ec68a54e3c0823fe88f83fb"
+      "url": "/client/templates/template.appointment_detail.js?f6b8ac46c25157b3c0d10644b0683ea032fe0005",
+      "size": 3787,
+      "hash": "f6b8ac46c25157b3c0d10644b0683ea032fe0005"
     },
     {
       "path": "app/client/templates/template.appointment_list.js",
@@ -687,6 +687,15 @@
       "url": "/client/templates/template.appointment_list.js?c08e3c170942cf21a841521a737c7463521ac9f3",
       "size": 2201,
       "hash": "c08e3c170942cf21a841521a737c7463521ac9f3"
+    },
+    {
+      "path": "app/client/templates/template.contact_modal.js",
+      "where": "client",
+      "type": "js",
+      "cacheable": true,
+      "url": "/client/templates/template.contact_modal.js?90cc4b56462ae7aeac2589aa1c99b0f894d69bdd",
+      "size": 1173,
+      "hash": "90cc4b56462ae7aeac2589aa1c99b0f894d69bdd"
     },
     {
       "path": "app/client/templates/template.information_modal.js",
@@ -729,9 +738,9 @@
       "where": "client",
       "type": "js",
       "cacheable": true,
-      "url": "/client/templates/appointment_detail.js?48d0fba61145649e0ba105a1f6216131460b6353",
-      "size": 5596,
-      "hash": "48d0fba61145649e0ba105a1f6216131460b6353"
+      "url": "/client/templates/appointment_detail.js?0deddbb1ef1877f6c1f2b2a37812bd39969be44f",
+      "size": 7938,
+      "hash": "0deddbb1ef1877f6c1f2b2a37812bd39969be44f"
     },
     {
       "path": "app/client/templates/appointment_list.js",
@@ -743,13 +752,22 @@
       "hash": "16123b8e4446ff6a25269d7e4305d7812638df83"
     },
     {
+      "path": "app/client/templates/contact_modal.js",
+      "where": "client",
+      "type": "js",
+      "cacheable": true,
+      "url": "/client/templates/contact_modal.js?fbf3c42b01d966e6347cbcf059ae5a1b6a3a964e",
+      "size": 240,
+      "hash": "fbf3c42b01d966e6347cbcf059ae5a1b6a3a964e"
+    },
+    {
       "path": "app/client/templates/information_modal.js",
       "where": "client",
       "type": "js",
       "cacheable": true,
-      "url": "/client/templates/information_modal.js?056723671a51bef8f7420ab8b7009606f4848d37",
-      "size": 168,
-      "hash": "056723671a51bef8f7420ab8b7009606f4848d37"
+      "url": "/client/templates/information_modal.js?46c29ddef8acf05b856e8b277505ee5214584404",
+      "size": 103,
+      "hash": "46c29ddef8acf05b856e8b277505ee5214584404"
     },
     {
       "path": "app/both/at_config.js",
@@ -765,9 +783,9 @@
       "where": "client",
       "type": "js",
       "cacheable": true,
-      "url": "/both/collections.js?e4627c7bbfdce19045aae52608dca0dbce5b2794",
-      "size": 294,
-      "hash": "e4627c7bbfdce19045aae52608dca0dbce5b2794"
+      "url": "/both/collections.js?cb9d3c00845faf304b4804cd2303b996febe8890",
+      "size": 2806,
+      "hash": "cb9d3c00845faf304b4804cd2303b996febe8890"
     },
     {
       "path": "app/both/routing.js",

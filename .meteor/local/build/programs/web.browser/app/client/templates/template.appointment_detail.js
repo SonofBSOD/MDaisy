@@ -87,11 +87,10 @@ Template["appointmentDetail"] = new Template("Template.appointmentDetail", (func
     }, "\n			", HTML.A({
       "class": "button update_preparation"
     }, "Update"), "\n			", HTML.A({
-      "class": "button medical_information",
-      "data-ion-modal": "information_modal"
+      "class": "button medical_information"
     }, "Information"), "\n			", HTML.A({
-      "class": "button"
-    }, "Staff"), "\n		"), "\n\n	" ];
+      "class": "button contact_staff"
+    }, "Contact"), "\n		"), "\n\n	" ];
   }) ];
 }));
 
