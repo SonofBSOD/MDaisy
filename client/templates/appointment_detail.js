@@ -160,39 +160,88 @@ Template.appointmentDetail.events({
 	},
 
 	'click .update_preparation' : function(e, tmp_inst){
-	
+		
 		var all_checkboxes = tmp_inst.$(".test_class");
-		var all_update_success = true;
-		var popup_text = "";
-
 		if(all_checkboxes.length > 0){
-			all_checkboxes.each(function(i, v){
-				all_update_success = all_update_success && 
-					(!!preparations.update({_id:$(v).attr("obligation_id")}, {$set:{completed:$(v).prop("checked")}}));
-			});
+			var id_and_checked_list = [];
 
-			if(all_update_success){
-				popup_text = "Your checklist was saved.";
-			}
-			else{
-				popup_text = "Your checklist could not be fully updated. Please try again.";
-			}
+			all_checkboxes.each(function(i, v){
+				id_and_checked_list.push({_id:$(v).attr("obligation_id"), checked:$(v).prop("checked")});
+			});
+			
+			Meteor.call("update_obligations", id_and_checked_list, this._id, function(error, result){
+				if(error){
+					IonPopup.show({
+						title: 'Update Status',
+						template : "A database error occurred. Please try again.",
+						buttons : [{
+							text: 'Ok',
+							type: 'button-positive',
+						onTap: function(){
+							IonPopup.close();
+						}
+						}]
+					});
+				}
+				else{
+					if(result.success){
+						IonPopup.show({
+								title: 'Update Status',
+								template : "Your checklist was updated successfully.",
+								buttons : [{
+									text: 'Ok',
+									type: 'button-positive',
+								onTap: function(){
+									IonPopup.close();
+								}
+								}]
+							});
+					}
+					else{
+						//must differentiate between attempted retroactive update or update failure!
+						if(result.outdated.length === 0){
+							IonPopup.show({
+								title: 'Update Status',
+								template : "A database error occurred. Please try again.",
+								buttons : [{
+									text: 'Ok',
+									type: 'button-positive',
+								onTap: function(){
+									IonPopup.close();
+								}
+								}]
+							});
+						}
+						else{
+							IonPopup.show({
+								title: 'Update Status',
+								template : "Retroactive obligation updates are not allowed!",
+								buttons : [{
+									text: 'Ok',
+									type: 'button-positive',
+								onTap: function(){
+									IonPopup.close();
+								}
+								}]
+							});
+						}
+					}
+				}
+			});
 		}
 		else{
-			popup_text = "You have no preparations to update.";
+			IonPopup.show({
+				title: 'Update Status',
+				template : "You have no preparations to update",
+				buttons : [{
+					text: 'Ok',
+					type: 'button-positive',
+					onTap: function(){
+						IonPopup.close();
+					}
+				}]
+			});
 		}
-
-		IonPopup.show({
-			title: 'Update Status',
-			template : popup_text,
-			buttons : [{
-				text: 'Ok',
-				type: 'button-positive',
-				onTap: function(){
-					IonPopup.close();
-				}
-			}]
-		});
 
 	},
 

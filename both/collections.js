@@ -46,6 +46,41 @@ preparations = new Mongo.Collection("preparations");
 */
 Meteor.methods({
 	update_obligations : function(obligation_status_list, appointment_id){
+		//first check that all proposed updates are NOT retroactive
+		var current_time = (new Date());
+		var retroactive = false;
+		var retroactive_list = [];
+
+		obligation_status_list.forEach(function(e){
+			var obligation_record = preparations.findOne({_id:e._id});
+			
+			//db lookup failure
+			if(obligation_record === null){
+				return {success:false, outdated:[]};
+			}
+
+			if(current_time > obligation_record.date_by){
+				retroactive = true;
+				retroactive_list.push(e._id);
+			}
+		});
+
+		//cannot update if the user is trying to maliciously change overdue obligations
+		if(retroactive){
+			return {success:false, outdated:retroactive_list};
+		}
+
+		//else, update the completed fields for each obligation, and make sure
+		//every update passes
+		obligation_status_list.forEach(function(e){
+			var ret = preparations.update({_id:e._id}, {$set:{completed:e.checked}});
+
+			if(ret != 1){
+				return {success:false, outdated:[]};
+			}
+		});
+
+		return {success:true, outdated:[]};
 		
 	}
 
