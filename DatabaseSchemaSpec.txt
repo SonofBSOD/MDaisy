@@ -46,6 +46,9 @@ appointments
 			the Mongo assigned _id of the staff account who ordered this appointment.
 		reason:
 			a string indicating why the appointment was ordered
+		last_checked:
+			Javascript Date timestamp indicating when all obligations have been last viewed
+			by medical staff. see entry under "preparations".
 
 medicalInfo
 	contains descriptions of medical procedures 
@@ -68,10 +71,13 @@ preparations
 			the requirement, in text
 		date_by: 
 			the day this requirement is filed under, represented by a Javascript date object
-		previous_value : 
-			holds the previous value of the checkbox, so that we can tell what changed
-			between multiple updates to this preparation requirement.
-			
-			on initialization, holds the Javascript value "null", and afterwards, will hold
-			the value of completed before an update operation is performed.
+		last_updated:
+			a Javascript Date timestamp indicating when this obligation was last updated by the user.
+			is initialized to date of creation.
+		last_checked:
+			a Javascript Date timestamp indicating when this obligation was last viewed by medical staff.
+			**[PROPOSED/CURRENTLY IMPLEMENTED CHANGE]
+			since all obligations share the same last_checked timestamp, i.e. they're all "viewed" when
+			staff read an appointment_detail page, this field should be stored in an appointment 
+			document.
 
