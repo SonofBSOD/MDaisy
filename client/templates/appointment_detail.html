@@ -34,7 +34,7 @@
 						{{#each date_obligations}}
 							<li class="item item-checkbox">
 								<label class="checkbox">
-									<input type="checkbox" class="test_class" {{obligation_checked}} obligation_id={{obligation_id}}>
+									<input type="checkbox" class="obligation_checkbox" {{obligation_checked}} {{obligation_disabled}} obligation_id={{obligation_id}}>
 								</label>
 								{{text}}
 							</li>

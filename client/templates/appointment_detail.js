@@ -87,6 +87,13 @@ function insert_by_date(date_object_list, prep_list){
 		date_obligations:a list of preparation objects grouped sharing this date}
 	obligation_checked
 		returns whether or not the current obligation object is marked as completed.
+	obligation_disabled
+		returns a string, either "disabled" or "", indicating whether the current obligation
+		can be updated. it cannot be updated if the client-side time now has passed the obligation's
+		date_by field.
+	
+		NOTE: though the client may be malicious and attempt to cheat by rewinding time, the server
+		does the final check with its own timestamp, and so this will not pass.
 	obligations_exp 
 		obligations but with the "experimental" preparations database.
 		returns a list of objects, each of the following form:
@@ -110,6 +117,15 @@ Template.appointmentDetail.helpers({
 	obligation_checked : function(){
 		if(this.completed){
 			return "checked";
+		}
+		else{
+			return "";
+		}
+	},
+	obligation_disabled : function(){
+		var current_time = new Date();
+		if(current_time > this.date_by){
+			return "disabled";
 		}
 		else{
 			return "";
@@ -160,8 +176,8 @@ Template.appointmentDetail.events({
 	},
 
 	'click .update_preparation' : function(e, tmp_inst){
-		
-		var all_checkboxes = tmp_inst.$(".test_class");
+		//only get the ones that are not disabled!
+		var all_checkboxes = tmp_inst.$(".obligation_checkbox:not([disabled])");
 		if(all_checkboxes.length > 0){
 			var id_and_checked_list = [];
 
