@@ -1,7 +1,5 @@
 Meteoric Daisy Patient Client Design Doc, v1.0
 
-TODO: proposed additions from the 6/3 meeting have not been fully incorporated.
-
 1) Rationale/Overview
 The app's interface should be as simple and convenient as possible.
 Buttons, animations should be kept to a minimum, and medical information 
@@ -24,7 +22,6 @@ takes priority.
 	Displays a list of the patient's upcoming appointments; each item
 	contains a "right arrow" to switch to a details page.
 
-	TODO: user logout
 	Transitions: 2.0, 2.2
 
 	2.2 Appointment Details Page
@@ -38,17 +35,44 @@ takes priority.
 	user can perform, specific to this appointment. Each button will
 	trigger a backdrop/popup prompting the user for the task. Tap again
 	to cancel/remove the prompt.
-		-Update Status: send the current status of the preparation checklist 
+		-Update Status: 
+		
+		send the current status of the preparation checklist 
 		to the staff program. Updates the "checked/unchecked" status of the current appointment. 
 		Returns a prompt to the user indicating whether or not the operation succeeded.
 		The updated state will be reflected on the medical staff's management application, and
 		they will also receive a notification.
+
+		users are not allowed to "retroactively" change/update the status of overdue or expired checklist items.
+		for example, if a certain obligation was due at May 30, 2015, 4:00PM, that checkbox will be grayed out
+		when the user revists the app past that time. 
+		
 		-Contact: Bring up contact details of staff associated with
 		-Info: Bring up information on this appointment's medical procedure
 
 	Transitions: 2.1, 2.2
 
-3) Notifications
-	TODO: receive native notifications for checklist updates and requirements
-	sent by medical staff to a specific appointment.
+3) Push Notifications
+	MDaisy push notifications take two forms, one for an appointment reminder, and the other
+	for a specific appointment's obligation reminder.
+
+	let patient_record stand in for a document from the Meteor.user collection
+	let patient_apt stand in for that user's corresponding appointment from the appointments collection
+	let patient_obligation stand in for an obligation related to patient_apt from the preparations collection
+
+	An appointment reminder has the following form:
+		"Hi <patient_record.profile[name]>, you have an upcoming appointment: 
+		<patient_apt.proc_type> on <patient_apt.date> at <patient_apt.location>."
+
+	These reminders are sent 24 hours before the actual date of the appointment.
+
+	An obligation reminder has the following form:
+		"Hi <patient_record.profile[name]>, remember to: <patient_obligation.text> for 
+		your appointment: <patient_apt.proc_type> on <patient_apt.date>."
+
+	These reminders are sent 1 hour before the actual required date of the preparation.
+
+	Furthermore, push notifications are only received by a user if they are currently logged into the MDaisy
+	app and the app is either running in the foreground or background. 
+
 	

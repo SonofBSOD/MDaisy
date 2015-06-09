@@ -97,9 +97,63 @@ function startup_data(){
 			reason : "Post-lobotomy checkup.",
 			last_checked : (new Date())
 		});
+
 	}
+}
+
+/*
+	check the notifications
+	collection every 1 minute for any overdue/deadlined notifications,
+	and will send them out to their respective users.
+*/
+function send_notifications(){
+	//first get all overdue notifications
+	var start_time = new Date();
+	var overdue = notifications.find({send_by : {$lt:start_time}});
+
+	//go through each of them and send to its user's listed app ids
+	overdue.forEach(function(notification){
+		Push.send({from: "TEST", title: 'MDaisy Notification',text: notification.text, query: {userId:notification.user_id}});
+	});
+
+	//remove these notifications
+	overdue.forEach(function (notification){
+		notifications.remove({_id:notification._id});
+	});
 }
 
 Meteor.startup(function() {
 	startup_data();
+
+	//register the push notification cronjob
+	if(!Meteor.isCordova){
+		var test_record = Meteor.users.findOne({'emails.address':'testpatient@fake.com'});
+		//set a sample notification 3 minutes into the future
+		var time_now = new Date();
+		time_now.setMinutes(time_now.getMinutes() + 3);
+		var test = Meteor.absoluteUrl();
+		notifications.insert({
+			notification_type : "appointment",
+			user_id : test_record._id,
+			from : "MDaisy",
+			title : "MDaisy Notification",
+			text : test + ": this is a test",
+			send_by : time_now
+		});
+
+
+		SyncedCron.add({
+			name:"push-notification-job",
+			schedule:function(parser){
+				return parser.text("every 1 minute");
+			},
+			job:function(){
+				console.log("push notification runs!");
+				send_notifications();
+			}
+		});
+
+		SyncedCron.start();
+	}
+
 });

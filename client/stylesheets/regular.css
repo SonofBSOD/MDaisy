@@ -1,0 +1,3 @@
+body.keyboard-open .platform-android .content.overflow-scroll{
+	bottom: 0px !important;
+}

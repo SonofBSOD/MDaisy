@@ -30,7 +30,7 @@ Meteor.user
 appointments
 	contains detailed information for each appointment
 	Document Format :
-		user_id : the userId of the user who has this appointment
+		user_id : the Meteor.accounts userId of the user who has this appointment
 		proc_type : 
 			a string representing the type of procedure. 
 			Current range of values: ["Lobotomy", "CT"]
@@ -80,4 +80,40 @@ preparations
 			since all obligations share the same last_checked timestamp, i.e. they're all "viewed" when
 			staff read an appointment_detail page, this field should be stored in an appointment 
 			document.
+
+user_to_push_id_map
+	contains documents mapping users to which instances of the mobile version of the app we should send 
+	push notifications to. since raix:push generates a unique application id for each android app, when a user logs in,
+	their account is associated with that app id.
+
+	Document Format:
+		user_id:
+			a string containing the **Meteor.accounts** userId of a target user
+		push_app_id:
+			a string containing the unique id of a certain instance of the mobile app
+		
+
+notifications
+	contains notification documents that the server needs to send out
+	in the future. Their purpose is further explained in Section 3, Notifications,
+	of the PatientClientDesignSpec.
+
+	Document Format:
+		notification_type:
+			a string indicating the type of the appointment: either "appointment" or "obligation"
+		user_id:
+			a string containing the **Meteor.accounts** userId of target user to send the notification to.
+		from:
+			a string containing text for the "from" field in the Push.send API call
+		title:
+			a string containing text for the "title" field in the Push.send API call
+		text: 
+			a string containing text for the "title" field in the Push.send API call
+		send_by:
+			a Javascript Date object indicating the approximate deadline for senidng the notification
+
+======EXPERIMENTAL=====
+user_to_push_id_map
+	unused as of 6/11
+		
 

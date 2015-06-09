@@ -1,0 +1,9 @@
+{
+	"gcm":{
+		"apiKey":"AIzaSyChanYw7P8q_8k7XBVwrez0g9q_b5FD_ks",
+		"projectNumber":103685835559
+	},
+	"production":true,
+	"sound":true,
+	"alert":true
+}

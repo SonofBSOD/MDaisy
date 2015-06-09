@@ -6,6 +6,8 @@
 appointments = new Mongo.Collection("appointments");
 medicalInfo = new Mongo.Collection("medicalInfo");
 preparations = new Mongo.Collection("preparations");
+user_to_push_id_map = new Mongo.Collection("user_to_push_id_map");
+notifications = new Mongo.Collection("notifications");
 
 /*
 	The following arguments are the rpc calls exposed to the 
