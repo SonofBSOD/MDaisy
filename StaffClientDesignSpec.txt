@@ -1,0 +1,7 @@
+Meteoric Daisy Staff Client Design Spec, v1.0
+
+1) Rationale/Overview
+The staff app should be as straightforward to use as possible.
+It shares a similar design with the patient client.
+
+2) App Screens/States

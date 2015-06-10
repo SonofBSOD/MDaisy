@@ -32,3 +32,7 @@ Router.route('/detail/:appointment_id',
 			}
 		}
 );
+
+Router.route('/staff_list', function(){
+	this.render("staff_appointment_list");
+});

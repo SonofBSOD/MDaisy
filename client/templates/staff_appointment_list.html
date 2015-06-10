@@ -1,0 +1,27 @@
+<!--
+	staff_appointment_list.html 
+	This file contains the staff version template for the general appointment list
+	described in section 2.1 in "PatientClientDesignSpec".
+-->
+
+<template name="staff_appointment_list">
+	{{#contentFor "headerButtonRight"}}
+		{{> atNavButton}}
+	{{/contentFor}}
+
+	{{#contentFor "headerTitle"}}
+		<h2 class="title">My Appointments</h2>
+	{{/contentFor}}
+
+	{{#ionContent}}
+		{{#ionList class="app-list"}}
+			{{#each app_list}}
+				{{#ionItem path="detail" data=get_appointment_id iconRight=true class=get_class}}
+					<h2>{{proc_type}}</h2>
+					<p>{{date}}</p>
+					{{> ionIcon icon="ios-arrow-right"}}
+				{{/ionItem}}
+			{{/each}}
+		{{/ionList}}
+	{{/ionContent}}
+</template>

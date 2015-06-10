@@ -8,6 +8,9 @@
 		appointment_list template:
 		{{date}} - A string listing both date and time of the appointment
 		{{event}} - A string listing the type of medical event
+	get_appointment_id
+		Returns an object consisting of the named parameters that the
+		detail route expects.
 */
 Template.appointmentList.helpers({
 	app_list : function(){

@@ -45,7 +45,8 @@ function startup_data(){
 			department : "Radiology",
 			ordering_physician : doctor_id,
 			reason : "Lobotomy is cool, so you're the lab rat.",
-			last_checked : (new Date())
+			last_checked : (new Date()),
+			updated_by_client : true
 		});
 
 		//along with fake sample information
@@ -95,7 +96,8 @@ function startup_data(){
 			department : "Neurology",
 			ordering_physician : doctor_id,
 			reason : "Post-lobotomy checkup.",
-			last_checked : (new Date())
+			last_checked : (new Date()),
+			updated_by_client : true
 		});
 
 	}
@@ -153,7 +155,7 @@ Meteor.startup(function() {
 			}
 		});
 
-		SyncedCron.start();
+		//SyncedCron.start();
 	}
 
 });

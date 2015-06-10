@@ -49,6 +49,10 @@ appointments
 		last_checked:
 			Javascript Date timestamp indicating when all obligations have been last viewed
 			by medical staff. see entry under "preparations".
+		updated_by_client:
+			a boolean indicating whether or not: 1) the appointment was last updated by the client AND
+			2) this update was seen by the staff. 
+			is initialized to true at the time of document creation.
 
 medicalInfo
 	contains descriptions of medical procedures 
@@ -110,7 +114,21 @@ notifications
 		text: 
 			a string containing text for the "title" field in the Push.send API call
 		send_by:
-			a Javascript Date object indicating the approximate deadline for senidng the notification
+			a Javascript Date object indicating the approximate deadline for sending the notification
+
+messages
+	contains a sequence of messages sent from a patient to the ordering physician responsible for 
+	an appointment. 
+
+	Document Format:
+		text:
+			a string containing the message body
+		to_id:
+			Meteor.accounts userId of the intended recipient
+		from_id:
+			meteor.accounts userId of the patient/sender
+		date:
+			message timestamp
 
 ======EXPERIMENTAL=====
 user_to_push_id_map
