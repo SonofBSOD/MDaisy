@@ -2,15 +2,16 @@
   Helpers:
 	app_list
 		Returns an array of JSON objects that give general details
-		of a patient's appointment.
+		of a patient's appointment. Uses the "query" Session variable
+		to determine which appointments to show up. If query is undefined
+		or the empty string, returns all of the user's appointments.
 		
-		The following attributes in these objects are used in the
-		appointment_list template:
-		{{date}} - A string listing both date and time of the appointment
-		{{event}} - A string listing the type of medical event
-	get_appointment_id
-		Returns an object consisting of the named parameters that the
-		detail route expects.
+	get_id_data
+		Returns an object with three id's that will be used to set 
+		Session variables for the tabbed interfaces.
+			appointment_id
+			patient_id
+			physician_id 
 	get_class
 		Returns the class tag for a list item.
 		By default, returns only "staff_list_button".
@@ -22,14 +23,25 @@ Template.staff_appointment_list.helpers({
 		var user_id = Meteor.userId();
 		
 		if(user_id !== null){
-			return appointments.find({'ordering_physician':user_id});
+			//return everything if nothing searched for, else 
+			//do a regular expression search!
+			var query = Session.get("query");
+			if(query === undefined || query === ""){
+				return appointments.find({'ordering_physician':user_id});
+			}
+			else{
+				var query_exp = new RegExp(query, "i");
+				return appointments.find({$and: [{'ordering_physician':user_id}, {$or: [{proc_type:query_exp}, {date:query_exp}, {location:query_exp},
+																					{organization:query_exp}, {department:query_exp}
+																					]}]});
+			}
 		}
 		else{
 			return [];
 		}
 	},
-	get_appointment_id: function(){
-		return {appointment_id:this._id};
+	get_id_data: function(){
+		return {appointment_id:this._id, patient_id:this.user_id, physician_id:this.ordering_physician};
 	},
 	get_class : function(){
 		var default_class = "staff_list_button";
@@ -55,10 +67,16 @@ Template.staff_appointment_list.events({
 	"click .staff_list_button":function(e, tmp_inst){
 		e.preventDefault();
 		//save the appointment id before the data context gets mangled in the Meteor.call callback
-		var id = this.data.appointment_id;
-		Meteor.call("set_updated_by_client_false", id, function(error, res){
+		var appointment_id = this.data.appointment_id;
+		var patient_id = this.data.patient_id;
+		var physician_id = this.data.physician_id;
+		
+		Meteor.call("set_updated_by_client_false", appointment_id, function(error, res){
 			if(res){
-				Router.go("/detail/" + id);
+				Session.set("tab.appointment_id", appointment_id);
+				Session.set("tab.patient_id", patient_id);
+				Session.set("tab.physician_id", physician_id);
+				Router.go("/staff_obligation_tab");
 			}
 			else{
 					IonPopup.show({

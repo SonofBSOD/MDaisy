@@ -29,7 +29,7 @@ messages = new Mongo.Collection("messages");
 		Postcondition
 			attempts to update the "checked" fields of all given obligations.
 			on success, also sets the "updated_by_client" flag to true in the corresponding
-			appointment.
+			appointment, and updates the previous_completed field.
 
 			returns an object with the following attributes:
 				success:
@@ -45,6 +45,7 @@ messages = new Mongo.Collection("messages");
 				1) all passed-in obligations are NOT retroactive and all database update operations on these 
 				obligations succeed.
 				2) setting the "updated_by_client" flag to true also succeeds.
+				3) setting the "previous_completed" field of each obligation succeeds.
 
 			there are no "roll-back" guarantees, if for example, out of 10 non-retroactive
 			obligations, 4 succeed, and the 5th fails. success will be set to false.
@@ -82,10 +83,18 @@ Meteor.methods({
 			return {success:false, outdated:retroactive_list};
 		}
 
-		//else, update the completed fields for each obligation, and make sure
+		//else, update the completed and previous_completed fields for each obligation, and make sure
 		//every update passes
 		obligation_status_list.forEach(function(e){
-			var ret = preparations.update({_id:e._id}, {$set:{completed:e.checked}});
+			var obligation_record = preparations.findOne({_id:e._id});
+			
+			//db lookup failure
+			if(obligation_record === null){
+				return {success:false, outdated:[]};
+			}
+			var old_completed = obligation_record.completed;
+			
+			var ret = preparations.update({_id:e._id}, {$set:{completed:e.checked, previous_completed:old_completed}});
 
 			if(ret != 1){
 				return {success:false, outdated:[]};

@@ -5,3 +5,37 @@ The staff app should be as straightforward to use as possible.
 It shares a similar design with the patient client.
 
 2) App Screens/States
+
+Each tab is just a template that DOES NOT have parameterized routes.
+rather, the appointment_id and physician_id's are passed as session variables.
+"staff.appointment_id" and "staff.physician_id"
+
+The first screen is already the obligation tab.
+Tabs rely on session variables, as the meteoric implementatation current does not
+support parameterized routes. Thus, the staff list uses the data attribute
+to pass data to the event handlers, which set the relevant session variables
+and then forward to the tab on success.
+
+2) App Screens/States
+	2.0 User Login Screen
+	The staff log in screen shares the same screen with the patient's view.
+
+	2.1 Index/Home Page
+	Displays a list of the patient's upcoming appointments; each item
+	contains a "right arrow" to switch to a details page. Additionally,
+	appointments that contain an "update": the patient has updated their obligation
+	list or posted a new message, will be colored blue.
+
+	A search box is provided to let staff quickly search appointments by title,
+	date, location, and organization.
+
+	Transitions: 2.0, 2.2
+
+	2.2 Appointment Details Page
+	Provides:
+		-A preparations tab that provides a read-only view of the patient's preparation list
+		-A messages tab that displays the entire message log the patient has sent to the 
+		staff.
+
+	There is a back button to return to the appointment list.
+	Transitions: 2.1, 2.2

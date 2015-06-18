@@ -14,11 +14,14 @@
 	{{/contentFor}}
 
 	{{#ionContent}}
+		{{> staff_search_box}}
 		{{#ionList class="app-list"}}
 			{{#each app_list}}
-				{{#ionItem path="detail" data=get_appointment_id iconRight=true class=get_class}}
+				{{#ionItem path="staff_obligation_tab" data=get_id_data iconRight=true class=get_class}}
 					<h2>{{proc_type}}</h2>
 					<p>{{date}}</p>
+					<p>{{organization}}, {{department}} </p>
+					<p>{{location}}</p>
 					{{> ionIcon icon="ios-arrow-right"}}
 				{{/ionItem}}
 			{{/each}}

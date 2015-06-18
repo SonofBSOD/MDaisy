@@ -1,0 +1,51 @@
+<!--
+	staff_appointment_detail_message_tab
+
+	contains the template that displays the user's sent messages 
+	to the ordering physician, sorted in ascending chronological order.
+
+	since meteoric tabs do not support a data object for specified paths,
+	this template relies on the following session variables:
+		-tab.appointment_id
+		-tab.patient_id
+		-tab.physician_id
+
+-->
+
+<template name="staff_appointment_detail_message_tab">
+
+	{{#contentFor "headerButtonLeft"}}
+		{{#ionItem path="staff_list"}}
+		{{> ionIcon icon="ios-arrow-left"}}
+		{{/ionItem}}
+	{{/contentFor}}
+
+	{{#contentFor "headerButtonRight"}}
+		{{> atNavButton}}
+	{{/contentFor}}
+
+	{{#contentFor "headerTitle"}}
+		<h5 class="title" style="font-size:1em">Patient Messages</h5>
+	{{/contentFor}}
+
+	{{#ionContent class="padding"}}
+		{{#if has_messages}}
+		{{#each message_list}}
+			<div class="card">
+				<div class="item item-text-wrap">
+					<p>{{message_date}}</p>
+					{{message_text}}
+				</div>
+			</div>
+		{{/each}}
+		{{else}}
+			<div class="card">
+				<div class="item item-text-wrap">
+					This appointment has no messages.
+				</div>
+			</div>
+		{{/if}}
+	{{/ionContent}}
+
+	{{> staff_tab_bar}}
+</template>

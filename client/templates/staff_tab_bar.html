@@ -1,0 +1,13 @@
+<template name="staff_tab_bar">
+  {{#if isAndroid}}
+    {{#ionTabs style="android" class="tabs-background-positive tabs-color-light"}}
+      {{> ionTab title="Preparations" path="staff_obligation_tab" icon="android-home"}}
+      {{> ionTab title="Messages" path="staff_message_tab" icon="android-star"}}
+    {{/ionTabs}}
+  {{else}}
+    {{#ionTabs style="ios"}}
+      {{> ionTab title="Preparations" path="staff_obligation_tab" iconOff="ios-home-outline" iconOn="ios-home"}}
+      {{> ionTab title="Messages" path="staff_message_tab" iconOff="ios-star-outline" iconOn="ios-star"}}
+    {{/ionTabs}}
+  {{/if}}
+</template>

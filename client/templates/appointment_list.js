@@ -17,7 +17,7 @@ Template.appointmentList.helpers({
 		var user_id = Meteor.userId();
 		
 		if(user_id !== null){
-			return appointments.find({'user_id':user_id});
+			return appointments.find({'user_id':user_id}, {sort:{date:1}});
 		}
 		else{
 			return [];

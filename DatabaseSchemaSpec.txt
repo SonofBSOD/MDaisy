@@ -13,6 +13,8 @@ Meteor.user
 	Both types of accounts share the following fields.
 		email:
 			a string containing the user email
+		user_type:
+			a string indicating the type of user; either "patient" or "staff"
 	
 	**Note that these two are not separate fields in the document, but are contained
 	in the Meteor-supplied "profile" object.
@@ -84,6 +86,9 @@ preparations
 			since all obligations share the same last_checked timestamp, i.e. they're all "viewed" when
 			staff read an appointment_detail page, this field should be stored in an appointment 
 			document.
+		previous_completed:
+			a boolean that contains the previous value of the completed field; on initialization, contains the
+			value "undefined"
 
 user_to_push_id_map
 	contains documents mapping users to which instances of the mobile version of the app we should send 
@@ -129,7 +134,9 @@ messages
 			meteor.accounts userId of the patient/sender
 		date:
 			message timestamp
-
+		appointment_id:
+			a string containing the Mongo-assigned _id of the appointment that this message
+			was sent under.
 ======EXPERIMENTAL=====
 user_to_push_id_map
 	unused as of 6/11

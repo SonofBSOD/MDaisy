@@ -60,7 +60,7 @@ if(Meteor.isServer){
 	Wire up the paths to connect to after successfully signing in and
 	signing out of the app.
 
-	After sign-in: display the user's appointment list @ /list
+	After sign-in: display the user's appointment list @ /landing
 	After sign-out: revert back to log-in page
 
 	More information:
@@ -70,7 +70,7 @@ AccountsTemplates.configureRoute('signIn', {
 		name: 'signin',
 		path: '/',
 		template: 'login',
-		redirect: '/list'
+		redirect: '/landing'
 });
 
 /*
