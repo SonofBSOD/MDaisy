@@ -56,6 +56,14 @@ messages = new Mongo.Collection("messages");
 		Postcondition
 			sets the "updated_by_client" field of the identified document to false.
 			returns true if the operation succeeded, false otherwise.
+	set_message_read_true:
+		Precondition
+			related_appointment_id - a string that is the Mongo-assigned _id of the appointment
+			under which this message was sent
+		
+		Postcondition
+			sets the "read" field of all related messages whose "read" field is false
+			to true. no meaningful value is returned.
 */
 Meteor.methods({
 	update_obligations : function(obligation_status_list, appointment_id){
@@ -114,6 +122,9 @@ Meteor.methods({
 	set_updated_by_client_false : function(appointment_id){
 		var ret = appointments.update({_id:appointment_id}, {$set:{updated_by_client:false}});
 		return ret === 1;
+	},
+	set_message_read_true : function(related_appointment_id){
+		messages.update({appointment_id:related_appointment_id, read:false},{$set:{read:true}}, {multi:true});
 	}
 
 });

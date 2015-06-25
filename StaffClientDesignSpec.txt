@@ -36,6 +36,8 @@ and then forward to the tab on success.
 		-A preparations tab that provides a read-only view of the patient's preparation list
 		-A messages tab that displays the entire message log the patient has sent to the 
 		staff.
+			Upon loading the messages, all messages that have not been marked as "read"
+			already will be marked so.
 
 	There is a back button to return to the appointment list.
 	Transitions: 2.1, 2.2

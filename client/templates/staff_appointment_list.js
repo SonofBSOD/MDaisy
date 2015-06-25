@@ -51,6 +51,15 @@ Template.staff_appointment_list.helpers({
 		else{
 			return default_class;
 		}
+	},
+	has_unread_messages: function(){
+		//do a query over all messages tied to this appointment
+		var unread_messages = messages.find({appointment_id:this._id, read:false});
+		return unread_messages.count() !== 0;
+	},
+	num_unread_messages: function(){
+		var unread_messages = messages.find({appointment_id:this._id, read:false});
+		return unread_messages.count();
 	}
 });
 

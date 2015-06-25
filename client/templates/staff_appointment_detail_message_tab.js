@@ -57,3 +57,20 @@ Template.staff_appointment_detail_message_tab.helpers({
 		return this.date.toLocaleString();
 	}
 });
+
+Template.staff_appointment_detail_message_tab.onRendered(function(){
+	var appointment_id = Session.get("tab.appointment_id");
+	if(appointment_id === undefined){
+		alert("undefined session vars!");
+	}
+	else{
+		Meteor.call("set_message_read_true", appointment_id, function(error, res){
+			if(error){
+				//alert("failure");
+			}
+			else{
+				//alert("success!");
+			}
+		});
+	}
+});

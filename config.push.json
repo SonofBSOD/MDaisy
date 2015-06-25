@@ -1,9 +1,15 @@
 {
-	"gcm":{
-		"apiKey":"AIzaSyChanYw7P8q_8k7XBVwrez0g9q_b5FD_ks",
+	"apn":{
+		"passphrase":<KEY HERE>,
+		"key":<CERT HERE>,
+		"cert":<CERT HERE>,
+		"gateway":"gateway.sandbox.push.apple.com"
+	},"gcm":{
+		"apiKey":<KEY HERE>,
 		"projectNumber":103685835559
 	},
-	"production":true,
+	"production":false,
 	"sound":true,
-	"alert":true
+	"alert":true,
+	"vibrate":true
 }

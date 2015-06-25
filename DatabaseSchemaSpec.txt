@@ -137,6 +137,12 @@ messages
 		appointment_id:
 			a string containing the Mongo-assigned _id of the appointment that this message
 			was sent under.
+		read_at:
+			[UNUSED]
+			a Javascript Date object indicating when this message was seen by the staff
+		read:
+			a boolean indicating whether this message has been accessed through the "messages"
+			tab by the staff; initialized to false on creation.
 ======EXPERIMENTAL=====
 user_to_push_id_map
 	unused as of 6/11

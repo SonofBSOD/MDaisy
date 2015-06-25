@@ -60,13 +60,24 @@ function startup_data(){
 			text: "MRI is a medical imaging technique used in radiology to investigate the anatomy and physiology of the body in both health and disease."
 		});
 
+		medicalInfo.insert({
+			proc_type:"Barium Enema", 
+			text:   "Barium enema is a special x-ray of the large intestine, which includes the colon and rectum."
+		});
+
+		medicalInfo.insert({
+			proc_type:"Abdomen CT", 
+			text:   "CT, or CAT scans, are special X-ray tests that produce cross-sectional images of the body using X-rays and a computer. CT scans are also referred to as computerized axial tomography."
+		});
+
 		//also insert 3 preparations 
 		preparations.insert({
 			appointment_id : appointment_id,
 			completed:true,
 			text:"drink lots of water, by 9:00AM",
 			date_by:(new Date(2015, 4, 30, 9, 00)),
-			last_updated:(new Date())
+			last_updated:(new Date()),
+			previous_completed:undefined
 		});
 
 		preparations.insert({
@@ -74,7 +85,8 @@ function startup_data(){
 			completed:true,
 			text:"stay up all night, by 11:00AM",
 			date_by:(new Date(2015, 4, 29, 11, 00)),
-			last_updated:(new Date())
+			last_updated:(new Date()),
+			previous_completed:undefined
 		});
 
 		preparations.insert({
@@ -82,7 +94,17 @@ function startup_data(){
 			completed:false,
 			text:"discover the meaning of life, by 10:00AM",
 			date_by:(new Date(2015, 4, 29, 10, 30)),
-			last_updated:(new Date())
+			last_updated:(new Date()),
+			previous_completed:undefined
+		});
+
+		preparations.insert({
+			appointment_id : appointment_id,
+			completed:false,
+			text:"only eat tofu, by 8:30AM",
+			date_by:(new Date(2016, 4, 29, 8, 30)),
+			last_updated:(new Date()),
+			previous_completed:undefined
 		});
 
 		//followed by an appointment with no preparation requirements
@@ -99,6 +121,89 @@ function startup_data(){
 			last_checked : (new Date()),
 			updated_by_client : true
 		});
+
+		//6/12 test data
+		var test_appointment_id = appointments.insert({
+			user_id : test_record._id,
+			proc_type : "Barium Enema",
+			date : "6/12/2015, 2:00 PM",
+			location : "1300 York Ave, New York, NY 10065",
+			organization : "Weill Cornell Medical College",
+			department : "Radiology",
+			ordering_physician : doctor_id,
+			reason : "Regular checkup.",
+			last_checked : (new Date()),
+			updated_by_client : true
+		});
+
+		preparations.insert({
+			appointment_id : test_appointment_id,
+			completed:false,
+			text:"Bowel preparation, start by 6/12 1:00AM",
+			date_by:(new Date("12 Jun 2015 13:00:00 EDT")),
+			last_updated:(new Date()),
+			previous_completed:undefined
+		});
+
+		preparations.insert({
+			appointment_id : test_appointment_id,
+			completed:false,
+			text:"NPO, start by 6/12 12:00AM",
+			date_by:(new Date("12 Jun 2015 00:00:00 EDT")),
+			last_updated:(new Date()),
+			previous_completed:undefined
+		});
+
+		var test_appointment_id_two = appointments.insert({
+			user_id : test_record._id,
+			proc_type : "Abdomen CT",
+			date : "6/12/2015, 2:00 PM",
+			location : "1300 York Ave, New York, NY 10065",
+			organization : "Weill Cornell Medical College",
+			department : "Radiology",
+			ordering_physician : doctor_id,
+			reason : "Abdomen checkup.",
+			last_checked : (new Date()),
+			updated_by_client : true
+		});
+
+		preparations.insert({
+			appointment_id : test_appointment_id_two,
+			completed:false,
+			text:"NPO, start by 6/12 10:00AM",
+			date_by:(new Date("12 Jun 2015 10:00:00 EDT")),
+			last_updated:(new Date()),
+			previous_completed:undefined
+		});
+
+		//insert 3 sample messages for the Barium Enema test
+		messages.insert({
+			text: "Hi Dr.House. I wanted to know whether a barium enema is safe?",
+			to_id: doctor_id,
+			from_id: test_record._id,
+			date: (new Date("10 Jun 2015 8:00:00 EDT")),
+			appointment_id: test_appointment_id,
+			read: false
+		});
+
+		messages.insert({
+			text: "What about eating a little bit of food? I'm feeling a little lightheaded right now. Need to get my usual fix of green eggs and ham.",
+			to_id: doctor_id,
+			from_id: test_record._id,
+			date: (new Date("10 Jun 2015 10:00:00 EDT")),
+			appointment_id: test_appointment_id,
+			read:false
+		});
+
+		messages.insert({
+			text: "I'm here early. Can I meet with you and ask a couple questions before the actual operation?",
+			to_id: doctor_id,
+			from_id: test_record._id,
+			date: (new Date("10 Jun 2015 00:00:00 EDT")),
+			appointment_id: test_appointment_id,
+			read:false
+		});
+		
 
 	}
 }

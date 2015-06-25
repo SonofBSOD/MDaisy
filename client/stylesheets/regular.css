@@ -12,3 +12,16 @@ body.keyboard-open .platform-android .content.overflow-scroll{
 .staff_appointment_list_updated_item{
 		background-color: DeepSkyBlue;
 }
+
+/*
+
+*/
+.unread_message_label{
+	right: 10%;
+	position: absolute;
+	top: 20%;
+}
+
+.unread_message_label h1{
+	text-align:center;
+}
