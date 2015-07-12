@@ -3,11 +3,13 @@
     {{#ionTabs style="android" class="tabs-background-positive tabs-color-light"}}
       {{> ionTab title="Preparations" path="staff_obligation_tab" icon="android-home"}}
       {{> ionTab title="Messages" path="staff_message_tab" icon="android-star"}}
+	  {{> ionTab title="Notifications" path="staff_notification_tab" icon="android-heart"}}
     {{/ionTabs}}
   {{else}}
     {{#ionTabs style="ios"}}
       {{> ionTab title="Preparations" path="staff_obligation_tab" iconOff="ios-home-outline" iconOn="ios-home"}}
       {{> ionTab title="Messages" path="staff_message_tab" iconOff="ios-star-outline" iconOn="ios-star"}}
+	  {{> ionTab title="Notifications" path="staff_notification_tab" icon="ios-heart"}}
     {{/ionTabs}}
   {{/if}}
 </template>

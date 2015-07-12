@@ -75,4 +75,6 @@ takes priority.
 	Furthermore, push notifications are only received by a user if they are currently logged into the MDaisy
 	app and the app is either running in the foreground or background. 
 
-	
+=======================
+	Staff control appointments. the back button now requires a login before successful redirect.
+	once selected, back/forward buttons can't be used to get to the appointment list. 

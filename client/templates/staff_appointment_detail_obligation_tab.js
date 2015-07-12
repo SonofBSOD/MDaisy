@@ -88,8 +88,8 @@ function insert_by_date(date_object_list, prep_list){
 		returns whether or not the current obligation object is marked as completed.
 	obligation_disabled
 		returns a string, either "disabled" or "", indicating whether the current obligation
-		can be updated. it cannot be updated if the client-side time now has passed the obligation's
-		date_by field.
+		can be updated. it cannot be updated if 1) the client-side time now has passed the obligation's
+		date_by field, or 2) the permissions field does not allow the client to do so.
 	
 		NOTE: though the client may be malicious and attempt to cheat by rewinding time, the server
 		does the final check with its own timestamp, and so this will not pass.
@@ -123,8 +123,7 @@ Template.staff_appointment_detail_obligation_tab.helpers({
 		}
 	},
 	obligation_disabled : function(){
-		var current_time = new Date();
-		if(current_time > this.date_by){
+		if((this.permission !== "both" && this.permission !== "staff")){
 			return "disabled";
 		}
 		else{
@@ -132,8 +131,7 @@ Template.staff_appointment_detail_obligation_tab.helpers({
 		}
 	},
 	obligations_exp : function(){
-		var appointment_id = Session.get("tab.appointment_id");
-		if(appointment_id === undefined){
+		if(Session.get("staff.tab.appointment_object") === undefined){
 			IonPopup.show({
 				title: 'Error',
 				template : "Sorry! Session data deleted. Please back out and reselect.",
@@ -146,6 +144,8 @@ Template.staff_appointment_detail_obligation_tab.helpers({
 				}]
 			});
 		}
+		
+		var appointment_id = Session.get("staff.tab.appointment_object")._id;
 		var appointment_group = preparations.find({"appointment_id":appointment_id}).fetch();
 		var unique_date_list = unique_date(appointment_group);
 		var insert_date_list = insert_by_date(unique_date_list, appointment_group); 
@@ -154,9 +154,9 @@ Template.staff_appointment_detail_obligation_tab.helpers({
 	obligation_id : function(){
 		return this._id;
 	},
+	
 	has_obligations : function(){
-		var aid = Session.get("tab.appointment_id");
-		if(aid === undefined){
+		if(Session.get("staff.tab.appointment_object") === undefined){
 			IonPopup.show({
 				title: 'Error',
 				template : "Sorry! Session data deleted. Please back out and reselect.",
@@ -169,6 +169,7 @@ Template.staff_appointment_detail_obligation_tab.helpers({
 				}]
 			});
 		}
+		var aid = Session.get("staff.tab.appointment_object")._id;
 		return (preparations.find({appointment_id:aid}).fetch().length) !== 0;
 	},
 	updated_obligation_class : function(){
@@ -179,4 +180,33 @@ Template.staff_appointment_detail_obligation_tab.helpers({
 			return "";
 		}
 	}
+});
+
+Template.staff_appointment_detail_obligation_tab.events({
+		"click .appointment_ready" : function(e, tmp_inst){
+			var checkbox_list = tmp_inst.$(".obligation_checkbox:not([disabled])");
+			var appointment_object = Session.get("staff.tab.appointment_object");
+			
+			var final_checkbox_list = [];
+			checkbox_list.each(function(i, v){
+				final_checkbox_list.push({_id:$(v).attr("obligation_id"), checked:$(v).prop("checked")});
+			});
+			
+			Meteor.call("staff_update_obligations_with_notify", final_checkbox_list, appointment_object._id, Meteor.userId(), function(error, res){
+				if(error){
+					alert("DB Error!");
+				}
+				else{
+					if(res.success === true){
+						alert("success!");
+					}
+					else{
+						alert("Operation failed!");
+					}
+					
+				}
+				
+			});
+		}
+	
 });

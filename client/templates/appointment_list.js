@@ -27,5 +27,22 @@ Template.appointmentList.helpers({
 	//Return a data object corresponding to the parameters that the detail route needs
 	get_appointment_id : function(){
 		return {appointment_id:this._id};
+	},
+	
+	get_id_data : function(){
+		return {appointment_id:this._id, patient_id:this.user_id, physician_id:this.ordering_physician};
+	},
+	
+	get_all_data : function(){
+		return this;
 	}
+});
+
+Template.appointmentList.events({
+	"click .client_list_button" : function(e, tmp_inst){
+		e.preventDefault();
+		Session.set("client.tab.appointment_object", this.data);
+		Router.go("/client_obligation_tab");
+	}
+	
 });

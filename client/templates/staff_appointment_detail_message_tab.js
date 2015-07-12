@@ -3,16 +3,15 @@
 		retrieve the session variables that should have been set
 		by a staff_list link, and then fetch/display the message log
 		for this appointment.
+	message_sender_style_class:
+		depending on the status of the message's sender, returns 
+		"message_sent_by_staff"
+		"message_sent_by_patient"
+		or "" on database error
 */
 Template.staff_appointment_detail_message_tab.helpers({
 	has_messages:function(){
-		var appointment_id = Session.get("tab.appointment_id");
-		var patient_id = Session.get("tab.patient_id");
-		var physician_id = Session.get("tab.physician_id");
-
-		if(appointment_id === undefined || 
-		   patient_id === undefined ||
-           physician_id === undefined){
+		if(Session.get("staff.tab.appointment_object") === undefined){
 			IonPopup.show({
 				title: 'Error',
 				template : "Sorry! Session data deleted. Please back out and reselect.",
@@ -25,28 +24,28 @@ Template.staff_appointment_detail_message_tab.helpers({
 				}]
 			});
 		}
-		else{
+		else{	
+			var appointment_id = Session.get("staff.tab.appointment_object")._id;
+			var patient_id = Session.get("staff.tab.appointment_object").user_id;
+			var physician_id = Session.get("staff.tab.appointment_object").ordering_physician;
 			return messages.find(
-				{'to_id':physician_id, 
-				'from_id':patient_id, 
+				{/*'to_id':physician_id, 
+				'from_id':patient_id, */
 				'appointment_id':appointment_id}, 
 				{sort:{date:1}}).count() !== 0;
 		}
 	},
 	message_list:function(){
-		var appointment_id = Session.get("tab.appointment_id");
-		var patient_id = Session.get("tab.patient_id");
-		var physician_id = Session.get("tab.physician_id");
-
-		if(appointment_id === undefined || 
-		   patient_id === undefined ||
-           physician_id === undefined){
+		if(Session.get("staff.tab.appointment_object") === undefined){
 			alert("undefined session vars!");
 		}
 		else{
+			var appointment_id = Session.get("staff.tab.appointment_object")._id;
+			var patient_id = Session.get("staff.tab.appointment_object").user_id;
+			var physician_id = Session.get("staff.tab.appointment_object").ordering_physician;
 			return messages.find(
-				{'to_id':physician_id, 
-				'from_id':patient_id, 
+				{/*'to_id':physician_id, 
+				'from_id':patient_id, */
 				'appointment_id':appointment_id}, 
 				{sort:{date:1}});
 		}
@@ -55,16 +54,42 @@ Template.staff_appointment_detail_message_tab.helpers({
 		return this.text;},
 	message_date:function(){
 		return this.date.toLocaleString();
+	},
+	message_read_by_patient:function(){
+		var to_user = Meteor.users.findOne({_id:this.to_id});
+		if(to_user != undefined){
+			return this.read && to_user.user_type == "patient";
+		}
+		else{
+			return false;
+		}
+	},
+	message_sender_style_class:function(){
+		var user = Meteor.users.findOne({_id:this.from_id});
+		if(user != undefined){
+			if(user.user_type == "patient"){
+				return "message_sent_by_patient";
+			}
+			else if(user.user_type == "staff"){
+				return "message_sent_by_staff";
+			}
+			else{
+				return "";
+			}
+		}
+		else{
+			return "";
+		}
 	}
 });
 
 Template.staff_appointment_detail_message_tab.onRendered(function(){
-	var appointment_id = Session.get("tab.appointment_id");
-	if(appointment_id === undefined){
+	if(Session.get("staff.tab.appointment_object") === undefined){
 		alert("undefined session vars!");
 	}
 	else{
-		Meteor.call("set_message_read_true", appointment_id, function(error, res){
+		var appointment_id = Session.get("staff.tab.appointment_object")._id;
+		Meteor.call("set_message_addressed_to_id_true", appointment_id, Meteor.userId(), function(error, res){
 			if(error){
 				//alert("failure");
 			}
@@ -72,5 +97,24 @@ Template.staff_appointment_detail_message_tab.onRendered(function(){
 				//alert("success!");
 			}
 		});
+	}
+});
+
+Template.staff_appointment_detail_message_tab.events({
+	"click .send_message" : function(e){
+		e.preventDefault();
+		//message_text, user_id, physician_id, message_date, related_appointment_id){
+		var message_text = $("textarea#message_box").val();
+		var appointment = Session.get("staff.tab.appointment_object");
+		Meteor.call("send_message", message_text, Meteor.userId(), appointment.user_id, (new Date()), appointment._id, function(err, res){
+			if(err){
+				alert("fail");
+			}
+			else{
+				alert("success!");
+				$("#message_box").focus();
+			}
+			
+		} );
 	}
 });

@@ -1,0 +1,64 @@
+<!--
+	staff_appointment_detail_notification_tab
+
+	contains the template that allows staff to send out either
+	predetermined push notifications or a custom text message
+	
+	since meteoric tabs do not support a data object for specified paths,
+		staff.tab.appointment_object
+
+-->
+
+<template name="staff_appointment_detail_notification_tab">
+
+	{{#contentFor "headerButtonLeft"}}
+		{{#ionItem path="staff_list"}}
+		{{> ionIcon icon="ios-arrow-left"}}
+		{{/ionItem}}
+	{{/contentFor}}
+
+	{{#contentFor "headerButtonRight"}}
+		{{> toggle_button}}
+		{{> atNavButton}}
+	{{/contentFor}}
+
+	{{#contentFor "headerTitle"}}
+		<h5 class="title" style="font-size:1em">Push Notifications</h5>
+	{{/contentFor}}
+
+	{{#ionContent class="padding" id="test_id"}}
+		<div>
+			<label for="login">Message Preview</label>
+			<input type="text" id="message_preview" readonly>
+		</div>
+		<div class="item item-input-inset">
+			<label class="item-input-wrapper">
+			<textarea id="message_box" type="text" placeholder="Custom Push Notification"></textarea>
+			</label>
+			<button class="button button-small send_message" id="message_send">
+			Send
+			</button>
+		</div>
+		
+		<div>
+		<button class="button button-full button-stable" id="message_one">
+		Hi patient, please come to the front desk.
+		</button>
+		
+		<button class="button button-full button-stable" id="message_two">
+		Hi patient, your appointment is next in line.
+		</button>
+
+		<button class="button button-full button-stable" id="message_three">
+		Hi patient, please quiet down.
+		</button>
+		
+		<button class="button button-full button-stable" id="message_four">
+		Hi patient, please return this device.
+		</button>
+		</div>
+	{{/ionContent}}
+
+	
+	{{> staff_tab_bar}}
+</template>

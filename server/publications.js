@@ -5,12 +5,13 @@
 		-profile
 */
 Meteor.publish("user_custom_fields", function () {
-  if (this.userId) {
+  /*if (this.userId) {
     return Meteor.users.find({},
                              {fields: {'user_type': 1, 'profile':1}});
   } else {
     this.ready();
-  }
+  }*/
+  return Meteor.users.find({}, {fields: {'user_type': 1, 'profile':1}});
 });
 
 /*

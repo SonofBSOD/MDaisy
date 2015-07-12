@@ -17,7 +17,14 @@
 	{{#ionContent}}
 		{{#ionList class="app-list"}}
 			{{#each app_list}}
-				{{#ionItem path="detail" data=get_appointment_id iconRight=true}}
+				<!--{{#ionItem path="detail" data=get_appointment_id iconRight=true}}
+					<h2>{{proc_type}}</h2>
+					<p>{{date}}</p>
+					<p>{{organization}}, {{department}} </p>
+					<p>{{location}}</p>
+					{{> ionIcon icon="ios-arrow-right"}}
+				{{/ionItem}}-->
+				{{#ionItem path="client_obligation_tab" data=get_all_data iconRight=true class="client_list_button"}}
 					<h2>{{proc_type}}</h2>
 					<p>{{date}}</p>
 					<p>{{organization}}, {{department}} </p>

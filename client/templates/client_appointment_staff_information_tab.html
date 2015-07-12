@@ -1,0 +1,31 @@
+<template name="client_appointment_staff_information_tab">
+	{{#contentFor "headerButtonLeft"}}
+		{{!--
+		{{#ionItem path="list"}}
+		{{> ionIcon icon="ios-arrow-left"}}
+		{{/ionItem}}
+		--}}
+	{{/contentFor}}
+
+	{{#contentFor "headerButtonRight"}}
+		{{> staff_control_button}}
+		{{> toggle_button}}
+		{{!-- {{> atNavButton}} --}}
+	{{/contentFor}}
+
+	{{#contentFor "headerTitle"}}
+		<h5 class="title" style="font-size:1em">Staff Contact Info</h5>
+	{{/contentFor}}
+	
+	{{#ionContent}}
+		<div class="card">
+				<div class="item item-text-wrap">
+					Name: {{name}} <br>
+					Email: gh@fake.com <br>
+					Phone: (555)-555-555
+				</div>
+		</div>
+	{{/ionContent}}
+	
+	{{> client_tab_bar}}
+</template>

@@ -18,7 +18,7 @@
 		If the corresponding appointment was also updated by the client,
 		then the returned string becomes "staff_list_button staff_appointment_list_updated_item".
 */
-Template.staff_appointment_list.helpers({
+Template.staff_control_appointment_list.helpers({
 	app_list : function(){
 		var user_id = Meteor.userId();
 		
@@ -75,7 +75,7 @@ Template.staff_appointment_list.helpers({
 		appointment_view_time and continue on to the staff detail page.
 		
 */
-Template.staff_appointment_list.events({
+Template.staff_control_appointment_list.events({
 	"click .staff_list_button":function(e, tmp_inst){
 		e.preventDefault();
 		//save all data before the context gets mangled and lost in the Meteor.call callback
@@ -84,29 +84,29 @@ Template.staff_appointment_list.events({
 		var physician_id = this.data.ordering_physician;
 		var appointment_object = this.data;
 		
-		Meteor.call("set_updated_by_client_false", appointment_id, function(error, res){
-			if(res){
-				Session.set("staff.tab.appointment_object", appointment_object);
-				Session.set("tab.appointment_id", appointment_id);
-				Session.set("tab.patient_id", patient_id);
-				Session.set("tab.physician_id", physician_id);
-				Router.go("/staff_obligation_tab");
+		//to make sure we get targeted push notifications on this device,
+		//log in the patient.
+		Meteor.loginWithPassword("testpatient@fake.com", "testpatient", function(error){
+			if(error){
+				alert("could not switch to patient account!");
 			}
 			else{
-					IonPopup.show({
-					title: 'Error',
-					template : "Sorry! Appointment status could not be updated! Please try again!",
-					buttons : [{
-						text: 'Ok',
-						type: 'button-positive',
-						onTap: function(){
-							IonPopup.close();
-						}
-					}]
-				});
+				Session.set("client.tab.appointment_object", appointment_object);
+				Router.go("/client_obligation_tab");
 			}
 		});
-		Session.set("appointment_view_time", new Date());
+
+		//log out the staff user and then switch to the appointment tab
+		/*Meteor.logout(function(error){
+			if(error){
+				alert("Could not switch to staff account!");
+			}
+			else{
+				Session.set("client.tab.appointment_object", appointment_object);
+				Router.go("/client_obligation_tab")
+			}
+		});*/
+		
 	}
 });
 

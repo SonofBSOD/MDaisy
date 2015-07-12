@@ -1,4 +1,3 @@
-
 /*
 	Precondition: 
 		p - a list whose structure is identical to the "preparations"
@@ -89,8 +88,8 @@ function insert_by_date(date_object_list, prep_list){
 		returns whether or not the current obligation object is marked as completed.
 	obligation_disabled
 		returns a string, either "disabled" or "", indicating whether the current obligation
-		can be updated. it cannot be updated if the client-side time now has passed the obligation's
-		date_by field.
+		can be updated. it cannot be updated if 1)the client-side time now has passed the obligation's
+		date_by field, or 2) the obligation permission field does not allow the patient to do so.
 	
 		NOTE: though the client may be malicious and attempt to cheat by rewinding time, the server
 		does the final check with its own timestamp, and so this will not pass.
@@ -104,8 +103,9 @@ function insert_by_date(date_object_list, prep_list){
 	has_obligations
 		returns a boolean indicating whether a given appointment object has attached
 		obligations
+	updated_obligation_class
 */
-Template.appointmentDetail.helpers({
+Template.client_appointment_detail_obligation_tab.helpers({
 	title : function(){
 		return this.date + " " + this.proc_type;
 	},
@@ -124,7 +124,7 @@ Template.appointmentDetail.helpers({
 	},
 	obligation_disabled : function(){
 		var current_time = new Date();
-		if(current_time > this.date_by){
+		if((current_time > this.date_by) || (this.permission !== "both" && this.permission !== "patient")){
 			return "disabled";
 		}
 		else{
@@ -132,7 +132,21 @@ Template.appointmentDetail.helpers({
 		}
 	},
 	obligations_exp : function(){
-		var appointment_group = preparations.find({appointment_id:this._id}).fetch();
+		if(Session.get("client.tab.appointment_object") === undefined){
+			IonPopup.show({
+				title: 'Error',
+				template : "Sorry! Session data deleted. Please back out and reselect.",
+				buttons : [{
+					text: 'Ok',
+					type: 'button-positive',
+					onTap: function(){
+						IonPopup.close();
+					}
+				}]
+			});
+		}
+		var appointment_id = Session.get("client.tab.appointment_object")._id;
+		var appointment_group = preparations.find({"appointment_id":appointment_id}).fetch();
 		var unique_date_list = unique_date(appointment_group);
 		var insert_date_list = insert_by_date(unique_date_list, appointment_group); 
 		return insert_date_list;
@@ -141,22 +155,40 @@ Template.appointmentDetail.helpers({
 		return this._id;
 	},
 	has_obligations : function(){
-		return (preparations.find({appointment_id:this._id}).fetch().length) !== 0;
+		if(Session.get("client.tab.appointment_object") === undefined){
+			IonPopup.show({
+				title: 'Error',
+				template : "Sorry! Session data deleted. Please back out and reselect.",
+				buttons : [{
+					text: 'Ok',
+					type: 'button-positive',
+					onTap: function(){
+						IonPopup.close();
+					}
+				}]
+			});
+		}
+		var aid = Session.get("client.tab.appointment_object")._id;
+		return (preparations.find({appointment_id:aid}).fetch().length) !== 0;
+	},
+	updated_obligation_class : function(){
+		if(this.completed !== this.previous_completed){
+			return "updated_obligation";
+		}
+		else{
+			return "";
+		}
 	}
 });
 
 /*
-	contains code to handle the three buttons in the bottom of the page
-	click .medical_information
-		pass the medical procedure's type to the modal window
-	click .update_preparation
-		attempt to the push the status of the checkboxes to the preparations database,
-		and prompt the user on success/failure
+	
 */
-Template.appointmentDetail.events({
-	'click .medical_information' : function(){
-		var medical_info_record = medicalInfo.findOne({proc_type:this.proc_type});
-
+Template.client_appointment_detail_obligation_tab.events({
+	'click .medical_information' : function(e, tmp_inst){
+		e.preventDefault();
+		var medical_info_record = medicalInfo.findOne({proc_type:Session.get("client.tab.appointment_object").proc_type});
+		
 		if(medical_info_record !== null){
 			IonModal.open("information_modal", medical_info_record);
 		}
@@ -185,7 +217,7 @@ Template.appointmentDetail.events({
 				id_and_checked_list.push({_id:$(v).attr("obligation_id"), checked:$(v).prop("checked")});
 			});
 			
-			Meteor.call("update_obligations", id_and_checked_list, this._id, function(error, result){
+			Meteor.call("update_obligations", id_and_checked_list, Session.get("client.tab.appointment_object")._id, function(error, result){
 				if(error){
 					IonPopup.show({
 						title: 'Update Status',
@@ -259,32 +291,6 @@ Template.appointmentDetail.events({
 			});
 		}
 
-	},
-
-	'click .contact_staff' : function(e, tmp_inst){
-		//Session.set("appointment_ordering_physician", this.ordering_physician);
-		var ordering_physician_record = Meteor.users.findOne({_id:this.ordering_physician});
-		
-		if(ordering_physician_record !== null){
-			//the second argument sets the modal's data context to an object containing
-			//the doctor's name and email.
-			IonModal.open("contact_modal", {name:ordering_physician_record.profile.name, 
-											email:ordering_physician_record.emails, 
-											physician_id:this.ordering_physician,
-											appointment_id:this._id});
-		}
-		else{
-			IonPopup.show({
-				title: 'Error',
-				template : "Sorry! Staff information could not be loaded. Please try again.",
-				buttons : [{
-					text: 'Ok',
-					type: 'button-positive',
-					onTap: function(){
-						IonPopup.close();
-					}
-				}]
-			});
-		}
 	}
+	
 });

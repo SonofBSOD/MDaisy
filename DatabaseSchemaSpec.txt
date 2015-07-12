@@ -89,6 +89,18 @@ preparations
 		previous_completed:
 			a boolean that contains the previous value of the completed field; on initialization, contains the
 			value "undefined"
+		notify_on_complete:
+			a boolean that controls whether or not a push notification should be sent to the patient account described
+			in the user_id field of the appointment document with id appointment_id whenever the preparation is marked as
+			"completed".
+		notify_options:
+			if notify_on_complete is true, it is an object of the following form:
+				{from:string, title:string, text:string}, corresponding to three raix:push notification options
+			if notify_on_complete is false, it is an empty object.
+		permission:
+			a string that controls which type of account can set this preparation. current possible values are: "patient",
+			"staff", or "both"
+			
 
 user_to_push_id_map
 	contains documents mapping users to which instances of the mobile version of the app we should send 
@@ -143,6 +155,9 @@ messages
 		read:
 			a boolean indicating whether this message has been accessed through the "messages"
 			tab by the staff; initialized to false on creation.
+		sender_status:
+			[UNUSED/UNIMPLEMENTED]
+			can be implicitly referenced via from_id.
 ======EXPERIMENTAL=====
 user_to_push_id_map
 	unused as of 6/11

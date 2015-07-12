@@ -78,5 +78,5 @@ AccountsTemplates.configureRoute('signIn', {
 	sense to log-in just to log-in.
 */
 Router.plugin('ensureSignedIn', {
-	except: ['signin']
+	except: ['signin', 'client_obligation_tab', 'client_message_tab', 'client_staff_info_tab']
 });

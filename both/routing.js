@@ -69,3 +69,38 @@ Router.route('/staff_message_tab',
 	}, {
 		name:'staff_message_tab',
 });
+
+Router.route('/staff_notification_tab', function(){
+		this.render("staff_appointment_detail_notification_tab");
+	},{
+		name:'staff_notification_tab'
+});
+
+Router.route('/client_obligation_tab', function(){
+		this.render("client_appointment_detail_obligation_tab");
+	}, {
+			name:'client_obligation_tab'
+});
+
+Router.route('/client_message_tab', 
+	function(){
+		this.render("client_appointment_detail_message_tab");
+	}, {
+		name:'client_message_tab',
+});
+
+Router.route('/client_staff_info_tab', 
+	function(){
+		this.render("client_appointment_staff_information_tab");
+	},{
+		name:'client_staff_info_tab'
+	}
+);
+
+Router.route('/staff_control_list',
+	function(){
+		this.render("staff_control_appointment_list");
+	},{
+		name:'staff_control_list'
+});
+

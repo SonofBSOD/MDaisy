@@ -12,21 +12,24 @@
 
 -->
 
-<template name="staff_appointment_detail_message_tab">
+<template name="client_appointment_detail_message_tab">
 
 	{{#contentFor "headerButtonLeft"}}
-		{{#ionItem path="staff_list"}}
+		{{!--
+		{{#ionItem path="list"}}
 		{{> ionIcon icon="ios-arrow-left"}}
 		{{/ionItem}}
+		--}}
 	{{/contentFor}}
 
 	{{#contentFor "headerButtonRight"}}
+		{{> staff_control_button}}
 		{{> toggle_button}}
-		{{> atNavButton}}
+		<!--{{> atNavButton}}-->
 	{{/contentFor}}
 
 	{{#contentFor "headerTitle"}}
-		<h5 class="title" style="font-size:1em">Patient Messages</h5>
+		<h5 class="title" style="font-size:1em">Your Messages</h5>
 	{{/contentFor}}
 
 	{{#ionContent class="padding" id="test_id"}}
@@ -36,8 +39,8 @@
 					<div class="item item-text-wrap {{message_sender_style_class}}">
 						<p>{{message_date}}</p>
 						{{message_text}}
-						{{#if message_read_by_patient}}
-							<p class="message_read_label">Read by patient.</p>
+						{{#if message_read_by_staff}}
+							<p class="message_read_label">Read by staff.</p>
 						{{/if}}
 					</div>
 				</div>
@@ -50,15 +53,14 @@
 			</div>
 		{{/if}}
 		<div class="item item-input-inset">
-			<label class="item-input-wrapper">
-				<textarea id="message_box" type="text" placeholder="Messages"></textarea>
-			</label>
-		<button class="button button-small send_message">
-			Send
-			</button>
-		</div>
+    <label class="item-input-wrapper">
+      <textarea id="message_box" type="text" placeholder="Messages"></textarea>
+    </label>
+    <button class="button button-small send_message">
+      Send
+    </button>
+  </div>
 	{{/ionContent}}
 
-	
-	{{> staff_tab_bar}}
+	{{> client_tab_bar}}
 </template>

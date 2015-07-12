@@ -1,5 +1,5 @@
 <!--
-	staff_appointment_detail_obligation_tab
+	client_appointment_detail_obligation_tab
 
 	contains the template that displays the user's updated obligation list, 
 	sorted in ascending chronological order.
@@ -12,21 +12,27 @@
 
 -->
 
-<template name="staff_appointment_detail_obligation_tab">
+<template name="client_appointment_detail_obligation_tab">
 
 	{{#contentFor "headerButtonLeft"}}
-		{{#ionItem path="staff_list"}}
+		{{!--
+		
+		{{#ionItem path="list"}}
 		{{> ionIcon icon="ios-arrow-left"}}
 		{{/ionItem}}
+		--}}
 	{{/contentFor}}
 
 	{{#contentFor "headerButtonRight"}}
+		{{> staff_control_button}}
 		{{> toggle_button}}
+		{{!--
 		{{> atNavButton}}
+		--}}
 	{{/contentFor}}
 
 	{{#contentFor "headerTitle"}}
-		<h5 class="title" style="font-size:1em">Patient Preparations</h5>
+		<h5 class="title" style="font-size:1em">Client-Side Patient Preparations</h5>
 	{{/contentFor}}
 
 	
@@ -60,9 +66,10 @@
 		{{/if}}
 		
 		<div class="button-bar">
-			<a class="button appointment_ready">Ready for Appointment</a>
+			<a class="button update_preparation">Update</a>
+			<a class="button medical_information">Information</a>
 		</div>
 	{{/ionContent}}
 
-	{{> staff_tab_bar}}
+	{{> client_tab_bar}}
 </template>

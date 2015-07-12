@@ -33,23 +33,7 @@ function startup_data(){
 		//get Dr. House's id
 		var doctor_id = Meteor.users.findOne({'emails.address':'gh@fake.com'})._id;
 
-		//insert a fake appointment associated with
-		//testpatient;
-		var test_record = Meteor.users.findOne({'emails.address':'testpatient@fake.com'});
-		var appointment_id = appointments.insert({
-			user_id : test_record._id,
-			proc_type : "Lobotomy",
-			date : "5/31/2015, 12:00 PM",
-			location : "1300 York Ave, New York, NY 10065",
-			organization : "Weill Cornell Medical College",
-			department : "Radiology",
-			ordering_physician : doctor_id,
-			reason : "Lobotomy is cool, so you're the lab rat.",
-			last_checked : (new Date()),
-			updated_by_client : true
-		});
-
-		//along with fake sample information
+		//Medical procedure sample information-------------------------------------------------------------------
 		medicalInfo.insert({
 			proc_type:"Lobotomy", 
 			text:   "Lobotomy consists of cutting or scraping away most of the connections to and from the prefrontal cortex, the anterior part of the frontal lobes of the brain."
@@ -65,54 +49,94 @@ function startup_data(){
 			text:   "Barium enema is a special x-ray of the large intestine, which includes the colon and rectum."
 		});
 
+		//sample_CT_data is defined in both/sample_data_strings.js
 		medicalInfo.insert({
 			proc_type:"Abdomen CT", 
-			text:   "CT, or CAT scans, are special X-ray tests that produce cross-sectional images of the body using X-rays and a computer. CT scans are also referred to as computerized axial tomography."
+			text: sample_CT_data
+		});
+		
+		
+		//sample Lobotomy data insertion---------------------------------------------------------------
+		var fake_user_object = Meteor.users.findOne({'emails.address':'testpatient@fake.com'});
+		var lobotomy_appointment_id = appointments.insert({
+			user_id : fake_user_object._id,
+			proc_type : "Lobotomy",
+			date : "5/31/2017, 12:00 PM",
+			location : "1300 York Ave, New York, NY 10065",
+			organization : "Weill Cornell Medical College",
+			department : "Radiology",
+			ordering_physician : doctor_id,
+			reason : "Lobotomy is cool, so you're the lab rat.",
+			last_checked : (new Date()),
+			updated_by_client : true
 		});
 
-		//also insert 3 preparations 
 		preparations.insert({
-			appointment_id : appointment_id,
+			appointment_id : lobotomy_appointment_id,
 			completed:true,
 			text:"drink lots of water, by 9:00AM",
-			date_by:(new Date(2015, 4, 30, 9, 00)),
+			date_by:(new Date("30 May 2017 9:00:00 EDT")),
 			last_updated:(new Date()),
-			previous_completed:undefined
+			previous_completed:undefined,
+			notify_on_complete:false,
+			notify_options:{},
+			permission:"both"
 		});
 
 		preparations.insert({
-			appointment_id : appointment_id,
+			appointment_id : lobotomy_appointment_id,
 			completed:true,
 			text:"stay up all night, by 11:00AM",
-			date_by:(new Date(2015, 4, 29, 11, 00)),
+			date_by:(new Date("29 May 2017 11:00:00 EDT")),
 			last_updated:(new Date()),
-			previous_completed:undefined
+			previous_completed:undefined,
+			notify_on_complete:false,
+			notify_options:{},
+			permission:"both"
 		});
 
 		preparations.insert({
-			appointment_id : appointment_id,
+			appointment_id : lobotomy_appointment_id,
 			completed:false,
 			text:"discover the meaning of life, by 10:00AM",
-			date_by:(new Date(2015, 4, 29, 10, 30)),
+			date_by:(new Date("29 May 2017 10:00:00 EDT")),
 			last_updated:(new Date()),
-			previous_completed:undefined
+			previous_completed:undefined,
+			notify_on_complete:false,
+			notify_options:{},
+			permission:"both"
 		});
 
 		preparations.insert({
-			appointment_id : appointment_id,
+			appointment_id : lobotomy_appointment_id,
 			completed:false,
 			text:"only eat tofu, by 8:30AM",
-			date_by:(new Date(2016, 4, 29, 8, 30)),
+			date_by:(new Date("29 May 2017 8:30:00 EDT")),
 			last_updated:(new Date()),
-			previous_completed:undefined
+			previous_completed:undefined,
+			notify_on_complete:false,
+			notify_options:{},
+			permission:"both"
+		});
+		
+		preparations.insert({
+			appointment_id : lobotomy_appointment_id,
+			completed:false,
+			text:"Ready for exam",
+			date_by:(new Date("31 May 2017 0:00:00 EDT")),
+			last_updated:(new Date()),
+			previous_completed:undefined,
+			notify_on_complete:true,
+			notify_options:{from:"MDaisy Staff", title:"Note", text:"Hi! You are ready for your exam!"},
+			permission:"staff"
 		});
 
-		//followed by an appointment with no preparation requirements
-		appointments.insert({
-			user_id : test_record._id,
+		//sample MRI data insertion---------------------------------------------------------------
+		var mri_appointment_id = appointments.insert({
+			user_id : fake_user_object._id,
 			preparation : [],
 			proc_type : "MRI",
-			date : "7/4/2015, 3:00 PM",
+			date : "7/4/2016, 3:00 PM",
 			location : "240 E 38th St, New York, NY 10016",
 			organization : "NYU Langone Medical Center",
 			department : "Neurology",
@@ -121,12 +145,24 @@ function startup_data(){
 			last_checked : (new Date()),
 			updated_by_client : true
 		});
+		
+		preparations.insert({
+			appointment_id : mri_appointment_id,
+			completed:false,
+			text:"Ready for exam",
+			date_by:(new Date("4 July 2016 15:00:00 EDT")),
+			last_updated:(new Date()),
+			previous_completed:undefined,
+			notify_on_complete:true,
+			notify_options:{"from":"MDaisy Staff", title:"Note", text:"Hi! You are ready for your exam!"},
+			permission:"staff"
+		});
 
-		//6/12 test data
-		var test_appointment_id = appointments.insert({
-			user_id : test_record._id,
+		//sample Barium Enema data insertion--------------------------------------------------------
+		var barium_appointment_id = appointments.insert({
+			user_id : fake_user_object._id,
 			proc_type : "Barium Enema",
-			date : "6/12/2015, 2:00 PM",
+			date : "6/12/2016, 2:00 PM",
 			location : "1300 York Ave, New York, NY 10065",
 			organization : "Weill Cornell Medical College",
 			department : "Radiology",
@@ -137,27 +173,46 @@ function startup_data(){
 		});
 
 		preparations.insert({
-			appointment_id : test_appointment_id,
+			appointment_id : barium_appointment_id,
 			completed:false,
 			text:"Bowel preparation, start by 6/12 1:00AM",
-			date_by:(new Date("12 Jun 2015 13:00:00 EDT")),
+			date_by:(new Date("12 Jun 2016 13:00:00 EDT")),
 			last_updated:(new Date()),
-			previous_completed:undefined
+			previous_completed:undefined,
+			notify_on_complete:false,
+			notify_options:{},
+			permission:"both"
 		});
 
 		preparations.insert({
-			appointment_id : test_appointment_id,
+			appointment_id : barium_appointment_id,
 			completed:false,
 			text:"NPO, start by 6/12 12:00AM",
-			date_by:(new Date("12 Jun 2015 00:00:00 EDT")),
+			date_by:(new Date("12 Jun 2016 00:00:00 EDT")),
 			last_updated:(new Date()),
-			previous_completed:undefined
+			previous_completed:undefined,
+			notify_on_complete:false,
+			notify_options:{},
+			permission:"both"
 		});
 
-		var test_appointment_id_two = appointments.insert({
-			user_id : test_record._id,
+		preparations.insert({
+			appointment_id : barium_appointment_id,
+			completed:false,
+			text:"Ready for exam",
+			date_by:(new Date("12 Jun 2016 14:00:00 EDT")),
+			last_updated:(new Date()),
+			previous_completed:undefined,
+			notify_on_complete:true,
+			notify_options:{from:"MDaisy Staff", title:"Note", text:"Hi! You are ready for your exam!"},
+			permission:"staff"
+		});
+		
+		//sample Abdomen CT data insertion--------------------------------------------------------
+		var ct_appointment_id = appointments.insert({
+			user_id : fake_user_object._id,
 			proc_type : "Abdomen CT",
-			date : "6/12/2015, 2:00 PM",
+			date : "6/12/2016, 2:00 PM",
 			location : "1300 York Ave, New York, NY 10065",
 			organization : "Weill Cornell Medical College",
 			department : "Radiology",
@@ -168,39 +223,54 @@ function startup_data(){
 		});
 
 		preparations.insert({
-			appointment_id : test_appointment_id_two,
+			appointment_id : ct_appointment_id,
 			completed:false,
 			text:"NPO, start by 6/12 10:00AM",
-			date_by:(new Date("12 Jun 2015 10:00:00 EDT")),
+			date_by:(new Date("12 Jun 2016 10:00:00 EDT")),
 			last_updated:(new Date()),
-			previous_completed:undefined
+			previous_completed:undefined,
+			notify_on_complete:false,
+			notify_options:{},
+			permission:"both"
+		});
+		
+		preparations.insert({
+			appointment_id : ct_appointment_id,
+			completed:false,
+			text:"Ready for exam",
+			date_by:(new Date("12 Jun 2016 14:00:00 EDT")),
+			last_updated:(new Date()),
+			previous_completed:undefined,
+			notify_on_complete:true,
+			notify_options:{from:"MDaisy Staff", title:"Note", text:"Hi! You are ready for your exam!"},
+			permission:"staff"
 		});
 
-		//insert 3 sample messages for the Barium Enema test
+		//sample message insertion--------------------------------------------------
 		messages.insert({
 			text: "Hi Dr.House. I wanted to know whether a barium enema is safe?",
 			to_id: doctor_id,
-			from_id: test_record._id,
+			from_id: fake_user_object._id,
 			date: (new Date("10 Jun 2015 8:00:00 EDT")),
-			appointment_id: test_appointment_id,
+			appointment_id: barium_appointment_id,
 			read: false
 		});
 
 		messages.insert({
 			text: "What about eating a little bit of food? I'm feeling a little lightheaded right now. Need to get my usual fix of green eggs and ham.",
 			to_id: doctor_id,
-			from_id: test_record._id,
+			from_id: fake_user_object._id,
 			date: (new Date("10 Jun 2015 10:00:00 EDT")),
-			appointment_id: test_appointment_id,
+			appointment_id: barium_appointment_id,
 			read:false
 		});
 
 		messages.insert({
 			text: "I'm here early. Can I meet with you and ask a couple questions before the actual operation?",
 			to_id: doctor_id,
-			from_id: test_record._id,
+			from_id: fake_user_object._id,
 			date: (new Date("10 Jun 2015 00:00:00 EDT")),
-			appointment_id: test_appointment_id,
+			appointment_id: barium_appointment_id,
 			read:false
 		});
 		
@@ -234,14 +304,14 @@ Meteor.startup(function() {
 
 	//register the push notification cronjob
 	if(!Meteor.isCordova){
-		var test_record = Meteor.users.findOne({'emails.address':'testpatient@fake.com'});
+		var fake_user_object = Meteor.users.findOne({'emails.address':'testpatient@fake.com'});
 		//set a sample notification 3 minutes into the future
 		var time_now = new Date();
 		time_now.setMinutes(time_now.getMinutes() + 3);
 		var test = Meteor.absoluteUrl();
 		notifications.insert({
 			notification_type : "appointment",
-			user_id : test_record._id,
+			user_id : fake_user_object._id,
 			from : "MDaisy",
 			title : "MDaisy Notification",
 			text : test + ": this is a test",

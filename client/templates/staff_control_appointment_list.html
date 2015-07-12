@@ -1,13 +1,11 @@
 <!--
-	staff_appointment_list.html 
-	This file contains the staff version template for the general appointment list
-	described in section 2.1 in "PatientClientDesignSpec".
+	staff_control_appointment_list.html
+	
 -->
 
-<template name="staff_appointment_list">
+<template name="staff_control_appointment_list">
 	{{#contentFor "headerButtonRight"}}
 		{{> toggle_button}}
-		{{> atNavButton}}
 	{{/contentFor}}
 
 	{{#contentFor "headerTitle"}}
@@ -18,18 +16,18 @@
 		{{> staff_search_box}}
 		{{#ionList class="app-list"}}
 			{{#each app_list}}
-				{{#ionItem path="staff_obligation_tab" data=get_all_data iconRight=true class=get_class}}
+				{{#ionItem  data=get_all_data iconRight=true class="staff_list_button"}}
 					<div id="label_alignment_div">
 						<h2>{{proc_type}}</h2>
 						<p>{{date}}</p>
 						<p>{{organization}}, {{department}} </p>
 						<p>{{location}}</p>
-						<div class="unread_message_label">
+						<!--<div class="unread_message_label">
 						{{#if has_unread_messages}}
 							<h1>{{num_unread_messages}}</h1>
-							<!--<h3> unread messages </h3>-->
+							<h3> unread messages </h3>
 						{{/if}}
-						</div>
+						</div>-->
 					</div>
 					{{> ionIcon icon="ios-arrow-right"}}
 				{{/ionItem}}

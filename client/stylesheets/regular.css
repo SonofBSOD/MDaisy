@@ -17,11 +17,27 @@ body.keyboard-open .platform-android .content.overflow-scroll{
 
 */
 .unread_message_label{
-	right: 10%;
+	right: 5%;
 	position: absolute;
-	top: 20%;
+	top: 30%;
 }
 
 .unread_message_label h1{
 	text-align:center;
+	color: red;
+}
+
+.message_read_label{
+	color:green !important;
+}
+
+.message_input_box{
+	position: absolute;
+	z-index: 999;
+	bottom: 0px;
+	
+}
+
+.message_sent_by_staff{
+	background-color: LightGray !important;
 }
