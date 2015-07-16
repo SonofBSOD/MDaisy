@@ -1,6 +1,32 @@
-Template.staff_control_button.events({
-	"click .change_appointment_button" : function(){
-			/*IonPopup.show({
+Template.control_modal.events({
+	"click #patient_switch" : function(e){
+		e.preventDefault();
+		Meteor.logout();
+		Meteor.loginWithPassword("gh@fake.com", "teststaff", function(error){
+			if(error){
+				alert("login failed!");
+			}
+			else{
+				IonModal.close();
+				Router.go("/staff_control_list");
+			}
+		});
+	},
+	"click #staff_switch" : function(e){
+		e.preventDefault();
+		Meteor.logout();
+		Meteor.loginWithPassword("gh@fake.com", "teststaff", function(error){
+			if(error){
+				alert("login failed!");
+			}
+			else{
+				IonModal.close();
+				Router.go("/landing");
+			}
+		});
+	},
+	"click #change_appointment_button" : function(e){
+		IonPopup.show({
 				title: 'Staff Change',
 				templateName : "staff_control_simple_login",
 				buttons : [
@@ -20,6 +46,7 @@ Template.staff_control_button.events({
 									}
 									else{
 										IonPopup.close();
+										IonModal.close();
 										Router.go("/staff_control_list");
 									}
 							
@@ -35,7 +62,7 @@ Template.staff_control_button.events({
 						}
 					}
 				]
-			});*/
-			IonModal.open("control_modal");
+		});
 	}
+	
 });

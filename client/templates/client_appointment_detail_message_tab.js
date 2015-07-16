@@ -24,8 +24,8 @@ Template.client_appointment_detail_message_tab.helpers({
 			var patient_id = Session.get("client.tab.appointment_object").user_id;
 			var physician_id = Session.get("client.tab.appointment_object").ordering_physician;
 			return messages.find(
-				{'to_id':physician_id, 
-				'from_id':patient_id, 
+				{/*'to_id':physician_id, 
+				'from_id':patient_id, */
 				'appointment_id':appointment_id}, 
 				{sort:{date:1}}).count() !== 0;
 		}
@@ -85,14 +85,31 @@ Template.client_appointment_detail_message_tab.events({
 		var appointment = Session.get("client.tab.appointment_object");
 		Meteor.call("send_message", message_text, appointment.user_id, appointment.ordering_physician, (new Date()), appointment._id, function(err, res){
 			if(err){
-				alert("fail");
+				//alert("fail");
 			}
 			else{
-				alert("success!");
+				//alert("success!");
 				$("#message_box").focus();
+				$("#message_box").val("");
 			}
 			
 		} );
+	},
+	"keyup #message_box" : function(event){
+		if(event.keyCode == 13){
+			var message_text = $("textarea#message_box").val();
+			var appointment = Session.get("client.tab.appointment_object");
+			Meteor.call("send_message", message_text, appointment.user_id, appointment.ordering_physician, (new Date()), appointment._id, function(err, res){
+				if(err){
+					//alert("fail");
+				}
+				else{
+					//alert("success!");
+					$("#message_box").focus();
+					$("#message_box").val("");
+				}
+			});
+		}
 	}
 });
 

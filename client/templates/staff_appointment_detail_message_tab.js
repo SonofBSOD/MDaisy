@@ -108,13 +108,30 @@ Template.staff_appointment_detail_message_tab.events({
 		var appointment = Session.get("staff.tab.appointment_object");
 		Meteor.call("send_message", message_text, Meteor.userId(), appointment.user_id, (new Date()), appointment._id, function(err, res){
 			if(err){
-				alert("fail");
+				//alert("fail");
 			}
 			else{
-				alert("success!");
+				//alert("success!");
 				$("#message_box").focus();
+				$("#message_box").val("");
 			}
 			
 		} );
+	},
+	"keyup #message_box" : function(event){
+		if(event.keyCode == 13){
+			var message_text = $("textarea#message_box").val();
+			var appointment = Session.get("staff.tab.appointment_object");
+				Meteor.call("send_message", message_text, Meteor.userId(), appointment.user_id, (new Date()), appointment._id, function(err, res){
+				if(err){
+					//alert("fail");
+				}
+				else{
+					//alert("success!");
+					$("#message_box").focus();
+					$("#message_box").val("");
+				}
+			});
+		}
 	}
 });

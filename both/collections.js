@@ -105,6 +105,11 @@ messages = new Mongo.Collection("messages");
 		Postcondition
 			sets the "read" field of all messages under appointment with id related_appointment_id
 			that are addressed to user with _id = to_id to "true" if they were originally "false".
+	staff_set_and_notify_appointment_exam_status
+		Precondition
+		
+		Postcondition
+			returns {success:boolean, notification_sent:boolean}
 */
 Meteor.methods({
 	update_obligations : function(obligation_status_list, appointment_id){
@@ -216,5 +221,54 @@ Meteor.methods({
 	},
 	send_message : function(message_text, user_id, physician_id, message_date, related_appointment_id){
 		messages.insert({text:message_text, to_id:physician_id, from_id:user_id, appointment_id:related_appointment_id, date:message_date, read:false});
+	},
+	staff_set_and_notify_appointment_exam_status : function(appointment_id, user_id, exam_status){
+		var appointment = appointments.findOne({_id:appointment_id});
+		if(appointment == null){
+			return {success:false};
+		}
+		
+		var user = Meteor.users.findOne({_id:user_id});
+		if(user == null){
+			return {success:false};
+		}
+		
+		if(user.user_type !== "staff"){
+			return {success:false};
+		}
+		
+		if(exam_status != true && exam_status != false){
+			return {success:false};
+		}
+		
+		appointments.update({_id:appointment_id}, {$set:{exam_ready:exam_status}});
+		if(exam_status == true){
+			/*Push.send({from:"MDaisy", 
+							title:"Exam Status", 
+							text:"Hi! You are ready for your exam!", 
+							query:{userId:appointment.user_id}, 
+							sound:"test.wav", 
+							vibrate:true});*/
+		}
+		
+		return {success:true, notification_sent:exam_status};
+	},
+	staff_delete_appointment : function(appointment_id, user_id){
+		var appointment = appointments.findOne({_id:appointment_id});
+		if(appointment == null){
+			return false;
+		}
+		
+		var user = Meteor.users.findOne({_id:user_id});
+		if(user == null){
+			return false;
+		}
+		
+		if(user.user_type !== "staff"){
+			return false;
+		}
+		
+		appointments.remove({_id:appointment_id});
+		return true;
 	}
 });

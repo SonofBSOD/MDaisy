@@ -1,0 +1,75 @@
+<!--
+	client_appointment_status_obligation_tab
+
+	contains the template that displays information about a user's exam,
+	and also a status button indicating whether staff are ready for them.
+
+	since meteoric tabs do not support a data object for specified paths,
+	this template relies on the following session variables:
+		-tab.appointment_id
+		-tab.patient_id
+		-tab.physician_id
+
+-->
+
+<template name="client_appointment_detail_status_tab">
+	{{#contentFor "headerButtonLeft"}}
+		{{!--
+		
+		{{#ionItem path="list"}}
+		{{> ionIcon icon="ios-arrow-left"}}
+		{{/ionItem}}
+		--}}
+	{{/contentFor}}
+
+	{{#contentFor "headerButtonRight"}}
+		{{> toggle_button}}
+		{{!--
+		{{> atNavButton}}
+		--}}
+	{{/contentFor}}
+
+
+	{{#contentFor "headerTitle"}}
+		<h5 class="title" style="font-size:1em">Your Appointment</h5>
+	{{/contentFor}}
+	
+	
+	{{#ionContent class=ready_background_class}}
+		<div class="card">
+				<div style="text-align:center" class="item item-divider">
+				<h1 class="obligation_title">{{appointment_type}}</h1>
+				</div>
+				<div class="item item-text-wrap">
+					<p>Name: {{appointment_user_name}}</p>
+					<p>MRN: {{appointment_user_mrn}}</p>
+					<p>Date: {{appointment_date}}</p>
+					<p>Department: {{appointment_department}}</p>
+					<p>Reason: {{appointment_reason}}</p>
+				</div>
+		</div>
+	
+		<div>
+			<div style="width: 250px; margin: 0 auto" id="image_container">
+			{{#if exam_ready}}
+				<img src="exam_ready.png">
+			{{else}}
+				<img src="exam_not_ready.png">
+			{{/if}}
+			</div>
+		</div>
+		
+		<div style="text-align: center">
+			{{#if exam_ready}}
+				<h3>Your exam is ready. Please report to the staff.</h3>
+			{{else}}
+				<h3>We'll notify you as soon as we're ready for your exam. <br/>
+				Information about your exam can be found under the 'Exam Info' tab. <br/>
+				Please let us know if you have any questions or send us a private message under the 'Messages' tab.</h3>
+			{{/if}}
+		</div>
+			{{> message_listener}}
+	{{/ionContent}}
+
+	{{> client_tab_bar}}
+</template>

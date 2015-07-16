@@ -294,3 +294,23 @@ Template.client_appointment_detail_obligation_tab.events({
 	}
 	
 });
+
+Template.client_appointment_detail_obligation_tab.onCreated(
+	function(){
+		alert("ALIVE!");
+		var appointment = Session.get("client.tab.appointment_object");
+		var message_list = messages.find({'appointment_id':appointment._id}, {sort:{date:1}});
+		var ignore = true;
+		var message_handler = message_list.observeChanges({
+					added : function(id, u){
+						if(!ignore){
+							alert("new message!");
+						}
+					}
+		});
+		ignore = false;
+		console.log("Y");
+		console.log(message_handler);
+		Session.set("client.message_handler", message_handler.stop);
+	}
+);

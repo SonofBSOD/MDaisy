@@ -33,6 +33,9 @@ appointments
 	contains detailed information for each appointment
 	Document Format :
 		user_id : the Meteor.accounts userId of the user who has this appointment
+		user_dob : a cached, SEARCHABLE version of the user's DOB, i.e. (new Date()).toLocaleDateString()
+		user_mrn : a cached version of the user's mrn
+		user_name : a cached version of the user's name
 		proc_type : 
 			a string representing the type of procedure. 
 			Current range of values: ["Lobotomy", "CT"]
@@ -55,6 +58,8 @@ appointments
 			a boolean indicating whether or not: 1) the appointment was last updated by the client AND
 			2) this update was seen by the staff. 
 			is initialized to true at the time of document creation.
+		exam_ready:
+			a boolean that indicates whether or not the patient is ready to be called for the exam. 
 
 medicalInfo
 	contains descriptions of medical procedures 
@@ -100,8 +105,7 @@ preparations
 		permission:
 			a string that controls which type of account can set this preparation. current possible values are: "patient",
 			"staff", or "both"
-			
-
+		
 user_to_push_id_map
 	contains documents mapping users to which instances of the mobile version of the app we should send 
 	push notifications to. since raix:push generates a unique application id for each android app, when a user logs in,

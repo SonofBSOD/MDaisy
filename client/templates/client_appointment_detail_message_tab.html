@@ -23,7 +23,6 @@
 	{{/contentFor}}
 
 	{{#contentFor "headerButtonRight"}}
-		{{> staff_control_button}}
 		{{> toggle_button}}
 		<!--{{> atNavButton}}-->
 	{{/contentFor}}
@@ -60,6 +59,8 @@
       Send
     </button>
   </div>
+  
+	{{> message_listener}}
 	{{/ionContent}}
 
 	{{> client_tab_bar}}

@@ -31,10 +31,29 @@ Template.staff_appointment_list.helpers({
 			}
 			else{
 				var query_exp = new RegExp(query, "i");
-				return appointments.find({$and: [{'ordering_physician':user_id}, {$or: [{proc_type:query_exp}, {date:query_exp}, {location:query_exp},
-																					{organization:query_exp}, {department:query_exp}
+				//and then filter the list to make sure we get a match on user name, dob, or mrn
+				/*var db_list = appointments.find({$and: [{'ordering_physician':user_id}, {$or: [{proc_type:query_exp}, {date:query_exp}, {location:query_exp},
+																					{organization:query_exp}, {department:query_exp}, {user_dob:query_exp},
+																						{user_mrn:query_exp}, {user_name:query_exp}
+																					]}]});*/
+				var db_list = appointments.find({$and: [{'ordering_physician':user_id}, {$or: [
+																						{user_mrn:query_exp}, {user_name:query_exp}
 																					]}]});
+				
+				/*var final_list = [];
+				db_list.forEach(function(e){
+					var user = Meteor.users.findOne({_id:e.user_id});
+					if(user != undefined){
+						if(query_exp.test(user.profile.name) || query_exp.test(user.profile.dob.toLocaleString()) || query_exp.test(user.profile.mrn)){
+							final_list.push(e);
+						}
+					}
+				});
+				
+				return final_list;*/
+				return db_list;
 			}
+			
 		}
 		else{
 			return [];
@@ -48,8 +67,18 @@ Template.staff_appointment_list.helpers({
 	},
 	get_class : function(){
 		var default_class = "staff_list_button";
-		if(this.updated_by_client){
+		/*if(this.updated_by_client){
 			return default_class + " " + "staff_appointment_list_updated_item";
+		}
+		else{
+			return default_class;
+		}*/
+		return default_class;
+	},
+	get_class_and_ready_status : function(){
+		var default_class = "staff_list_button";
+		if(this.exam_ready){
+			return default_class + " " + "staff_appointment_list_exam_ready_item";
 		}
 		else{
 			return default_class;
@@ -63,6 +92,24 @@ Template.staff_appointment_list.helpers({
 	num_unread_messages: function(){
 		var unread_messages = messages.find({appointment_id:this._id, read:false});
 		return unread_messages.count();
+	},
+	patient_name : function(){
+		var user = Meteor.users.findOne({_id:this.user_id});
+		if(user != undefined){
+			return user.profile.name;
+		}
+	},
+	patient_dob : function(){
+		var user = Meteor.users.findOne({_id:this.user_id});
+		if(user != undefined){
+			return user.profile.dob.toLocaleDateString();
+		}
+	},
+	patient_mrn : function(){
+		var user = Meteor.users.findOne({_id:this.user_id});
+		if(user != undefined){
+			return user.profile.mrn;
+		}
 	}
 });
 
@@ -90,7 +137,7 @@ Template.staff_appointment_list.events({
 				Session.set("tab.appointment_id", appointment_id);
 				Session.set("tab.patient_id", patient_id);
 				Session.set("tab.physician_id", physician_id);
-				Router.go("/staff_obligation_tab");
+				Router.go("/staff_status_tab");
 			}
 			else{
 					IonPopup.show({

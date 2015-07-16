@@ -31,9 +31,16 @@ Template.staff_control_appointment_list.helpers({
 			}
 			else{
 				var query_exp = new RegExp(query, "i");
-				return appointments.find({$and: [{'ordering_physician':user_id}, {$or: [{proc_type:query_exp}, {date:query_exp}, {location:query_exp},
-																					{organization:query_exp}, {department:query_exp}
+				//and then filter the list to make sure we get a match on user name, dob, or mrn
+				/*var db_list = appointments.find({$and: [{'ordering_physician':user_id}, {$or: [{proc_type:query_exp}, {date:query_exp}, {location:query_exp},
+																					{organization:query_exp}, {department:query_exp}, {user_dob:query_exp},
+																						{user_mrn:query_exp}, {user_name:query_exp}
+																					]}]});*/
+				var db_list = appointments.find({$and: [{'ordering_physician':user_id}, {$or: [
+																						{user_mrn:query_exp}, {user_name:query_exp}
 																					]}]});
+				
+				return db_list;
 			}
 		}
 		else{
@@ -55,6 +62,15 @@ Template.staff_control_appointment_list.helpers({
 			return default_class;
 		}
 	},
+	get_class_and_ready_status : function(){
+		var default_class = "staff_list_button";
+		if(this.exam_ready){
+			return default_class + " " + "staff_appointment_list_exam_ready_item";
+		}
+		else{
+			return default_class;
+		}
+	},
 	has_unread_messages: function(){
 		//do a query over all messages tied to this appointment
 		var unread_messages = messages.find({appointment_id:this._id, read:false});
@@ -63,8 +79,62 @@ Template.staff_control_appointment_list.helpers({
 	num_unread_messages: function(){
 		var unread_messages = messages.find({appointment_id:this._id, read:false});
 		return unread_messages.count();
+	},
+	patient_name : function(){
+		var user = Meteor.users.findOne({_id:this.user_id});
+		if(user != undefined){
+			return user.profile.name;
+		}
+	},
+	patient_dob : function(){
+		var user = Meteor.users.findOne({_id:this.user_id});
+		if(user != undefined){
+			return user.profile.dob.toLocaleDateString();
+		}
+	},
+	patient_mrn : function(){
+		var user = Meteor.users.findOne({_id:this.user_id});
+		if(user != undefined){
+			return user.profile.mrn;
+		}
 	}
 });
+
+
+/*
+	This is a handler function installed right before we switch to a hard-set patient
+	appointment that watches for message log updates. On update, it will switch to the 
+	message tab and play "chimes.wav" to alert the user.
+	
+	Precondition:
+		expects "client.listen_for_message_update" to be set to a non-undefined value before
+		it is installed by Tracker.autorun
+		
+*/
+function message_update_handler(comp){
+	if(Session.get("client.listen_for_message_update") === undefined){
+		Session.set("client.listen_for_message_update.after_first_run", undefined);
+		alert("message_update_handler: bye!");
+		comp.stop();
+	}
+	else{
+		//run the same query for the message list as the message tab,
+		//so that we'll effectively listen for message list updates
+		if(Session.get("client.listen_for_message_update.after_first_run") !== undefined){
+			var appointment_id = Session.get("client.tab.appointment_object")._id;
+			var message_list = messages.find(
+				{'appointment_id':appointment_id}, 
+				{sort:{date:1}}).fetch();
+				
+			var sound = new Audio("chimes.wav").play();
+			alert("message_update_handler: you got a new message!");
+		}
+		else{
+			console.log("i ran");
+			Session.set("client.listen_for_message_update.after_first_run", true);
+		}
+	}
+}
 
 /*
 	Events:
@@ -73,6 +143,9 @@ Template.staff_control_appointment_list.helpers({
 		"updated_by_client" flag to false; this is because the staff is going to view it.
 		if this fails, we issue a prompt to try again. otherwise, we set the current
 		appointment_view_time and continue on to the staff detail page.
+		
+		also installs a handler to watch for updates on the message_list.
+		client.listen_for_message_update will be non-undefined on routing to the client tabs.
 		
 */
 Template.staff_control_appointment_list.events({
@@ -91,8 +164,24 @@ Template.staff_control_appointment_list.events({
 				alert("could not switch to patient account!");
 			}
 			else{
+				//install the handler that watches for message updates!
+				//Session.set("client.listen_for_message_update", true);
+				//console.log(Session.get("client.listen_for_message_update.after_first_run"));
+				//Tracker.autorun(message_update_handler);
+				/*var ignore = true;
+				var message_list = messages.find({'appointment_id':appointment_id}, {sort:{date:1}});
+				var message_handler = message_list.observeChanges({
+					added : function(id, u){
+						if(!ignore){
+							alert("new message!");
+						}
+					}
+				});*/
+				
+				//console.log("after mh");
+				//Session.set("client.message_handler", message_handler);
 				Session.set("client.tab.appointment_object", appointment_object);
-				Router.go("/client_obligation_tab");
+				Router.go("/client_status_tab");
 			}
 		});
 

@@ -13,7 +13,6 @@
 -->
 
 <template name="client_appointment_detail_obligation_tab">
-
 	{{#contentFor "headerButtonLeft"}}
 		{{!--
 		
@@ -31,10 +30,10 @@
 		--}}
 	{{/contentFor}}
 
+
 	{{#contentFor "headerTitle"}}
 		<h5 class="title" style="font-size:1em">Client-Side Patient Preparations</h5>
 	{{/contentFor}}
-
 	
 	{{#ionContent class="padding"}}
 		{{#if has_obligations}}
@@ -69,6 +68,8 @@
 			<a class="button update_preparation">Update</a>
 			<a class="button medical_information">Information</a>
 		</div>
+		
+		{{> message_listener}}
 	{{/ionContent}}
 
 	{{> client_tab_bar}}

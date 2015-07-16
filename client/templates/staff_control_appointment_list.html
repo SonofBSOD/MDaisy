@@ -9,16 +9,18 @@
 	{{/contentFor}}
 
 	{{#contentFor "headerTitle"}}
-		<h2 class="title">My Appointments</h2>
+		<h2 class="title">Select Patient Appointment</h2>
 	{{/contentFor}}
 
 	{{#ionContent}}
 		{{> staff_search_box}}
 		{{#ionList class="app-list"}}
 			{{#each app_list}}
-				{{#ionItem  data=get_all_data iconRight=true class="staff_list_button"}}
+				{{#ionItem  data=get_all_data iconRight=true class=get_class_and_ready_status}}
 					<div id="label_alignment_div">
-						<h2>{{proc_type}}</h2>
+						<h2>{{patient_name}}</h2>
+						<p>DOB: {{patient_dob}}, MRN: {{patient_mrn}}</p>
+						<h3>{{proc_type}}</h3>
 						<p>{{date}}</p>
 						<p>{{organization}}, {{department}} </p>
 						<p>{{location}}</p>
@@ -28,6 +30,11 @@
 							<h3> unread messages </h3>
 						{{/if}}
 						</div>-->
+						{{#if exam_ready}}
+							<div class="exam_ready_label">
+								<h2>READY</h2>
+							</div>
+						{{/if}}
 					</div>
 					{{> ionIcon icon="ios-arrow-right"}}
 				{{/ionItem}}

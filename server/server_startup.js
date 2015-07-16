@@ -17,10 +17,46 @@ function startup_data(){
 			password:"testpatient",
 			profile :{
 				name: "Bob Jones",
-				phone_number : "555-666-7777"},
+				phone_number : "555-666-7777",
+				dob:new Date("12 Jun 1990"),
+				mrn:"16182369"},
 			user_type:"patient"
 		});
 
+		Accounts.createUser({
+			email:"ella.amaryllis@fake.com",
+			password:"testpatient",
+			profile :{
+				name: "Ella Amaryllis",
+				phone_number : "555-111-2222",
+				dob:new Date("1 Aug 2000"),
+				mrn:"12983102"},
+			user_type:"patient"
+		});
+		
+		Accounts.createUser({
+			email:"davor.fionnbarra@fake.com",
+			password:"testpatient",
+			profile :{
+				name: "Davor Fionnbarra",
+				phone_number : "555-222-3333",
+				dob:new Date("3 Feb 1986"),
+				mrn:"36193716"},
+			user_type:"patient"
+		});
+		
+		Accounts.createUser({
+			email:"thamar.goran@fake.com",
+			password:"testpatient",
+			profile :{
+				name: "Thamar Goran",
+				phone_number : "555-777-8888",
+				dob:new Date("27 Jan 1970"),
+				mrn:"81730183"},
+			user_type:"patient"
+		});
+		
+		
 		Accounts.createUser({
 			email:"gh@fake.com",
 			password:"teststaff",
@@ -58,21 +94,28 @@ function startup_data(){
 		
 		//sample Lobotomy data insertion---------------------------------------------------------------
 		var fake_user_object = Meteor.users.findOne({'emails.address':'testpatient@fake.com'});
-		var lobotomy_appointment_id = appointments.insert({
-			user_id : fake_user_object._id,
-			proc_type : "Lobotomy",
+		var ella_object = Meteor.users.findOne({'emails.address':'ella.amaryllis@fake.com'});
+		var davor_object = Meteor.users.findOne({'emails.address':'davor.fionnbarra@fake.com'});
+		var thamar_object = Meteor.users.findOne({'emails.address':'thamar.goran@fake.com'});
+		var ultrasound_appointment_id = appointments.insert({
+			user_id : ella_object._id,
+			user_name : "Ella Amaryllis",
+			user_dob: (new Date("1 Aug 2000")).toLocaleDateString(),
+			user_mrn: "12983102",
+			proc_type : "Ultrasound",
 			date : "5/31/2017, 12:00 PM",
 			location : "1300 York Ave, New York, NY 10065",
 			organization : "Weill Cornell Medical College",
 			department : "Radiology",
 			ordering_physician : doctor_id,
-			reason : "Lobotomy is cool, so you're the lab rat.",
+			reason : "Baby checkup exam.",
 			last_checked : (new Date()),
-			updated_by_client : true
+			updated_by_client : true,
+			exam_ready : false
 		});
 
 		preparations.insert({
-			appointment_id : lobotomy_appointment_id,
+			appointment_id : ultrasound_appointment_id,
 			completed:true,
 			text:"drink lots of water, by 9:00AM",
 			date_by:(new Date("30 May 2017 9:00:00 EDT")),
@@ -84,7 +127,7 @@ function startup_data(){
 		});
 
 		preparations.insert({
-			appointment_id : lobotomy_appointment_id,
+			appointment_id : ultrasound_appointment_id,
 			completed:true,
 			text:"stay up all night, by 11:00AM",
 			date_by:(new Date("29 May 2017 11:00:00 EDT")),
@@ -96,7 +139,7 @@ function startup_data(){
 		});
 
 		preparations.insert({
-			appointment_id : lobotomy_appointment_id,
+			appointment_id : ultrasound_appointment_id,
 			completed:false,
 			text:"discover the meaning of life, by 10:00AM",
 			date_by:(new Date("29 May 2017 10:00:00 EDT")),
@@ -108,7 +151,7 @@ function startup_data(){
 		});
 
 		preparations.insert({
-			appointment_id : lobotomy_appointment_id,
+			appointment_id : ultrasound_appointment_id,
 			completed:false,
 			text:"only eat tofu, by 8:30AM",
 			date_by:(new Date("29 May 2017 8:30:00 EDT")),
@@ -120,7 +163,7 @@ function startup_data(){
 		});
 		
 		preparations.insert({
-			appointment_id : lobotomy_appointment_id,
+			appointment_id : ultrasound_appointment_id,
 			completed:false,
 			text:"Ready for exam",
 			date_by:(new Date("31 May 2017 0:00:00 EDT")),
@@ -134,16 +177,20 @@ function startup_data(){
 		//sample MRI data insertion---------------------------------------------------------------
 		var mri_appointment_id = appointments.insert({
 			user_id : fake_user_object._id,
+			user_name : "Bob Jones",
+			user_dob: (new Date("12 Jun 1990")).toLocaleDateString(),
+			user_mrn: "16182369",
 			preparation : [],
 			proc_type : "MRI",
 			date : "7/4/2016, 3:00 PM",
 			location : "240 E 38th St, New York, NY 10016",
-			organization : "NYU Langone Medical Center",
+			organization : "Weill Cornell Medical College",
 			department : "Neurology",
 			ordering_physician : doctor_id,
 			reason : "Post-lobotomy checkup.",
 			last_checked : (new Date()),
-			updated_by_client : true
+			updated_by_client : true,
+			exam_ready : false
 		});
 		
 		preparations.insert({
@@ -160,7 +207,10 @@ function startup_data(){
 
 		//sample Barium Enema data insertion--------------------------------------------------------
 		var barium_appointment_id = appointments.insert({
-			user_id : fake_user_object._id,
+			user_id : thamar_object._id,
+			user_name : "Thamar Goran",
+			user_dob: (new Date("27 Jan 1970")).toLocaleDateString(),
+			user_mrn: "81730183",
 			proc_type : "Barium Enema",
 			date : "6/12/2016, 2:00 PM",
 			location : "1300 York Ave, New York, NY 10065",
@@ -169,7 +219,8 @@ function startup_data(){
 			ordering_physician : doctor_id,
 			reason : "Regular checkup.",
 			last_checked : (new Date()),
-			updated_by_client : true
+			updated_by_client : true,
+			exam_ready : false
 		});
 
 		preparations.insert({
@@ -210,7 +261,10 @@ function startup_data(){
 		
 		//sample Abdomen CT data insertion--------------------------------------------------------
 		var ct_appointment_id = appointments.insert({
-			user_id : fake_user_object._id,
+			user_id : davor_object._id,
+			user_name : "Davor Fionnbarra",
+			user_dob: (new Date("3 Feb 1986")).toLocaleDateString(),
+			user_mrn: "36193716",
 			proc_type : "Abdomen CT",
 			date : "6/12/2016, 2:00 PM",
 			location : "1300 York Ave, New York, NY 10065",
@@ -219,7 +273,8 @@ function startup_data(){
 			ordering_physician : doctor_id,
 			reason : "Abdomen checkup.",
 			last_checked : (new Date()),
-			updated_by_client : true
+			updated_by_client : true,
+			exam_ready : false
 		});
 
 		preparations.insert({

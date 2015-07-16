@@ -23,7 +23,8 @@ Router.route('/landing', {
 			Router.go("/staff_list");
 		}
 		else{
-			Router.go("/list");
+			//force a staff login for now
+			Meteor.loginWithPassword("gh@fake.com", "teststaff", function(){Router.go("/staff_list");});
 		}
 	}
 });
@@ -89,6 +90,20 @@ Router.route('/client_message_tab',
 		name:'client_message_tab',
 });
 
+Router.route('/client_status_tab', 
+	function(){
+		this.render("client_appointment_detail_status_tab");
+	},{
+		name:'client_status_tab'
+});
+
+Router.route('/client_exam_info_tab', 
+	function(){
+		this.render("client_appointment_detail_info_tab");
+	},{
+		name:'client_exam_info_tab'
+});
+
 Router.route('/client_staff_info_tab', 
 	function(){
 		this.render("client_appointment_staff_information_tab");
@@ -104,3 +119,9 @@ Router.route('/staff_control_list',
 		name:'staff_control_list'
 });
 
+Router.route('/staff_status_tab',
+	function(){
+		this.render("staff_appointment_detail_status_tab");
+	},{
+		name:'staff_status_tab'
+});

@@ -9,22 +9,33 @@ body.keyboard-open .platform-android .content.overflow-scroll{
 /*
 	highlight updated items on the staff appointment list
 */
-.staff_appointment_list_updated_item{
-		background-color: DeepSkyBlue;
+.staff_appointment_list_exam_ready_item{
+		background-color: #D6EEF7;
 }
 
 /*
 
 */
 .unread_message_label{
-	right: 5%;
+	right: 7%;
 	position: absolute;
-	top: 30%;
+	top: 37%;
 }
 
 .unread_message_label h1{
 	text-align:center;
 	color: red;
+}
+
+.exam_ready_label{
+	right: 10%;
+	position: absolute;
+	top: 45%;
+}
+
+.exam_ready_label h2{
+	text-align:center;
+	color: DeepSkyBlue;
 }
 
 .message_read_label{
@@ -40,4 +51,16 @@ body.keyboard-open .platform-android .content.overflow-scroll{
 
 .message_sent_by_staff{
 	background-color: LightGray !important;
+}
+
+/*
+	this scales the check mark inside the staff status check mark
+*/
+#exam_checkbox::after{
+	width: 100px !important;
+	height: 50px !important;
+}
+
+.ready_background{
+	background-color: LightGreen;
 }

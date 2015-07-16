@@ -1,0 +1,69 @@
+<!--
+	staff_appointment_detail_status_tab
+
+	contains the template that displays information about the type 
+	of the user's exam, and lets staff set whether the exam is ready or not.
+
+	since meteoric tabs do not support a data object for specified paths,
+	this template relies on the following session variables:
+		-tab.appointment_id
+		-tab.patient_id
+		-tab.physician_id
+
+-->
+
+<template name="staff_appointment_detail_status_tab">
+	{{#contentFor "headerButtonLeft"}}
+		{{#ionItem path="staff_list"}}
+		{{> ionIcon icon="ios-arrow-left"}}
+		{{/ionItem}}
+	{{/contentFor}}
+
+	{{#contentFor "headerButtonRight"}}
+		{{> toggle_button}}
+		{{!--
+		{{> atNavButton}}
+		--}}
+	{{/contentFor}}
+
+
+	{{#contentFor "headerTitle"}}
+		<h5 class="title" style="font-size:1em">Patient Appointment</h5>
+	{{/contentFor}}
+	
+	{{#ionContent class="padding"}}
+		{{#if no_delete_hide}}
+		<div class="card">
+				<div style="text-align:center" class="item item-divider">
+				<h1 class="obligation_title">{{appointment_type}}</h1>
+				</div>
+				<div class="item item-text-wrap">
+					<p>Name: {{appointment_patient_name}}</p>
+					<p>MRN:{{appointment_patient_mrn}}</p>
+					<p>Date: {{appointment_date}}</p>
+					<p>Department: {{appointment_department}}</p>
+					<p>Reason: {{appointment_reason}}</p>
+				</div>
+		</div>
+	
+		<div id="staff_status_checkbox_div">
+			<div style="width: 250px; margin: 0 auto" id="image_container">
+				<label class="checkbox">
+					<input id="exam_checkbox" style="width: 250px; height: 250px" type="checkbox" {{exam_checked}}>
+				</label>
+			</div>
+		</div>
+		{{else}}
+		{{/if}}
+		
+		<button id="exam_status_update" class="button button-full button-balanced">
+			Ready for Exam
+		</button>
+		<br />
+		<!--<button id="delete_appointment" class="button button-full button-assertive">
+			Delete Appointment
+		</button>-->
+		{{> staff_message_listener}}
+	{{/ionContent}}
+	{{> staff_tab_bar}}
+</template>
