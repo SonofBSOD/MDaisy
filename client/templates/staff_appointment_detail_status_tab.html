@@ -28,35 +28,86 @@
 
 
 	{{#contentFor "headerTitle"}}
-		<h5 class="title" style="font-size:1em">Patient Appointment</h5>
+		<h5 class="title" style="font-size:1em">STAFF VIEW: Patient Status</h5>
 	{{/contentFor}}
 	
 	{{#ionContent class="padding"}}
 		{{#if no_delete_hide}}
-		<div class="card">
-				<div style="text-align:center" class="item item-divider">
-				<h1 class="obligation_title">{{appointment_type}}</h1>
-				</div>
-				<div class="item item-text-wrap">
-					<p>Name: {{appointment_patient_name}}</p>
-					<p>MRN:{{appointment_patient_mrn}}</p>
-					<p>Date: {{appointment_date}}</p>
-					<p>Department: {{appointment_department}}</p>
-					<p>Reason: {{appointment_reason}}</p>
-				</div>
+		<div class="list card">
+		        <!--<div class="item item-avatar">-->
+		        <!--    <i class="icon ion-person"></i>-->
+		        <!--    <h1>{{appointment_patient_name}}</h1>-->
+		        <!--</div>-->
+		        <a href="#" class="item item-icon-left">
+                    <h1><i class="icon ion-person"></i>{{appointment_patient_name}}</h1>
+                    DOB: 12/15/1982
+		          <!--<div style="text-align:center" class="item item-divider"> -->
+            <!--      <h1><i class="icon ion-person"></i>{{appointment_patient_name}}</h1>-->
+                  <!--</div>-->
+                </a>
+                <div class="item item-body">
+                    
+                    <img src="radiology_US.png">    
+                    
+                    
+                    <div class="row">
+                      <div class="col col-10" style="text-align:right"><b>Exam:</b></div>
+                      <div class="col col-90">{{appointment_type}}</div>
+                    </div>
+                    <div class="row">
+                      <div class="col col-10" style="text-align:right"><b>History:</b></div>
+                      <div class="col col-90">{{appointment_reason}}</div>
+                    </div>
+                    <!--<div class="row">-->
+                    <!--  <div class="col col-right" style="text-align:right"><b>Dept:</b></div>-->
+                    <!--  <div class="col col-90">{{appointment_department}}</div>-->
+                    <!--</div>-->
+                    
+                </div>
+				<!--<div style="text-align:center" class="item item-divider">-->
+				<!--<h1 class="obligation_title">{{appointment_patient_name}}</h1>-->
+				<!--</div>-->
+				<!--<div class="item item-text-wrap">-->
+				    <!--<div class="row">-->
+        <!--              <div class="col col-right" style="text-align:right"><b>Name:</b></div>-->
+        <!--              <div class="col col-90">{{appointment_patient_name}}</div>-->
+        <!--            </div>-->
+        <!--            <div class="row">-->
+        <!--              <div class="col col-right" style="text-align:right"><b>MRN:</b></div>-->
+        <!--              <div class="col col-90">{{appointment_patient_mrn}}</div>-->
+        <!--            </div>-->
+    <!--                <div class="row">-->
+    <!--                  <div class="col col-right" style="text-align:right"><b>Exam:</b></div>-->
+    <!--                  <div class="col col-90">{{appointment_type}}</div>-->
+    <!--                </div>-->
+    <!--                <div class="row">-->
+    <!--                  <div class="col col-right" style="text-align:right"><b>History:</b></div>-->
+    <!--                  <div class="col col-90">{{appointment_reason}}</div>-->
+    <!--                </div>-->
+    <!--                <div class="row">-->
+    <!--                  <div class="col col-right" style="text-align:right"><b>Dept:</b></div>-->
+    <!--                  <div class="col col-90">{{appointment_department}}</div>-->
+    <!--                </div>-->
+                    
+					<!--<p>Name: {{appointment_patient_name}}</p>-->
+					<!--<p>MRN:{{appointment_patient_mrn}}</p>-->
+					<!--<p>Date: {{appointment_date}}</p>-->
+					<!--<p>Department: {{appointment_department}}</p>-->
+					<!--<p>Reason: {{appointment_reason}}</p>-->
+				<!--</div>-->
 		</div>
 	
 		<div id="staff_status_checkbox_div">
-			<div style="width: 250px; margin: 0 auto" id="image_container">
+			<div style="width: 200px; margin: 0 auto" id="image_container">
 				<label class="checkbox">
-					<input id="exam_checkbox" style="width: 250px; height: 250px" type="checkbox" {{exam_checked}}>
+					<input id="exam_checkbox" style="width: 200px; height: 200px" type="checkbox" {{exam_checked}}>
 				</label>
 			</div>
 		</div>
 		{{else}}
 		{{/if}}
 		
-		<button id="exam_status_update" class="button button-full button-balanced">
+		<button id="exam_status_update" class="button button-large button-full button-balanced">
 			Ready for Exam
 		</button>
 		<br />
