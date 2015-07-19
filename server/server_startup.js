@@ -108,7 +108,7 @@ function startup_data(){
 			organization : "Weill Cornell Medical College",
 			department : "Radiology",
 			ordering_physician : doctor_id,
-			reason : "Baby checkup exam.",
+			reason : "Pregnancy, with pelvic pain",
 			last_checked : (new Date()),
 			updated_by_client : true,
 			exam_ready : false
@@ -170,7 +170,7 @@ function startup_data(){
 			last_updated:(new Date()),
 			previous_completed:undefined,
 			notify_on_complete:true,
-			notify_options:{from:"MDaisy Staff", title:"Note", text:"Hi! You are ready for your exam!"},
+			notify_options:{from:"Radiology Staff", title:"Note", text:"Hi! You are ready for your exam!"},
 			permission:"staff"
 		});
 
@@ -185,9 +185,9 @@ function startup_data(){
 			date : "7/4/2016, 3:00 PM",
 			location : "240 E 38th St, New York, NY 10016",
 			organization : "Weill Cornell Medical College",
-			department : "Neurology",
+			department : "Radiology",
 			ordering_physician : doctor_id,
-			reason : "Post-lobotomy checkup.",
+			reason : "Status post tumor resection",
 			last_checked : (new Date()),
 			updated_by_client : true,
 			exam_ready : false
@@ -201,7 +201,7 @@ function startup_data(){
 			last_updated:(new Date()),
 			previous_completed:undefined,
 			notify_on_complete:true,
-			notify_options:{"from":"MDaisy Staff", title:"Note", text:"Hi! You are ready for your exam!"},
+			notify_options:{"from":"Radiology Staff", title:"Note", text:"Hi! You are ready for your exam!"},
 			permission:"staff"
 		});
 
@@ -211,13 +211,13 @@ function startup_data(){
 			user_name : "Thamar Goran",
 			user_dob: (new Date("27 Jan 1970")).toLocaleDateString(),
 			user_mrn: "81730183",
-			proc_type : "Barium Enema",
+			proc_type : "CT",
 			date : "6/12/2016, 2:00 PM",
 			location : "1300 York Ave, New York, NY 10065",
 			organization : "Weill Cornell Medical College",
 			department : "Radiology",
 			ordering_physician : doctor_id,
-			reason : "Regular checkup.",
+			reason : "Abdominal pain",
 			last_checked : (new Date()),
 			updated_by_client : true,
 			exam_ready : false
@@ -255,7 +255,7 @@ function startup_data(){
 			last_updated:(new Date()),
 			previous_completed:undefined,
 			notify_on_complete:true,
-			notify_options:{from:"MDaisy Staff", title:"Note", text:"Hi! You are ready for your exam!"},
+			notify_options:{from:"Radiology Staff", title:"Note", text:"Hi! You are ready for your exam!"},
 			permission:"staff"
 		});
 		
@@ -265,13 +265,13 @@ function startup_data(){
 			user_name : "Davor Fionnbarra",
 			user_dob: (new Date("3 Feb 1986")).toLocaleDateString(),
 			user_mrn: "36193716",
-			proc_type : "Abdomen CT",
+			proc_type : "CT",
 			date : "6/12/2016, 2:00 PM",
 			location : "1300 York Ave, New York, NY 10065",
 			organization : "Weill Cornell Medical College",
 			department : "Radiology",
 			ordering_physician : doctor_id,
-			reason : "Abdomen checkup.",
+			reason : "Chest pain",
 			last_checked : (new Date()),
 			updated_by_client : true,
 			exam_ready : false
@@ -297,7 +297,7 @@ function startup_data(){
 			last_updated:(new Date()),
 			previous_completed:undefined,
 			notify_on_complete:true,
-			notify_options:{from:"MDaisy Staff", title:"Note", text:"Hi! You are ready for your exam!"},
+			notify_options:{from:"Radiology Staff", title:"Note", text:"Hi! You are ready for your exam!"},
 			permission:"staff"
 		});
 

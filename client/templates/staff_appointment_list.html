@@ -11,26 +11,31 @@
 	{{/contentFor}}
 
 	{{#contentFor "headerTitle"}}
-		<h2 class="title">Manage Patient Appointments</h2>
+		<h2 class="title">STAFF VIEW: Manage Appointments</h2>
 	{{/contentFor}}
 
 	{{#ionContent}}
 		{{> staff_search_box}}
 		{{#ionList class="app-list"}}
 			{{#each app_list}}
-				{{#ionItem  data=get_all_data iconRight=true class=get_class_and_ready_status}}
+				{{#ionItem  data=get_all_data class=get_class_and_ready_status}}
 					<div id="label_alignment_div">
-						<h2>{{patient_name}}</h2>
-						<p>DOB: {{patient_dob}}, MRN: {{patient_mrn}}</p>
-						<h3>{{proc_type}}</h3>
+						<h2><i class="icon ion-person" ></i> {{patient_name}}</h2>
+						<p>MRN: {{patient_mrn}} / DOB: {{patient_dob}} </p>
+						<br />
+						<h3><i class="icon ion-images" ></i> {{proc_type}}</h3>
 						<p>{{date}}</p>
-						<p>{{organization}}, {{department}} </p>
+						<p>{{organization}} @ {{department}} </p>
 						<p>{{location}}</p>
 						<div class="unread_message_label">
 						{{#if has_unread_messages}}
 							<h1>{{num_unread_messages}}</h1>
+							
 							<!--<h3> unread messages </h3>-->
+						{{else}}
+						    <i class="icon ion-chevron-right"></i>
 						{{/if}}
+						
 						</div>
 						{{#if exam_ready}}
 							<div class="exam_ready_label">
@@ -38,7 +43,7 @@
 							</div>
 						{{/if}}
 					</div>
-					{{> ionIcon icon="ios-arrow-right"}}
+					<!--{{> ionIcon icon="ios-arrow-right"}}-->
 				{{/ionItem}}
 			{{/each}}
 		{{/ionList}}

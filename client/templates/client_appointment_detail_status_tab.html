@@ -31,26 +31,52 @@
 
 
 	{{#contentFor "headerTitle"}}
-		<h5 class="title" style="font-size:1em">Your Appointment</h5>
+		<h5 class="title" style="font-size:1em">PATIENT APPOINTMENT</h5>
 	{{/contentFor}}
 	
 	
 	{{#ionContent class=ready_background_class}}
-		<div class="card">
-				<div style="text-align:center" class="item item-divider">
-				<h1 class="obligation_title">{{appointment_type}}</h1>
-				</div>
-				<div class="item item-text-wrap">
-					<p>Name: {{appointment_user_name}}</p>
-					<p>MRN: {{appointment_user_mrn}}</p>
-					<p>Date: {{appointment_date}}</p>
-					<p>Department: {{appointment_department}}</p>
-					<p>Reason: {{appointment_reason}}</p>
-				</div>
-		</div>
+	
+	    <div class="list card">
+
+                <a href="#" class="item item-icon-left">
+                    <h1><i class="icon ion-person"></i>{{appointment_user_name}}</h1>
+                    DOB: 12-15-1982 // MRN: {{appointment_user_mrn}}
+                  
+                </a>
+                <div class="item item-body">
+                    
+                    <img src="radiology_US.png">    
+                    
+                    
+                    <div class="row">
+                      <div class="col col-10" style="text-align:right"><b>Exam:</b></div>
+                      <div class="col col-90">{{appointment_type}}</div>
+                    </div>
+                    <div class="row">
+                      <div class="col col-10" style="text-align:right"><b>History:</b></div>
+                      <div class="col col-90">{{appointment_reason}}</div>
+                    </div>
+                </div>
+
+        </div>
+	
+	
+		<!--<div class="card">-->
+		<!--		<div style="text-align:center" class="item item-divider">-->
+		<!--		<h1 class="obligation_title">{{appointment_type}}</h1>-->
+		<!--		</div>-->
+		<!--		<div class="item item-text-wrap">-->
+		<!--			<p>Name: {{appointment_user_name}}</p>-->
+		<!--			<p>MRN: {{appointment_user_mrn}}</p>-->
+		<!--			<p>Date: {{appointment_date}}</p>-->
+		<!--			<p>Department: {{appointment_department}}</p>-->
+		<!--			<p>Reason: {{appointment_reason}}</p>-->
+		<!--		</div>-->
+		<!--</div>-->
 	
 		<div>
-			<div style="width: 250px; margin: 0 auto" id="image_container">
+			<div style="width: 200px; margin: 0 auto" id="image_container">
 			{{#if exam_ready}}
 				<img src="exam_ready.png">
 			{{else}}
@@ -59,16 +85,35 @@
 			</div>
 		</div>
 		
-		<div style="text-align: center">
-			{{#if exam_ready}}
-				<h3>Your exam is ready. Please report to the staff.</h3>
-			{{else}}
-				<h3>We'll notify you as soon as we're ready for your exam. <br/>
-				Information about your exam can be found under the 'Exam Info' tab. <br/>
-				Please let us know if you have any questions or send us a private message under the 'Messages' tab.</h3>
-			{{/if}}
-		</div>
-			{{> message_listener}}
+		
+		{{#if exam_ready}}
+		    <div class="card">
+              <div class="item item-divider">
+                  <button class="button button-clear button-balanced">
+                    EXAM READY
+                  </button>
+              </div>
+              <div class="item item-text-wrap">
+                Please go to the front desk
+              </div>
+            </div>
+		{{else}}
+		    <div class="card">
+              <div class="item item-divider" style="text-align:center">
+                  <button class="button button-clear button-assertive">
+                    EXAM NOT READY
+                  </button>
+              </div>
+              <div class="item item-text-wrap">
+                We'll notify you as soon as possible.
+                Information about your exam can be found under the 'Exam Info' tab.
+                <br/>
+                Questions? Send us message under the 'Messages' tab.
+              </div>
+            </div>
+				
+		{{/if}}
+				{{> message_listener}}
 	{{/ionContent}}
 
 	{{> client_tab_bar}}

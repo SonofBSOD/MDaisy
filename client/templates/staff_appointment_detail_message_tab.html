@@ -61,7 +61,7 @@
 						<p>{{message_date}}</p>
 						{{message_text}}
 						{{#if message_read_by_patient}}
-							<p class="message_read_label">Read by patient.</p>
+							<p class="message_read_label">READ BY PATIENT</p>
 						{{/if}}
 					</div>
 				</div>
@@ -69,7 +69,9 @@
 		{{else}}
 			<div class="card">
 				<div class="item item-text-wrap">
-					This appointment has no messages.
+				    <button class="button button-clear button-royal">
+                      NO MESSAGES YET
+                    </button>
 				</div>
 			</div>
 		{{/if}}
@@ -77,7 +79,7 @@
 			<label class="item-input-wrapper">
 				<textarea id="message_box" type="text" placeholder="Messages"></textarea>
 			</label>
-		<button class="button button-small send_message">
+		<button class="button button-large button-assertive send_message">
 			Send
 			</button>
 		</div>

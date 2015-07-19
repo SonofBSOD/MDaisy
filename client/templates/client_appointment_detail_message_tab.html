@@ -28,10 +28,35 @@
 	{{/contentFor}}
 
 	{{#contentFor "headerTitle"}}
-		<h5 class="title" style="font-size:1em">Your Messages</h5>
+		<h5 class="title" style="font-size:1em">PATIENT MESSAGES</h5>
 	{{/contentFor}}
 
 	{{#ionContent class="padding" id="test_id"}}
+	
+	    <div class="list card">
+
+                <a href="#" class="item item-icon-left">
+                    <h1><i class="icon ion-person"></i>{{appointment_patient_name}}</h1>
+                    DOB: 12-15-1982 // MRN: 12345678
+                  
+                </a>
+                <div class="item item-body">
+                    
+                    <img src="radiology_US.png">    
+                    
+                    
+                    <div class="row">
+                      <div class="col col-10" style="text-align:right"><b>Exam:</b></div>
+                      <div class="col col-90">{{appointment_type}}</div>
+                    </div>
+                    <div class="row">
+                      <div class="col col-10" style="text-align:right"><b>History:</b></div>
+                      <div class="col col-90">{{appointment_reason}}</div>
+                    </div>
+                </div>
+
+        </div>
+	
 		{{#if has_messages}}
 			{{#each message_list}}
 				<div class="card">
@@ -45,20 +70,22 @@
 				</div>
 			{{/each}}
 		{{else}}
-			<div class="card">
-				<div class="item item-text-wrap">
-					This appointment has no messages.
-				</div>
-			</div>
-		{{/if}}
-		<div class="item item-input-inset">
-    <label class="item-input-wrapper">
-      <textarea id="message_box" type="text" placeholder="Messages"></textarea>
-    </label>
-    <button class="button button-small send_message">
-      Send
-    </button>
-  </div>
+            <div class="card">
+                <div class="item item-text-wrap">
+                    <button class="button button-clear button-energized">
+                      NO MESSAGES YET
+                    </button>
+                </div>
+            </div>
+        {{/if}}
+        <div class="item item-input-inset">
+            <label class="item-input-wrapper">
+                <textarea id="message_box" type="text" placeholder="Messages"></textarea>
+            </label>
+        <button class="button button-large button-positive send_message">
+            Send
+            </button>
+        </div>
   
 	{{> message_listener}}
 	{{/ionContent}}
