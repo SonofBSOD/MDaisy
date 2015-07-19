@@ -89,7 +89,7 @@ Template.staff_control_appointment_list.helpers({
 	patient_dob : function(){
 		var user = Meteor.users.findOne({_id:this.user_id});
 		if(user != undefined){
-			return user.profile.dob.toLocaleDateString();
+			return user.profile.dob.toLocaleDateString().replace(/\//g, "-");
 		}
 	},
 	patient_mrn : function(){

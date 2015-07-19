@@ -1,21 +1,40 @@
 <template name="common_info_card">
 <div class="list card">
 	<a href="#" class="item item-icon-left">
+	    <!--<div id="common_info_card_image"><img width="90" src={{appointment_image_name}}></div>-->
         <h1><i class="icon ion-person"></i>{{patient_name}}</h1>
-        Gender: {{patient_gender}} // Age: {{patient_age}} // DOB: {{patient_dob}} // MRN: {{patient_mrn}}
+        
+        <p>{{patient_age}} {{patient_gender}}</p>  
+        <p>DOB: {{patient_dob}} // MRN: {{patient_mrn}}</p>
+        <p><b>Allergies: None</b></p>
+        
     </a>
     <div class="item item-body">
-		<div id="common_info_card_exam_text">
-			<b>Exam:</b> {{appointment_type}} <br/>
-			<b>History:</b> {{appointment_reason}} <br/>
-            <!--<div class="col col-10" style="text-align:right"><b>Exam:</b></div>
-            <div class="col col-90">{{appointment_type}}</div>
+        
+		<!--<div id="common_info_card_exam_text">-->
+		<!--	<b>Exam:</b> {{appointment_type}} <br/>-->
+		<!--	<b>History:</b> {{appointment_reason}} <br/>-->
+			<div class="row row-center">
+                <!--<div class="col col-10" style="text-align:right"><b>Exam:</b></div>-->
+                <div class="col col-10" style="text-align:right"></div>
+                <div class="col col-75" style="font-size: 200%">{{appointment_type}}</div>
+                <div class="col col-20"><img width="90" src={{appointment_image_name}}></div>
+
             </div>
             <div class="row">
                 <div class="col col-10" style="text-align:right"><b>History:</b></div>
-                <div class="col col-90">{{appointment_reason}}</div>
-            </div>--></div>
-		<div id="common_info_card_image"><img src={{appointment_image_name}}></div>
+                <div class="col col-75">{{appointment_reason}}</div>
+            </div>
+            <div class="row">
+                <div class="col col-10" style="text-align:right"><b>Date:</b></div>
+                <div class="col col-75">{{appointment_date}}</div>
+            </div>
+            <div class="row">
+                <div class="col col-10" style="text-align:right"><b>Provider:</b></div>
+                <div class="col col-75">William Leung, MD</div>
+            </div>
+        <!--</div>-->
+		
 		
     </div>			
 </div>

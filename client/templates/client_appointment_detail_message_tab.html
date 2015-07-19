@@ -59,15 +59,28 @@
 	
 		{{#if has_messages}}
 			{{#each message_list}}
-				<div class="card">
-					<div class="item item-text-wrap {{message_sender_style_class}}">
-						<p>{{message_date}}</p>
-						{{message_text}}
-						{{#if message_read_by_staff}}
-							<p class="message_read_label">READ BY STAFF.</p>
-						{{/if}}
-					</div>
-				</div>
+			    <div class="card">
+                    <div class="item item-text-wrap {{message_sender_style_class}}">
+                        <div class="row">
+                            <div class="col col-50" style="text-align:left">
+                                <button class="button button-outline button-stable">
+                                  <p>{{message_date}}</p>
+                                </button>
+                            </div>
+                            <div class="col col-50" style="text-align:right">
+                                {{#if message_read_by_staff}}
+                                    <button class="button button-outline button-balanced">
+                                      READ BY STAFF
+                                    </button>
+                                    <!--<p class="message_read_label">READ BY PATIENT</p>-->
+                                {{/if}}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col col-90" style="text-align:left"><br/>{{message_text}}</div>
+                        </div>
+                    </div>
+                </div>
 			{{/each}}
 		{{else}}
             <div class="card">

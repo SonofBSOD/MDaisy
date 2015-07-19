@@ -65,12 +65,23 @@ Template.common_info_card.helpers({
 			return appointment_object.reason;
 		}
 	},
+	appointment_date : function(){
+        var appointment_object = get_appointment_object();
+        if(appointment_object != undefined){
+            return appointment_object.date.replace(/\//g, "-");
+        }
+    },
 	patient_gender : function(){
 		var appointment_object = get_appointment_object();
 		if(appointment_object != undefined){
 			var user_object = Meteor.users.findOne({_id:appointment_object.user_id});
 			if(user_object != undefined){
-				return user_object.profile.gender;
+			        if (user_object.profile.gender == 'female') {
+			            return 'F';
+			        } else {
+			            return 'M';
+			        }
+				
 			}
 			else{
 				console.log("common_info_card: could not fetch user associated with this appointment");
@@ -84,7 +95,8 @@ Template.common_info_card.helpers({
 			if(user_object != undefined){
 				var diff = Date.now() - user_object.profile.dob.getTime();
 				var yrs = Math.abs((new Date(diff)).getUTCFullYear() - 1970);
-				return yrs + " yrs";
+				return yrs + "";
+				// return yrs + " yrs";
 			}
 			else{
 				console.log("common_info_card: could not fetch user associated with this appointment");
@@ -111,7 +123,7 @@ Template.common_info_card.helpers({
 		if(appointment_object != undefined){
 			var user_object = Meteor.users.findOne({_id:appointment_object.user_id});
 			if(user_object != undefined){
-				return user_object.profile.dob.toLocaleDateString();
+				return user_object.profile.dob.toLocaleDateString().replace(/\//g, "-");
 			}
 			else{
 				console.log("common_info_card: could not fetch user associated with this appointment");
