@@ -243,12 +243,14 @@ Meteor.methods({
 		
 		appointments.update({_id:appointment_id}, {$set:{exam_ready:exam_status}});
 		if(exam_status == true){
-			/*Push.send({from:"MDaisy", 
+		    console.log("ID: " + appointment.user_id);
+			Push.send({from:"Radiology Staff", 
 							title:"Exam Status", 
 							text:"Hi! You are ready for your exam!", 
 							query:{userId:appointment.user_id}, 
-							sound:"test.wav", 
-							vibrate:true});*/
+							sound:"test.wav",
+							alert:true,
+							vibrate:true});
 		}
 		
 		return {success:true, notification_sent:exam_status};

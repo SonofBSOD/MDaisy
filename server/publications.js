@@ -11,7 +11,7 @@ Meteor.publish("user_custom_fields", function () {
   } else {
     this.ready();
   }*/
-  return Meteor.users.find({}, {fields: {'user_type': 1, 'profile':1}});
+	return Meteor.users.find({}, {fields: {'emails' : 1, 'user_type': 1, 'profile':1}});
 });
 
 /*

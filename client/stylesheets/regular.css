@@ -64,3 +64,15 @@ body.keyboard-open .platform-android .content.overflow-scroll{
 .ready_background{
 	background-color: LightGreen;
 }
+
+.patient_navbar{
+	background-color: #88EDFC !important;
+}
+
+#common_info_card_exam_text{
+	float: left;
+}
+
+#common_info_card_image{
+	float: right;
+}

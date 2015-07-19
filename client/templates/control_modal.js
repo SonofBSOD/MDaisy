@@ -1,27 +1,31 @@
 Template.control_modal.events({
 	"click #patient_switch" : function(e){
 		e.preventDefault();
-		Meteor.logout();
+		//Meteor.logout();
 		Meteor.loginWithPassword("gh@fake.com", "teststaff", function(error){
 			if(error){
 				alert("login failed!");
 			}
 			else{
 				IonModal.close();
+				$(".bar-stable").addClass("patient_navbar");
+				//Session.set("all.appointment_object.indicator", "client");
 				Router.go("/staff_control_list");
 			}
 		});
 	},
 	"click #staff_switch" : function(e){
 		e.preventDefault();
-		Meteor.logout();
+		//Meteor.logout();
 		Meteor.loginWithPassword("gh@fake.com", "teststaff", function(error){
 			if(error){
 				alert("login failed!");
 			}
 			else{
 				IonModal.close();
-				Router.go("/landing");
+				$(".bar-stable").removeClass("patient_navbar");
+				//Session.set("all.appointment_object.indicator", "staff");
+				Router.go("/staff_list");
 			}
 		});
 	},

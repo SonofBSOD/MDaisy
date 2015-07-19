@@ -32,8 +32,8 @@
 	{{/contentFor}}
 
 	{{#ionContent class="padding" id="test_id"}}
-	
-	    <div class="list card">
+		{{> common_info_card}}
+	  <!--  <div class="list card">
 
                 <a href="#" class="item item-icon-left">
                     <h1><i class="icon ion-person"></i>{{appointment_patient_name}}</h1>
@@ -55,7 +55,7 @@
                     </div>
                 </div>
 
-        </div>
+        </div>-->
 	
 		{{#if has_messages}}
 			{{#each message_list}}
@@ -64,7 +64,7 @@
 						<p>{{message_date}}</p>
 						{{message_text}}
 						{{#if message_read_by_staff}}
-							<p class="message_read_label">Read by staff.</p>
+							<p class="message_read_label">READ BY STAFF.</p>
 						{{/if}}
 					</div>
 				</div>

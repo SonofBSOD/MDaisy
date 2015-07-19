@@ -19,7 +19,8 @@ function startup_data(){
 				name: "Bob Jones",
 				phone_number : "555-666-7777",
 				dob:new Date("12 Jun 1990"),
-				mrn:"16182369"},
+				mrn:"16182369",
+				gender:"male"},
 			user_type:"patient"
 		});
 
@@ -30,7 +31,8 @@ function startup_data(){
 				name: "Ella Amaryllis",
 				phone_number : "555-111-2222",
 				dob:new Date("1 Aug 2000"),
-				mrn:"12983102"},
+				mrn:"12983102",
+				gender:"female"},
 			user_type:"patient"
 		});
 		
@@ -41,7 +43,8 @@ function startup_data(){
 				name: "Davor Fionnbarra",
 				phone_number : "555-222-3333",
 				dob:new Date("3 Feb 1986"),
-				mrn:"36193716"},
+				mrn:"36193716",
+				gender:"male"},
 			user_type:"patient"
 		});
 		
@@ -52,7 +55,8 @@ function startup_data(){
 				name: "Thamar Goran",
 				phone_number : "555-777-8888",
 				dob:new Date("27 Jan 1970"),
-				mrn:"81730183"},
+				mrn:"81730183",
+				gender:"male"},
 			user_type:"patient"
 		});
 		
@@ -71,8 +75,8 @@ function startup_data(){
 
 		//Medical procedure sample information-------------------------------------------------------------------
 		medicalInfo.insert({
-			proc_type:"Lobotomy", 
-			text:   "Lobotomy consists of cutting or scraping away most of the connections to and from the prefrontal cortex, the anterior part of the frontal lobes of the brain."
+			proc_type:"Ultrasound", 
+			text: "Ultrasonic devices are used to detect objects and measure distances. Ultrasound imaging or sonography is often in medicine."
 		});
 
 		medicalInfo.insert({
@@ -87,7 +91,7 @@ function startup_data(){
 
 		//sample_CT_data is defined in both/sample_data_strings.js
 		medicalInfo.insert({
-			proc_type:"Abdomen CT", 
+			proc_type:"CT", 
 			text: sample_CT_data
 		});
 		
@@ -301,32 +305,34 @@ function startup_data(){
 			permission:"staff"
 		});
 
-		//sample message insertion--------------------------------------------------
-		messages.insert({
-			text: "Hi Dr.House. I wanted to know whether a barium enema is safe?",
-			to_id: doctor_id,
-			from_id: fake_user_object._id,
-			date: (new Date("10 Jun 2015 8:00:00 EDT")),
-			appointment_id: barium_appointment_id,
-			read: false
-		});
+		//sample message insertion--------------------------------------------------                     
+                messages.insert({
+                        text: "Hi Dr.House. I wanted to know whether a barium enema is safe?",
+			    to_id: doctor_id,
+			    from_id: thamar_object._id,
+			    date: (new Date("10 Jun 2015 8:00:00 EDT")),
+			    appointment_id: barium_appointment_id,
+			    read: false
+			    });
 
-		messages.insert({
-			text: "What about eating a little bit of food? I'm feeling a little lightheaded right now. Need to get my usual fix of green eggs and ham.",
-			to_id: doctor_id,
-			from_id: fake_user_object._id,
-			date: (new Date("10 Jun 2015 10:00:00 EDT")),
-			appointment_id: barium_appointment_id,
-			read:false
-		});
+                messages.insert({
+                        text: "What about eating a little bit of food? I'm feeling a little lightheaded right no\
+w. Need to get my usual fix of green eggs and ham.",
+			    to_id: doctor_id,
+			    from_id: thamar_object._id,
+			    date: (new Date("10 Jun 2015 10:00:00 EDT")),
+			    appointment_id: barium_appointment_id,
+			    read:false
+			    });
 
-		messages.insert({
-			text: "I'm here early. Can I meet with you and ask a couple questions before the actual operation?",
-			to_id: doctor_id,
-			from_id: fake_user_object._id,
-			date: (new Date("10 Jun 2015 00:00:00 EDT")),
-			appointment_id: barium_appointment_id,
-			read:false
+                messages.insert({
+                        text: "I'm here early. Can I meet with you and ask a couple questions before the actual \
+operation?",
+			    to_id: doctor_id,
+			    from_id: thamar_object._id,
+			    date: (new Date("10 Jun 2015 00:00:00 EDT")),
+			    appointment_id: barium_appointment_id,
+			    read:false
 		});
 		
 
