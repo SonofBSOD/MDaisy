@@ -124,10 +124,10 @@ Template.client_appointment_detail_message_tab.onRendered(function(){
 				//alert("failure");
 			}
 			else{
-				$("#message_box").focus();
+				// $("#message_box").focus();
 				//alert("success!");
 			}
 		});
-		$("#message_box").focus();
+// 		$("#message_box").focus();
 	}
 });

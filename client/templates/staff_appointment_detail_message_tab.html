@@ -26,7 +26,7 @@
 	{{/contentFor}}
 
 	{{#contentFor "headerTitle"}}
-		<h5 class="title" style="font-size:1em">STAFF VIEW: Messages</h5>
+		<h5 class="title" style="font-size:1em">STAFF: Messages</h5>
 	{{/contentFor}}
 
 	{{#ionContent class="padding" id="test_id"}}
@@ -61,16 +61,11 @@
 					<div class="item item-text-wrap {{message_sender_style_class}}">
 					    <div class="row">
                             <div class="col col-50" style="text-align:left">
-                                <button class="button button-outline button-stable">
-                                  <p>{{message_date}}</p>
-                                </button>
+                                  <p style="font-size:75%">{{message_date}}</p>
                             </div>
                             <div class="col col-50" style="text-align:right">
                                 {{#if message_read_by_patient}}
-                                    <button class="button button-outline button-balanced">
-                                      READ BY PATIENT
-                                    </button>
-                                    <!--<p class="message_read_label">READ BY PATIENT</p>-->
+                                    <p class="message_read_label">READ BY PATIENT</p>
                                 {{/if}}
                             </div>
                         </div>

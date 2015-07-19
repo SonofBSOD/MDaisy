@@ -19,11 +19,13 @@
 				{{#ionItem  data=get_all_data class=get_class_and_ready_status}}
 					<div id="label_alignment_div">
 						<h2><i class="icon ion-person" ></i> {{patient_name}}</h2>
-						<p>MRN: {{patient_mrn}} // DOB: {{patient_dob}} </p>
+						<p>{{patient_age}} {{patient_gender}}</p>
+						<p>DOB: {{patient_dob}} // MRN: {{patient_mrn}}</p>
 						<br />
 						<h3><i class="icon ion-images" ></i> {{proc_type}}</h3>
 						<p>{{date}}</p>
-						<p>{{organization}} @ {{department}} </p>
+						<p>{{organization}}</p> 
+						<!--<p>@ {{department}}</p>-->
 						<p>{{location}}</p>
 						<div class="unread_message_label">
 						    <i class="icon ion-chevron-right"></i>

@@ -92,6 +92,36 @@ Template.staff_control_appointment_list.helpers({
 			return user.profile.dob.toLocaleDateString().replace(/\//g, "-");
 		}
 	},
+	patient_gender : function(){
+        var user = Meteor.users.findOne({_id:this.user_id});
+        if (user != undefined){
+                    if (user.profile.gender == 'female') {
+                        return 'F';
+                    } else {
+                        return 'M';
+                    }
+                
+        }
+        else{
+                console.log("common_info_card: could not fetch user associated with this appointment");
+        }
+    },
+    patient_age : function(){
+        var user = Meteor.users.findOne({_id:this.user_id});
+        if (user != undefined){
+            var diff = Date.now() - user.profile.dob.getTime();
+            var yrs = Math.abs((new Date(diff)).getUTCFullYear() - 1970);
+            return yrs + "";
+            // return yrs + " yrs";
+        }
+        else{
+            console.log("common_info_card: could not fetch user associated with this appointment");
+        }
+    
+    // var ageDifMs = Date.now() - birthday.getTime();
+    // var ageDate = new Date(ageDifMs); // miliseconds from epoch
+    // return Math.abs(ageDate.getUTCFullYear() - 1970);
+    },
 	patient_mrn : function(){
 		var user = Meteor.users.findOne({_id:this.user_id});
 		if(user != undefined){
