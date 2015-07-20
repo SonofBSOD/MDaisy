@@ -65,6 +65,19 @@ Template.common_info_card.helpers({
 			return appointment_object.proc_type;
 		}
 	},
+	appointment_accession : function(){
+        var appointment_object = get_appointment_object();
+        if(appointment_object != undefined){
+            // $("#bcTarget").barcode(appointment_object.accession, "int25",{barWidth:2, barHeight:90});
+            return appointment_object.accession;
+        }
+    },
+    appointment_accession_barcode : function(){
+        var appointment_object = get_appointment_object();
+        if(appointment_object != undefined){
+            $("#bcTarget").barcode(appointment_object.accession, "int25",{barWidth:2, barHeight:90}); 
+        }
+    },
 	appointment_reason : function(){
 		var appointment_object = get_appointment_object();
 		if(appointment_object != undefined){
@@ -133,6 +146,18 @@ Template.common_info_card.helpers({
 			}
 		}
 	},
+	patient_mrn_barcode : function(){
+        var appointment_object = get_appointment_object();
+        if(appointment_object != undefined){
+            var user_object = Meteor.users.findOne({_id:appointment_object.user_id});
+            if(user_object != undefined){
+                $("#bcTarget").barcode(user_object.profile.mrn, "int25",{barWidth:2, barHeight:90});
+            }
+            else{
+                console.log("common_info_card: could not fetch user associated with this appointment");
+            }
+        }
+    },
 	patient_mrn : function(){
 		var appointment_object = get_appointment_object();
 		if(appointment_object != undefined){

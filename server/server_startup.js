@@ -117,6 +117,7 @@ function startup_data(){
 			user_dob: (new Date("1 Aug 2000")).toLocaleDateString(),
 			user_mrn: "12983102",
 			proc_type : "Ultrasound",
+			accession: "5674567",
 			date : new Date("31 May 2017 12:00:00 EDT"),//"5/31/2017, 12:00 PM",
 			location : "2315 Broadway 4th Floor, New York, NY 10024",
 			organization : "Weill Cornell Imaging at NewYork-Presbyterian",
@@ -188,7 +189,7 @@ function startup_data(){
 			permission:"staff"
 		});
 
-		//sample MRI data insertion---------------------------------------------------------------
+		//sample Starr 0, CT data insertion---------------------------------------------------------------
 		var mri_appointment_id = appointments.insert({
 			user_id : fake_user_object._id,
 			user_name : "Bob Jones",
@@ -196,6 +197,7 @@ function startup_data(){
 			user_mrn: "16182369",
 			preparation : [],
 			proc_type : "CT",
+			accession: "5671234",
 			date : new Date("4 July 2016 3:00:00 EDT"),//"7/4/2016, 3:00 PM",
 			location : "520 East 70th Street, New York, NY 10065",
 			organization : "Weill Cornell Imaging at NewYork-Presbyterian",
@@ -219,13 +221,14 @@ function startup_data(){
 			permission:"staff"
 		});
 
-		//sample Barium Enema data insertion--------------------------------------------------------
+		//sample York, MRI data insertion--------------------------------------------------------
 		var barium_appointment_id = appointments.insert({
 			user_id : thamar_object._id,
 			user_name : "Thamar Goran",
 			user_dob: (new Date("27 Jan 1970")).toLocaleDateString(),
 			user_mrn: "81730183",
 			proc_type : "MRI",
+			accession: "5672345",
 			date : new Date("12 June 2016 2:00:00 EDT"),//"6/12/2016, 2:00 PM",
 			location : "1305 York Avenue, 3rd Floor, New York, NY 10065",
 			organization : "Weill Cornell Imaging at NewYork-Presbyterian",
@@ -273,13 +276,14 @@ function startup_data(){
 			permission:"staff"
 		});
 		
-		//sample Abdomen CT data insertion--------------------------------------------------------
+		//sample York MRI #2 data insertion--------------------------------------------------------
 		var ct_appointment_id = appointments.insert({
 			user_id : davor_object._id,
 			user_name : "Davor Fionnbarra",
 			user_dob: (new Date("3 Feb 1986")).toLocaleDateString(),
 			user_mrn: "36193716",
 			proc_type : "MRI",
+			accession: "5673456",
 			date : new Date("6 Jun 2016 2:00:00 EDT"),//"6/12/2016, 2:00 PM",
 			location : "1305 York Avenue, 3rd Floor, New York, NY 10065",
 			organization : "Weill Cornell Imaging at NewYork-Presbyterian",
@@ -320,7 +324,7 @@ function startup_data(){
                         text: "Hi Dr.House. I wanted to know whether a barium enema is safe?",
 			    to_id: doctor_id,
 			    from_id: thamar_object._id,
-			    date: (new Date("10 Jun 2015 8:00:00 EDT")),
+			    date: (new Date("22 Jul 2015 8:00:00 EDT")),
 			    appointment_id: barium_appointment_id,
 			    read: false
 			    });
@@ -330,7 +334,7 @@ function startup_data(){
 w. Need to get my usual fix of green eggs and ham.",
 			    to_id: doctor_id,
 			    from_id: thamar_object._id,
-			    date: (new Date("10 Jun 2015 10:00:00 EDT")),
+			    date: (new Date("22 Jul 2015 10:00:00 EDT")),
 			    appointment_id: barium_appointment_id,
 			    read:false
 			    });
@@ -340,7 +344,7 @@ w. Need to get my usual fix of green eggs and ham.",
 operation?",
 			    to_id: doctor_id,
 			    from_id: thamar_object._id,
-			    date: (new Date("10 Jun 2015 00:00:00 EDT")),
+			    date: (new Date("22 Juj 2015 00:00:00 EDT")),
 			    appointment_id: barium_appointment_id,
 			    read:false
 		});
