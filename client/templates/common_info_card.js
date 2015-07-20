@@ -32,6 +32,12 @@ function get_appointment_object(){
 	return undefined;
 }
 
+Template.common_info_card.onRendered(function () {
+	//$("#bcTarget").barcode("1234567890128", "ean13");  
+	//$("#bcTarget").barcode("1234567890128", "ean13",{barWidth:1, barHeight:60});
+	$("#bcTarget").barcode("1234567", "int25",{barWidth:2, barHeight:90});
+});
+
 Template.common_info_card.helpers({
 	appointment_image_name : function(){
 		var appointment_object = get_appointment_object();
