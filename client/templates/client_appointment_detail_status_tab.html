@@ -20,10 +20,12 @@
 		{{> ionIcon icon="arrow-left-a"}}
 		{{/ionItem}}
 		--}}
+		<div class="navbar_normal_buttons">
+		{{> toggle_button}}
+		</div>
 	{{/contentFor}}
 
 	{{#contentFor "headerButtonRight"}}
-		{{> toggle_button}}
 		{{!--
 		{{> atNavButton}}
 		--}}
@@ -31,7 +33,12 @@
 
 
 	{{#contentFor "headerTitle"}}
-		<h5 class="title" style="font-size:1em">PATIENT APPOINTMENT</h5>
+		<div id="navbar_div">
+			<img src="wcmc_red_small.png"/>
+			<h3>Waiting Room App</h3>
+			<h2 class="title" style="font-size:1em">PATIENT APPOINTMENT</h2>
+		</div>
+		<!--<h5 class="title" style="font-size:1em">PATIENT APPOINTMENT</h5>-->
 	{{/contentFor}}
 	
 	

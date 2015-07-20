@@ -105,14 +105,14 @@ Template.client_appointment_detail_message_tab.helpers({
 			var db_appointment_object = appointments.findOne({_id:appointment_object._id});
 			if(db_appointment_object != null){
 				if(db_appointment_object.exam_ready){
-					return "ready_background";
+					return "patient_ready_background";
 				}
 				else{
-					return "";
+					return "patient_not_ready_background";
 				}
 			}
 			else{
-				return "";
+				return "patient_not_ready_background";
 			}
 		}
 	}

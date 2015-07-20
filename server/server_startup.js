@@ -86,18 +86,14 @@ function startup_data(){
 		//Medical procedure sample information-------------------------------------------------------------------
 		medicalInfo.insert({
 			proc_type:"Ultrasound", 
-			text: "Ultrasonic devices are used to detect objects and measure distances. Ultrasound imaging or sonography is often in medicine."
+			text: sample_US_data
 		});
 
 		medicalInfo.insert({
 			proc_type:"MRI",
-			text: "MRI is a medical imaging technique used in radiology to investigate the anatomy and physiology of the body in both health and disease."
+			text: sample_MRI_data
 		});
 
-		medicalInfo.insert({
-			proc_type:"Barium Enema", 
-			text:   "Barium enema is a special x-ray of the large intestine, which includes the colon and rectum."
-		});
 
 		//sample_CT_data is defined in both/sample_data_strings.js
 		medicalInfo.insert({
