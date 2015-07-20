@@ -4,12 +4,27 @@
 -->
 
 <template name="staff_control_appointment_list">
-	{{#contentFor "headerButtonRight"}}
-		{{> toggle_button}}
+	{{#contentFor "headerButtonLeft" }}
+		<!--<div class="navbar_normal_items">-->
+		<div class="navbar_normal_buttons">
+			{{> toggle_button}}
+		</div>
+		<!--</div>-->
 	{{/contentFor}}
 
 	{{#contentFor "headerTitle"}}
-		<h2 class="title">Select Patient Appointment</h2>
+		<!--<div id="navbar_branding_div">
+			<img src="wcmc_red_small.png"/><p>Waiting Room App</p>
+		</div>
+		<br/>-->
+		<!--<div class="navbar_normal_items">-->
+			<!--<h2 class="title">Select Patient Appointment</h2>-->
+			<div id="navbar_div">
+				<img src="wcmc_red_small.png"/>
+				<h3>Waiting Room App</h3>
+				<h2 class="title">Select Patient Appointment</h2>
+			</div>
+		<!--</div>-->
 	{{/contentFor}}
 
 	{{#ionContent}}

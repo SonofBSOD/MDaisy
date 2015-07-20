@@ -61,13 +61,17 @@ body.keyboard-open .platform-android .content.overflow-scroll{
 	height: 50px !important;
 }
 
-.ready_background{
+.patient_ready_background{
 	background-color: LightGreen;
 }
 
-.patient_navbar{
-	background-color: #88EDFC !important;
+.patient_not_ready_background{
+	background-color: #43CEE6;
 }
+
+/*.patient_navbar{
+	background-color: #88EDFC !important;
+}*/
 
 #common_info_card_exam_text{
 	float: left;
@@ -86,26 +90,101 @@ body.keyboard-open .platform-android .content.overflow-scroll{
 	original height is 38px;
 */
 .mdaisy_nav_bar{
-	height: 80px;
+	height: 240px;
+	/*height: 120px;*/
 }
 
-.content.overflow-scroll.has-header{
-	padding-top: 35px;
+div.scroll-content.ionic-scroll > div.content.overflow-scroll.has-header{
+	padding-top: 195px;
+	/*padding-top: 75px;*/
 }
 
 .list_back_icon{
-	font-size: 35px;
+	font-size: 58px;
 	margin: auto;
-	height: 36px;
+	height: 62px;
 }
 
 .list_back_link{
 	padding: 0px;
 	padding-left: 1px;
-	width: 35px;
-	height: 36px;
+	margin-top: 1px;
+	margin-right: 3px;
+	width: 61px;
+	height: 61px;
+}
+
+.list_back_link > i {
+	padding-left: 3px;
 }
 
 #common_info_card > a.item.item-icon-left{
 	display: none;
+}
+
+#navbar_branding_div{
+	position: relative;
+	left: 185px;
+}
+
+#navbar_branding_div > i{
+	
+}
+
+#navbar_branding_div > p {
+	position: relative;
+	margin: 0px;
+	top: -80px;
+	left: 130px;
+	font-size: 30px;
+}
+
+.navbar_normal_items, .navbar_normal_items > h2{
+	margin-top: 170px !important;
+}
+
+#everything_else{
+	margin-top: 10px;
+}
+
+/*
+	fix so that the search box correctly stays under the
+	lengthened navbar
+*/
+div .bar.bar-header.item-input-inset{
+	z-index: -99;
+}
+
+#navbar_div img{
+	/*position: relative;
+	top: -50px;
+	display: span;*/
+	position: absolute;
+	width: 120px;
+	margin:auto;
+}
+
+#navbar_div h3{
+	position: absolute;
+	left: 210px;
+	top: 30px;
+}
+
+#navbar_div h2.title{
+	margin-top: 160px !important;
+}
+
+.navbar_normal_buttons, #at-nav-button {
+	margin-top: 160px !important;
+	height:  0px;
+}
+
+/*
+	do not apply the pullup to the control panel button on the staff_list;
+	we only need to pull up in the staff detail views, where there are two buttons
+*/
+.double_buttons > #control_panel_button{
+	position: relative;
+	top: -60px;
+	left: 63px;
 }

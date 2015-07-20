@@ -8,8 +8,6 @@ Template.control_modal.events({
 			}
 			else{
 				IonModal.close();
-				$(".mdaisy_nav_bar").addClass("patient_navbar");
-				//Session.set("all.appointment_object.indicator", "client");
 				Router.go("/staff_control_list");
 			}
 		});
@@ -23,8 +21,6 @@ Template.control_modal.events({
 			}
 			else{
 				IonModal.close();
-				$(".mdaisy_nav_bar").removeClass("patient_navbar");
-				//Session.set("all.appointment_object.indicator", "staff");
 				Router.go("/staff_list");
 			}
 		});
