@@ -105,3 +105,7 @@ body.keyboard-open .platform-android .content.overflow-scroll{
 	width: 35px;
 	height: 36px;
 }
+
+#common_info_card > a.item.item-icon-left{
+	display: none;
+}

@@ -217,7 +217,12 @@ Meteor.methods({
 		messages.update({appointment_id:related_appointment_id, read:false},{$set:{read:true}}, {multi:true});
 	},
 	set_message_addressed_to_id_true: function(related_appointment_id, user_id){
-		messages.update({appointment_id:related_appointment_id, read:false, to_id:user_id},{$set:{read:true}}, {multi:true});
+		//messages.update({appointment_id:related_appointment_id, read:false, to_id:user_id},{$set:{read:true}}, {multi:true});
+		messages.update({appointment_id:related_appointment_id, read:false, to_id:user_id},{$set:{read:true}});
+	},
+	set_message_addressed_from_id_true:function(related_appointment_id, user_id){
+		//messages.update({appointment_id:related_appointment_id, read:false, from_id:user_id},{$set:{read:true}}, {multi:true});
+		messages.update({appointment_id:related_appointment_id, read:false, from_id:user_id},{$set:{read:true}});
 	},
 	send_message : function(message_text, user_id, physician_id, message_date, related_appointment_id){
 		messages.insert({text:message_text, to_id:physician_id, from_id:user_id, appointment_id:related_appointment_id, date:message_date, read:false});
