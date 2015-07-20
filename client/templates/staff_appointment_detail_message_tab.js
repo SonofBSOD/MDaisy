@@ -87,10 +87,10 @@ Template.staff_appointment_detail_message_tab.helpers({
 		if(user != undefined){
 			console.log("here");
 			if(user.user_type == "patient"){
-				return "Sent by patient: " + user.profile.name;
+				return "From PATIENT: " + user.profile.name + "";
 			}
 			else if(user.user_type == "staff"){
-				return "Sent by staff: " + user.profile.name;
+				return "From STAFF: " + user.profile.name + "";
 			}
 			else{
 				return "";
