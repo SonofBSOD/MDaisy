@@ -127,6 +127,9 @@ Template.staff_control_appointment_list.helpers({
 		if(user != undefined){
 			return user.profile.mrn;
 		}
+	},
+	formatted_date : function(){
+		return this.date.toLocaleDateString().replace(/\//g, "-");
 	}
 });
 

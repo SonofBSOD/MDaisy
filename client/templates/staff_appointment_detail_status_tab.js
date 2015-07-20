@@ -140,8 +140,8 @@ Template.staff_appointment_detail_status_tab.events({
 						if(res.success){
 							if(res.notification_sent){
 								IonPopup.show({
-									title: 'Update Success',
-									template : "Exam status updated successfully. Notification sent.",
+									title: 'EXAM READY',
+									template : "Push notification sent to patient.",
 									buttons : [{
 										text: 'Ok',
 										type: 'button-positive',
@@ -153,8 +153,8 @@ Template.staff_appointment_detail_status_tab.events({
 							}
 							else{
 								IonPopup.show({
-									title: 'Update Success',
-									template : "Exam status updated successfully.",
+									title: 'EXAM NOT READY',
+									template : "Status reset.",
 									buttons : [{
 										text: 'Ok',
 										type: 'button-positive',

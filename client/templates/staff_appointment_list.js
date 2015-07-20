@@ -27,7 +27,8 @@ Template.staff_appointment_list.helpers({
 			//do a regular expression search!
 			var query = Session.get("query");
 			if(query === undefined || query === ""){
-				return appointments.find({'ordering_physician':user_id});
+				//return appointments.find({'ordering_physician':user_id});
+				return appointments.find({});
 			}
 			else{
 				var query_exp = new RegExp(query, "i");
@@ -130,16 +131,15 @@ Template.staff_appointment_list.helpers({
         else{
             console.log("common_info_card: could not fetch user associated with this appointment");
         }
-    
-    // var ageDifMs = Date.now() - birthday.getTime();
-    // var ageDate = new Date(ageDifMs); // miliseconds from epoch
-    // return Math.abs(ageDate.getUTCFullYear() - 1970);
     },
 	patient_mrn : function(){
 		var user = Meteor.users.findOne({_id:this.user_id});
 		if(user != undefined){
 			return user.profile.mrn;
 		}
+	},
+	formatted_date : function(){
+		return this.date.toLocaleDateString().replace(/\//g, "-");
 	}
 });
 

@@ -69,6 +69,16 @@ function startup_data(){
 				phone_number : "555-888-9999"}, 
 			user_type: "staff"
 		});
+		
+		Accounts.createUser({
+			email:"pr@fake.com",
+			password:"teststaff",
+			profile : {
+				name: "Polly Robinson",
+				phone_number : "555-888-9999"}, 
+			user_type: "staff"
+		});
+
 
 		//get Dr. House's id
 		var doctor_id = Meteor.users.findOne({'emails.address':'gh@fake.com'})._id;
@@ -107,7 +117,7 @@ function startup_data(){
 			user_dob: (new Date("1 Aug 2000")).toLocaleDateString(),
 			user_mrn: "12983102",
 			proc_type : "Ultrasound",
-			date : "5/31/2017, 12:00 PM",
+			date : new Date("31 May 2017 12:00:00 EDT"),//"5/31/2017, 12:00 PM",
 			location : "2315 Broadway 4th Floor, New York, NY 10024",
 			organization : "Weill Cornell Imaging at NewYork-Presbyterian",
 			department : "Radiology",
@@ -186,7 +196,7 @@ function startup_data(){
 			user_mrn: "16182369",
 			preparation : [],
 			proc_type : "CT",
-			date : "7/4/2016, 3:00 PM",
+			date : new Date("4 July 2016 3:00:00 EDT"),//"7/4/2016, 3:00 PM",
 			location : "520 East 70th Street, New York, NY 10065",
 			organization : "Weill Cornell Imaging at NewYork-Presbyterian",
 			department : "Radiology",
@@ -216,7 +226,7 @@ function startup_data(){
 			user_dob: (new Date("27 Jan 1970")).toLocaleDateString(),
 			user_mrn: "81730183",
 			proc_type : "MRI",
-			date : "6/12/2016, 2:00 PM",
+			date : new Date("12 June 2016 2:00:00 EDT"),//"6/12/2016, 2:00 PM",
 			location : "1305 York Avenue, 3rd Floor, New York, NY 10065",
 			organization : "Weill Cornell Imaging at NewYork-Presbyterian",
 			department : "Radiology",
@@ -270,7 +280,7 @@ function startup_data(){
 			user_dob: (new Date("3 Feb 1986")).toLocaleDateString(),
 			user_mrn: "36193716",
 			proc_type : "MRI",
-			date : "6/12/2016, 2:00 PM",
+			date : new Date("6 Jun 2016 2:00:00 EDT"),//"6/12/2016, 2:00 PM",
 			location : "1305 York Avenue, 3rd Floor, New York, NY 10065",
 			organization : "Weill Cornell Imaging at NewYork-Presbyterian",
 			department : "Radiology",

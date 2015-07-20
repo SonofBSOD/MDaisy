@@ -68,7 +68,7 @@ Template.common_info_card.helpers({
 	appointment_date : function(){
         var appointment_object = get_appointment_object();
         if(appointment_object != undefined){
-            return appointment_object.date.replace(/\//g, "-");
+            return appointment_object.date.toLocaleDateString().replace(/\//g, "-");
         }
     },
 	patient_gender : function(){
@@ -102,9 +102,6 @@ Template.common_info_card.helpers({
 				console.log("common_info_card: could not fetch user associated with this appointment");
 			}
 		}
-		 var ageDifMs = Date.now() - birthday.getTime();
-    var ageDate = new Date(ageDifMs); // miliseconds from epoch
-    return Math.abs(ageDate.getUTCFullYear() - 1970);
 	},
 	patient_name : function(){
 		var appointment_object = get_appointment_object();

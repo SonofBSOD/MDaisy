@@ -15,8 +15,8 @@
 <template name="staff_appointment_detail_message_tab">
 
 	{{#contentFor "headerButtonLeft"}}
-		{{#ionItem path="staff_list"}}
-		{{> ionIcon icon="load-b"}}
+		{{#ionItem class="list_back_link" path="staff_list"}}
+		{{> ionIcon class="list_back_icon" icon="load-b"}}
 		{{/ionItem}}
 	{{/contentFor}}
 
@@ -61,14 +61,16 @@
 					<div class="item item-text-wrap {{message_sender_style_class}}">
 					    <div class="row">
                             <div class="col col-50" style="text-align:left">
-                                  <p style="font-size:75%">{{message_date}}</p>
-                            </div>
+                                  <p style="font-size:75%">{{message_date}} ({{message_sender}})</p>
+							</div>
+							<br/>
                             <div class="col col-50" style="text-align:right">
                                 {{#if message_read_by_patient}}
                                     <p class="message_read_label">READ BY PATIENT</p>
                                 {{/if}}
                             </div>
                         </div>
+
                         <div class="row">
                             <div class="col col-90" style="text-align:left"><br/>{{message_text}}</div>
                         </div>

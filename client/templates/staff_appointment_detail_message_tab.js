@@ -80,6 +80,26 @@ Template.staff_appointment_detail_message_tab.helpers({
 		else{
 			return "";
 		}
+	},
+	message_sender:function(){
+		var user = Meteor.users.findOne({_id:this.from_id});
+		console.log(user);
+		if(user != undefined){
+			console.log("here");
+			if(user.user_type == "patient"){
+				return "Sent by patient: " + user.profile.name;
+			}
+			else if(user.user_type == "staff"){
+				return "Sent by staff: " + user.profile.name;
+			}
+			else{
+				return "";
+			}
+		}
+		else{
+			console.log("there");
+			return "";
+		}
 	}
 });
 
