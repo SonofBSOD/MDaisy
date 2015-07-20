@@ -90,12 +90,12 @@ body.keyboard-open .platform-android .content.overflow-scroll{
 	original height is 38px;
 */
 .mdaisy_nav_bar{
-	height: 240px;
+	height: 180px;
 	/*height: 120px;*/
 }
 
 div.scroll-content.ionic-scroll > div.content.overflow-scroll.has-header{
-	padding-top: 195px;
+	padding-top: 135px;
 	/*padding-top: 75px;*/
 }
 
@@ -115,14 +115,14 @@ div.scroll-content.ionic-scroll > div.content.overflow-scroll.has-header{
 }
 
 .list_back_link > i {
-	padding-left: 3px;
+	padding-left: 8px;
 }
 
 #common_info_card > a.item.item-icon-left{
 	display: none;
 }
 
-#navbar_branding_div{
+/*#navbar_branding_div{
 	position: relative;
 	left: 185px;
 }
@@ -137,10 +137,10 @@ div.scroll-content.ionic-scroll > div.content.overflow-scroll.has-header{
 	top: -80px;
 	left: 130px;
 	font-size: 30px;
-}
+}*/
 
 .navbar_normal_items, .navbar_normal_items > h2{
-	margin-top: 170px !important;
+	margin-top: 150px !important;
 }
 
 #everything_else{
@@ -160,22 +160,21 @@ div .bar.bar-header.item-input-inset{
 	top: -50px;
 	display: span;*/
 	position: absolute;
-	width: 120px;
 	margin:auto;
 }
 
 #navbar_div h3{
 	position: absolute;
-	left: 210px;
-	top: 30px;
+	left: 170px;
+	top: 10px;
 }
 
 #navbar_div h2.title{
-	margin-top: 160px !important;
+	margin-top: 100px !important;
 }
 
 .navbar_normal_buttons, #at-nav-button {
-	margin-top: 160px !important;
+	margin-top: 100px !important;
 	height:  0px;
 }
 
