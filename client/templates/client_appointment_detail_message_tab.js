@@ -94,6 +94,27 @@ Template.client_appointment_detail_message_tab.helpers({
 			console.log("there");
 			return "";
 		}
+	},
+	ready_background_class : function(){
+		var appointment_object = Session.get("client.tab.appointment_object");
+		if(appointment_object == undefined){
+			alert("Error! Could not load session appointment object!");
+		}
+		else{
+			//fetch this from the database; we want reactive updates for this.
+			var db_appointment_object = appointments.findOne({_id:appointment_object._id});
+			if(db_appointment_object != null){
+				if(db_appointment_object.exam_ready){
+					return "ready_background";
+				}
+				else{
+					return "";
+				}
+			}
+			else{
+				return "";
+			}
+		}
 	}
 });
 
@@ -134,7 +155,7 @@ Template.client_appointment_detail_message_tab.events({
 });
 
 Template.client_appointment_detail_message_tab.onRendered(function(){
-	if(Session.get("client.tab.appointment_object") === undefined){
+	/*if(Session.get("client.tab.appointment_object") === undefined){
 		alert("undefined session vars!");
 	}
 	else{
@@ -149,5 +170,5 @@ Template.client_appointment_detail_message_tab.onRendered(function(){
 			}
 		});
 // 		$("#message_box").focus();
-	}
+	}*/
 });

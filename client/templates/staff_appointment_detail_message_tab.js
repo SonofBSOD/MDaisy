@@ -104,7 +104,7 @@ Template.staff_appointment_detail_message_tab.helpers({
 });
 
 Template.staff_appointment_detail_message_tab.onRendered(function(){
-	if(Session.get("staff.tab.appointment_object") === undefined){
+	/*if(Session.get("staff.tab.appointment_object") === undefined){
 		alert("undefined session vars!");
 	}
 	else{
@@ -117,7 +117,7 @@ Template.staff_appointment_detail_message_tab.onRendered(function(){
 				//alert("success!");
 			}
 		});
-	}
+	}*/
 });
 
 Template.staff_appointment_detail_message_tab.events({
