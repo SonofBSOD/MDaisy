@@ -10,7 +10,7 @@ body.keyboard-open .platform-android .content.overflow-scroll{
 	highlight updated items on the staff appointment list
 */
 .staff_appointment_list_exam_ready_item{
-		background-color: #D6EEF7;
+	background-color: #66cc33; /*background-color: #D6EEF7;*/
 }
 
 /*
@@ -62,7 +62,7 @@ body.keyboard-open .platform-android .content.overflow-scroll{
 }
 
 .patient_ready_background{
-	background-color: LightGreen;
+	background-color: #66cc33; /*background-color: LightGreen;*/
 }
 
 .patient_not_ready_background{
