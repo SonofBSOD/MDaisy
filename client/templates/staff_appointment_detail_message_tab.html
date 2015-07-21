@@ -56,8 +56,9 @@
             </div>-->
 	
 		{{#if has_messages}}
+			<div class="card">
 			{{#each message_list}}
-				<div class="card">
+				
 					<div class="item item-text-wrap {{message_sender_style_class}}">
 					    <div class="row">
                             <div class="col col-50" style="text-align:left">
@@ -81,8 +82,9 @@
 						
 						{{> staff_message_reporter}}
 					</div>
-				</div>
+				
 			{{/each}}
+			</div>
 		{{else}}
 			<div class="card">
 				<div class="item item-text-wrap">
@@ -96,7 +98,9 @@
 		<div class="card">
 		<div class="item item-input-inset">
 			<label class="item-input-wrapper">
-				<textarea id="message_box" type="text" placeholder=" Type a message"></textarea>
+			    <i class="icon ion-ios-chatbubble-outline placeholder-icon"></i>
+			    <input id="message_box" type="text" placeholder="Type a message">
+				<!--<textarea id="message_box" type="text" placeholder=" Type a message"></textarea>-->
 			</label>
 		<button class="button button-large button-assertive send_message">
 			Send

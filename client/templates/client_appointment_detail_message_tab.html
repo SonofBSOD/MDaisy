@@ -68,10 +68,11 @@
         </div>-->
 	
 		{{#if has_messages}}
+		    <div class="card">
 			{{#each message_list}}
-			    <div class="card">
+			    
                     <div class="item item-text-wrap {{message_sender_style_class}}">
-                        <div class="row">
+                        <div class="row {{message_sender_style_class}}">
                             <div class="col col-50" style="text-align:left">
                                   <p style="font-size:75%">{{message_sender}}</p>
                                   <p style="font-size:75%">{{message_date}}</p>
@@ -90,8 +91,9 @@
                         
 						{{> client_message_reporter}}
                     </div>
-                </div>
+                
 			{{/each}}
+			</div>
 		{{else}}
             <div class="card">
                 <div class="item item-text-wrap">
@@ -105,9 +107,11 @@
         <div class="card">
         <div class="item item-input-inset">
             <label class="item-input-wrapper">
-                <textarea id="message_box" type="text" placeholder=" Type a message"></textarea>
+                <i class="icon ion-ios-chatbubble-outline placeholder-icon"></i>
+                <input id="message_box" type="text" placeholder="Type a message">
+                <!--<textarea id="message_box" type="text" placeholder=" Type a message"></textarea>-->
             </label>
-        <button class="button button-large button-positive send_message">
+            <button class="button button-large button-positive send_message">
             Send
             </button>
         </div>
