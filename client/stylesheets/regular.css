@@ -66,7 +66,7 @@ body.keyboard-open .platform-android .content.overflow-scroll{
 }
 
 .patient_not_ready_background{
-	background-color: #43CEE6;
+	background-color: #ffc900;  /*background-color: #43CEE6;*/
 }
 
 /*.patient_navbar{
