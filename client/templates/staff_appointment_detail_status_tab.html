@@ -14,29 +14,33 @@
 
 <template name="staff_appointment_detail_status_tab">
 	{{#contentFor "headerButtonLeft"}}
-		<div class="navbar_normal_buttons double_buttons">
+		<!--<div class="navbar_normal_buttons double_buttons">
 		{{#ionItem class="list_back_link" path="staff_list"}}
 		{{> ionIcon class="list_back_icon" icon="arrow-left-c"}}
 		{{/ionItem}}
 		{{> toggle_button}}
-		</div>
+		</div>-->
+		{{#ionItem class="list_back_link" path="staff_list"}}
+		{{> ionIcon class="list_back_icon" icon="arrow-left-c"}}
+		{{/ionItem}}
 	{{/contentFor}}
 
 	{{#contentFor "headerButtonRight"}}
 		{{!--
 		{{> atNavButton}}
 		--}}
-		
-		{{> atNavButton}}
+		{{> toggle_button}}
+		<!--{{> atNavButton}}-->
 	{{/contentFor}}
 
 
 	{{#contentFor "headerTitle"}}
-		<div id="navbar_div">
+		<!--<div id="navbar_div">
 			<img src="wcmc_red_smaller.png"/>
 			<h3>Waiting Room App</h3>
 			<h2 class="title" style="font-size:1em">STAFF CHANGE STATUS</h2>
-		</div>
+		</div>-->
+		<h2 class="title" style="font-size:1em">STAFF CHANGE STATUS</h2>
 	{{/contentFor}}
 	
 	{{#ionContent class="padding"}}

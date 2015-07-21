@@ -6,12 +6,17 @@
 <template name="staff_control_appointment_list">
 	{{#contentFor "headerButtonLeft" }}
 		<!--<div class="navbar_normal_items">-->
-		<div class="navbar_normal_buttons">
+		<!--<div class="navbar_normal_buttons">
 			{{> toggle_button}}
-		</div>
+		</div>-->
 		<!--</div>-->
+		<!--{{> toggle_button}}-->
 	{{/contentFor}}
-
+	
+	{{#contentFor "headerButtonRight" }}
+		{{> toggle_button}}
+	{{/contentFor}}
+	
 	{{#contentFor "headerTitle"}}
 		<!--<div id="navbar_branding_div">
 			<img src="wcmc_red_small.png"/><p>Waiting Room App</p>
@@ -19,12 +24,13 @@
 		<br/>-->
 		<!--<div class="navbar_normal_items">-->
 			<!--<h2 class="title">Select Patient Appointment</h2>-->
-			<div id="navbar_div">
+			<!--<div id="navbar_div">
 				<img src="wcmc_red_smaller.png"/>
 				<h3>Waiting Room App</h3>
 				<h2 class="title">Select Patient Appointment</h2>
-			</div>
+			</div>-->
 		<!--</div>-->
+		<h2 class="title">Select Patient Appointment</h2>
 	{{/contentFor}}
 
 	{{#ionContent}}

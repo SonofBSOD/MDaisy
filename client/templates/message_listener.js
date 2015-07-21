@@ -10,6 +10,10 @@ Template.message_listener.onRendered(
 					added : function(id, u){
 						if(!ignore){
 							//alert("new message!");
+							if(u.from_id != Meteor.userId()){
+								alert("you have received a new message!");
+								Router.go("/client_message_tab");
+							}
 						}
 					}
 		});

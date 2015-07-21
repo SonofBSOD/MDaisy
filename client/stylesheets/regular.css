@@ -90,12 +90,14 @@ body.keyboard-open .platform-android .content.overflow-scroll{
 	original height is 38px;
 */
 .mdaisy_nav_bar{
-	height: 180px;
+	height: 80px;
+	/*height: 180px;*/
 	/*height: 120px;*/
 }
 
 div.scroll-content.ionic-scroll > div.content.overflow-scroll.has-header{
-	padding-top: 135px;
+	padding-top: 35px;
+	/*padding-top: 135px;*/
 	/*padding-top: 75px;*/
 }
 
@@ -186,4 +188,18 @@ div .bar.bar-header.item-input-inset{
 	position: relative;
 	top: -60px;
 	left: 63px;
+}
+
+/*no borders*/
+#control_panel_button{
+	border: none !important;
+}
+
+.list_back_link{
+	border: none !important;
+}
+
+#control_modal_div > #at-nav-button{
+	margin: 0 !important;
+	color: black;
 }

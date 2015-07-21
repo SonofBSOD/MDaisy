@@ -6,24 +6,25 @@
 
 <template name="staff_appointment_list">
 	{{#contentFor "headerButtonLeft"}}
-		<div class="navbar_normal_buttons">
+		<!--<div class="navbar_normal_buttons">
 		{{> toggle_button}}
-		</div>
-		
-		
+		</div>-->
+		<!--{{> toggle_button}}-->
 	{{/contentFor}}
 	
 	{{#contentFor "headerButtonRight"}}
 		<!-- this needs to be css controlled separately, or else conflicting block display will force it to the left side-->
-		{{> atNavButton}}
+		<!--{{> atNavButton}}-->
+		{{> toggle_button}}
 	{{/contentFor}}
 
 	{{#contentFor "headerTitle"}}
-		<div id="navbar_div">
+		<!--<div id="navbar_div">
 				<img src="wcmc_red_smaller.png"/>
 				<h3>Waiting Room App</h3>
 				<h2 class="title">STAFF: Manage Appointments</h2>
-		</div>
+		</div>-->
+		<h2 class="title">STAFF: Manage Appointments</h2>
 	{{/contentFor}}
 
 	{{#ionContent}}

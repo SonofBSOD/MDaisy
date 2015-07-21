@@ -46,7 +46,7 @@ Template.client_appointment_detail_message_tab.helpers({
 	message_text:function(){
 		return this.text;},
 	message_date:function(){
-		return this.date.toLocaleString();
+		return this.date.toLocaleString().replace(/[A-Z]{3}$/, "");;
 	},
 	message_read_by_staff:function(){
 		console.log(this.to_id);

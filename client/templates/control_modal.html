@@ -1,6 +1,6 @@
 <template name="control_modal">
 	{{#ionModal title="CONTROL PANEL"}}
-	<div>
+	<div id="control_modal_div">
 		<!--<button id="change_appointment_button" class="button button-full button-balanced">
 			Change Appointment
 		</button>-->
@@ -10,6 +10,10 @@
 		<button id="staff_switch" class="button button-large button-full button-assertive">
 			Enable Staff View
 		</button>
+		
+		{{> atNavButton}}
+		
+		
 	</div>
 	{{/ionModal}}
 </template>

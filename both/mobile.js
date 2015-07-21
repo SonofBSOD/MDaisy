@@ -54,14 +54,14 @@ Push.addListener("alert", function(notification){
 	}
 
 	IonPopup.show({
-		title: 'Notification received!',
+		title: 'Exam Status',
 		    template : notification.message,
 		buttons : [{
 			text: 'Ok',
 			type: 'button-positive',
 			onTap: function(){
 			    IonPopup.close();
-	      
+				Router.go("/client_status_tab");
 			}
 		}]
 		});
