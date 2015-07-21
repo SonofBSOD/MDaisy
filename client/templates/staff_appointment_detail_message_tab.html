@@ -15,24 +15,18 @@
 <template name="staff_appointment_detail_message_tab">
 
 	{{#contentFor "headerButtonLeft"}}
-		<div class="navbar_normal_buttons double_buttons">
-			{{#ionItem class="list_back_link" path="staff_list"}}
-			{{> ionIcon class="list_back_icon" icon="arrow-left-c"}}
-			{{/ionItem}}
-			{{> toggle_button}}
-		</div>
+		{{#ionItem class="list_back_link" path="staff_list"}}
+		{{> ionIcon class="list_back_icon" icon="arrow-left-c"}}
+		{{/ionItem}}
 	{{/contentFor}}
 
 	{{#contentFor "headerButtonRight"}}
+		{{> toggle_button}}
 		{{> atNavButton}}
 	{{/contentFor}}
 
 	{{#contentFor "headerTitle"}}
-		<div id="navbar_div">
-			<img src="wcmc_red_smaller.png"/>
-			<h3>Waiting Room App</h3>
-			<h2 class="title" style="font-size:1em">STAFF MESSAGES</h2>
-		</div>
+		<h5 class="title" style="font-size:1em">STAFF MESSAGES</h5>
 	{{/contentFor}}
 
 	{{#ionContent class="padding" id="test_id"}}
@@ -98,6 +92,8 @@
 				</div>
 			</div>
 		{{/if}}
+		
+		<div class="card">
 		<div class="item item-input-inset">
 			<label class="item-input-wrapper">
 				<textarea id="message_box" type="text" placeholder="Messages"></textarea>
@@ -105,6 +101,7 @@
 		<button class="button button-large button-assertive send_message">
 			Send
 			</button>
+		</div>
 		</div>
 	{{/ionContent}}
 	{{> staff_message_listener}}
