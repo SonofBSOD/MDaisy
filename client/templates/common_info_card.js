@@ -90,6 +90,22 @@ Template.common_info_card.helpers({
             return appointment_object.date.toLocaleDateString().replace(/\//g, "-");
         }
     },
+    exam_ready : function(){
+        var appointment_object = get_appointment_object();
+        if(appointment_object == undefined){
+            alert("Error! Could not load session appointment object!");
+        }
+        else{
+            //fetch this from the database; we want reactive updates for this.
+            var db_appointment_object = appointments.findOne({_id:appointment_object._id});
+            if(db_appointment_object != null){
+                return db_appointment_object.exam_ready;
+            }
+            else{
+                alert("Error! Could not find appointment object!");
+            }
+        }
+    },
 	patient_gender : function(){
 		var appointment_object = get_appointment_object();
 		if(appointment_object != undefined){

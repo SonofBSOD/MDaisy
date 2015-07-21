@@ -138,7 +138,7 @@ Template.client_appointment_detail_message_tab.events({
 	"click .send_message" : function(e){
 		e.preventDefault();
 		//message_text, user_id, physician_id, message_date, related_appointment_id){
-		var message_text = $("textarea#message_box").val();
+		var message_text = $("input#message_box").val();
 		var appointment = Session.get("client.tab.appointment_object");
 		Meteor.call("send_message", message_text, appointment.user_id, appointment.ordering_physician, (new Date()), appointment._id, function(err, res){
 			if(err){
@@ -154,7 +154,7 @@ Template.client_appointment_detail_message_tab.events({
 	},
 	"keyup #message_box" : function(event){
 		if(event.keyCode == 13){
-			var message_text = $("textarea#message_box").val();
+			var message_text = $("input#message_box").val();
 			var appointment = Session.get("client.tab.appointment_object");
 			Meteor.call("send_message", message_text, appointment.user_id, appointment.ordering_physician, (new Date()), appointment._id, function(err, res){
 				if(err){

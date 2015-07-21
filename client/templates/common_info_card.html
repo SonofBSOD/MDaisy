@@ -33,6 +33,24 @@
                 <div class="col col-33">William Leung, MD</div>
             </div>
             
+            <div class="row">
+                <div class="col col-10"></div>
+                <div class="col col-33"></div>
+                <div class="col col-10"></div>
+                <div class="col col-33"></div>
+                <div class="col col-10">
+                    {{#if exam_ready}}
+                        <button class="button button-outline button-balanced">
+                        READY
+                        </button>
+                    {{else}}
+                        <button class="button button-outline button-energized">
+                        WAITING
+                        </button>
+                    {{/if}}
+                </div>
+            </div>
+            
         <!--</div>-->
             <div class="row">
             </div>
