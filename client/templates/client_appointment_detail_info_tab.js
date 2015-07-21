@@ -34,5 +34,21 @@ Template.client_appointment_detail_info_tab.helpers({
 				return "patient_not_ready_background";
 			}
 		}
+	},
+	exam_ready : function(){
+		var appointment_object = Session.get("client.tab.appointment_object");
+		if(appointment_object == undefined){
+			alert("Error! Could not load session appointment object!");
+		}
+		else{
+			//fetch this from the database; we want reactive updates for this.
+			var db_appointment_object = appointments.findOne({_id:appointment_object._id});
+			if(db_appointment_object != null){
+				return db_appointment_object.exam_ready;
+			}
+			else{
+				alert("Error! Could not find appointment object!");
+			}
+		}
 	}
 });

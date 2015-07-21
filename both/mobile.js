@@ -1,5 +1,4 @@
-var SITE_LINK = "http://mdaisydist3.meteor.com/";
-var BEEP_LINK = SITE_LINK + "/beep.mp3";
+
 
 /*
 	this file contains raix:push callback event handlers.

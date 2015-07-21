@@ -122,6 +122,11 @@
 				
 		{{/if}}
 				{{> message_listener}}
+		{{#if exam_ready}}
+			{{> on_ready_player}}
+		{{else}}
+			<div></div>
+		{{/if}}
 	{{/ionContent}}
 
 	{{> client_tab_bar}}
