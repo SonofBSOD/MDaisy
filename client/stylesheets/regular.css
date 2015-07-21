@@ -110,7 +110,7 @@ div.scroll-content.ionic-scroll > div.content.overflow-scroll.has-header{
 .list_back_link{
 	padding: 0px;
 	padding-left: 1px;
-	margin-top: 1px;
+	margin-top: -15px;
 	margin-right: 3px;
 	width: 61px;
 	height: 61px;
@@ -118,6 +118,7 @@ div.scroll-content.ionic-scroll > div.content.overflow-scroll.has-header{
 
 .list_back_link > i {
 	padding-left: 8px;
+	margin-top: -15px;
 }
 
 #common_info_card > a.item.item-icon-left{
@@ -193,6 +194,7 @@ div .bar.bar-header.item-input-inset{
 /*no borders*/
 #control_panel_button{
 	border: none !important;
+	margin-top: -8px;
 }
 
 .list_back_link{

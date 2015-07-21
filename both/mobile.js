@@ -46,8 +46,8 @@ var getLocalPath = function (localPath) {
 //when the message arrives
 Push.addListener("alert", function(notification){
 	
-	var beep_music = new Audio(BEEP_LINK);
-	beep_music.play();
+	/*var beep_music = new Audio(BEEP_LINK);
+	beep_music.play();*/
 	if($(".popup").length != 0){
 	    return;
 	}
