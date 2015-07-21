@@ -26,7 +26,7 @@
 	{{/contentFor}}
 
 	{{#contentFor "headerTitle"}}
-		<h2 class="title" style="font-size:1em">STAFF MESSAGES</h2>
+		<h2 class="title" style="font-size:2em">STAFF MESSAGES</h2>
 	{{/contentFor}}
 
 	{{#ionContent class="padding" id="test_id"}}
@@ -59,8 +59,8 @@
 			<div class="card">
 			{{#each message_list}}
 				
-					<div class="item item-text-wrap {{message_sender_style_class}}">
-					    <div class="row">
+					<div class="item item-text-wrap no-padding {{message_sender_style_class}}">
+					    <div class="row no-padding">
                             <div class="col col-50" style="text-align:left">
                                   <p style="font-size:75%">{{message_sender}}</p>
                                   <p style="font-size:75%">{{message_date}}</p>
@@ -74,7 +74,7 @@
                             </div>
                         </div>
 
-                        <div class="row">
+                        <div class="row no-padding">
                             <div class="col col-90" style="text-align:left"><br/>{{message_text}}</div>
                         </div>
 						<!--<p>{{message_date}}</p>-->
@@ -99,7 +99,7 @@
 		<div class="item item-input-inset">
 			<label class="item-input-wrapper">
 			    <i class="icon ion-ios-chatbubble-outline placeholder-icon"></i>
-			    <input id="message_box" type="text" placeholder="Type a message">
+			    <input id="message_box" type="text" placeholder="Type a message" style="height:60px; font-size: 125%">
 				<!--<textarea id="message_box" type="text" placeholder=" Type a message"></textarea>-->
 			</label>
 		<button class="button button-large button-assertive send_message">

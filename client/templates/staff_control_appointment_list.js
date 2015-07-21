@@ -68,7 +68,7 @@ Template.staff_control_appointment_list.helpers({
 			return default_class + " " + "staff_appointment_list_exam_ready_item";
 		}
 		else{
-			return default_class;
+			return default_class + " " + "patient_not_ready_background";
 		}
 	},
 	has_unread_messages: function(){

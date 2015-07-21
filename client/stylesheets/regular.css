@@ -181,6 +181,10 @@ div .bar.bar-header.item-input-inset{
 	height:  0px;
 }
 
+#exam_info p {
+    font-size: 20px
+}
+
 /*
 	do not apply the pullup to the control panel button on the staff_list;
 	we only need to pull up in the staff detail views, where there are two buttons
@@ -204,4 +208,10 @@ div .bar.bar-header.item-input-inset{
 #control_modal_div > #at-nav-button{
 	margin: 0 !important;
 	color: black;
+}
+
+
+/*No padding for certain elements */
+.no-padding {
+    padding: 0px !important;
 }
