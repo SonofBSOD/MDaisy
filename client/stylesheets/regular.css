@@ -104,13 +104,13 @@ div.scroll-content.ionic-scroll > div.content.overflow-scroll.has-header{
 .list_back_icon{
 	font-size: 58px;
 	margin: auto;
-	height: 62px;
+	/*height: 62px;*/
 }
 
-.list_back_link{
+/*.list_back_link{
 	padding: 0px;
 	padding-left: 1px;
-	margin-top: -15px;
+	margin-top: -23px;
 	margin-right: 3px;
 	width: 61px;
 	height: 61px;
@@ -119,6 +119,11 @@ div.scroll-content.ionic-scroll > div.content.overflow-scroll.has-header{
 .list_back_link > i {
 	padding-left: 8px;
 	margin-top: -15px;
+}*/
+
+#list_back_button a{
+	padding: 0px;
+	margin-top: -23px !important;
 }
 
 #common_info_card > a.item.item-icon-left{
@@ -181,8 +186,8 @@ div .bar.bar-header.item-input-inset{
 	height:  0px;
 }
 
-#exam_info p {
-    font-size: 20px
+.exam_info p, .exam_info li, .exam_info b{
+    font-size: 20px;
 }
 
 /*
@@ -198,7 +203,7 @@ div .bar.bar-header.item-input-inset{
 /*no borders*/
 #control_panel_button{
 	border: none !important;
-	margin-top: -8px;
+	margin-top: -6px;
 }
 
 .list_back_link{
@@ -214,4 +219,8 @@ div .bar.bar-header.item-input-inset{
 /*No padding for certain elements */
 .no-padding {
     padding: 0px !important;
+}
+
+#search_box{
+	z-index: 9;
 }

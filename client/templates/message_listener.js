@@ -18,7 +18,7 @@ Template.message_listener.onRendered(
 							}*/
 							
 							if(u.from_id != Meteor.userId()){
-								var drip = new Audio(DRIP_LINK);
+								var drip = new Audio(KNOCK_LINK);
 								drip.onplaying = function ()
 								{
 									if(Router.current().route.getName() != "client_message_tab"){

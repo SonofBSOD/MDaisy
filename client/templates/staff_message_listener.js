@@ -11,7 +11,7 @@ Template.staff_message_listener.onRendered(
 						if(!ignore){
 							//alert("new message!");
 							if(u.from_id != Meteor.userId()){
-								var drip = new Audio(DRIP_LINK);
+								var drip = new Audio(KNOCK_LINK);
 								drip.onplaying = function ()
 								{
 									if(Router.current().route.getName() != "staff_message_tab"){
