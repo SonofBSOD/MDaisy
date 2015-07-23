@@ -33,12 +33,12 @@
 			{{#each app_list}}
 				{{#ionItem  data=get_all_data class=get_class_and_ready_status}}
 					<div id="label_alignment_div">
-						<h2><i class="icon ion-person" ></i> {{patient_name}}</h2>
-						<p>{{patient_age}} {{patient_gender}}</p>
-						<p>DOB: {{patient_dob}} // MRN: {{patient_mrn}}</p>
+						<h2 style="font-size:1.3em"><i class="icon ion-person" ></i> {{patient_name}}</h2>
+						<p style="font-size:1.0em">{{patient_age}} {{patient_gender}}</p>
+						<p style="font-size:1.0em">DOB: {{patient_dob}} // MRN: {{patient_mrn}}</p>
 						<br />
-						<h3><i class="icon ion-images" ></i> {{proc_type}}</h3>
-						<p>{{formatted_date}}</p>
+						<h3 style="font-size:1.2em"><i class="icon ion-images" ></i> {{proc_type}}</h3>
+						<p style="font-size:1.0em">{{formatted_date}}</p>
 						<p>{{organization}}</p> 
                         <!--<p>@ {{department}}</p>-->
 						<p>{{location}}</p>
@@ -48,7 +48,7 @@
 							
 							<!--<h3> unread messages </h3>-->
 						{{else}}
-						    <i class="icon ion-chevron-right" style="font-size: 200%"></i>
+						    <i class="icon ion-chevron-right" style="font-size:2em"></i>
 						{{/if}}
 						
 						</div>

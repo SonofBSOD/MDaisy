@@ -37,8 +37,8 @@ Template.staff_appointment_list.helpers({
 																					{organization:query_exp}, {department:query_exp}, {user_dob:query_exp},
 																						{user_mrn:query_exp}, {user_name:query_exp}
 																					]}]});*/
-				var db_list = appointments.find({$and: [{'ordering_physician':user_id}, {$or: [
-																						{user_mrn:query_exp}, {user_name:query_exp}
+				var db_list = appointments.find({$and: [{'ordering_physician':user_id}, {$or: [ 
+																						{proc_type:query_exp}, {user_mrn:query_exp}, {user_name:query_exp}
 																					]}]});
 				
 				/*var final_list = [];
