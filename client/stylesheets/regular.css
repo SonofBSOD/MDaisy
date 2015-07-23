@@ -16,6 +16,7 @@ body.keyboard-open .platform-android .content.overflow-scroll{
 /*
 
 */
+
 .unread_message_label{
 	right: 7%;
 	position: absolute;
@@ -28,9 +29,9 @@ body.keyboard-open .platform-android .content.overflow-scroll{
 }
 
 .exam_ready_label{
-	right: 10%;
+	right: 12%;
 	position: absolute;
-	top: 45%;
+	top: 34%;
 }
 
 .exam_ready_label h2{

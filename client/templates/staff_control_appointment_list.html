@@ -49,12 +49,14 @@
 						<!--<p>@ {{department}}</p>-->
 						<p>{{location}}</p>
 						<div class="unread_message_label">
-						    <i class="icon ion-chevron-right"></i>
+						    <i class="icon ion-chevron-right" style="font-size: 200%"></i>
 						</div>
 						{{#if exam_ready}}
 							<div class="exam_ready_label">
-								<h2>READY</h2>
-							</div>
+                                <button class="button button-outline button-dark" style="background: white">
+                                READY
+                                </button>
+                            </div>
 						{{/if}}
 					</div>
 					<!--<div id="label_alignment_div">
