@@ -18,11 +18,11 @@ Template.message_listener.onRendered(
 							}*/
 							
 							if(u.from_id != Meteor.userId()){
-								var drip = new Audio(KNOCK_LINK);
+								var drip = Router.current().route.getName() == "client_message_tab" ? new Audio(DRIP_LINK) : new Audio(KNOCK_LINK);
 								drip.onplaying = function ()
 								{
 									if(Router.current().route.getName() != "client_message_tab"){
-										alert("you have received a new message!");
+										alert("Message: you have received a new message!");
 										Router.go("/client_message_tab");
 									}
 									
