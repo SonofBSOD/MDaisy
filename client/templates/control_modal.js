@@ -2,7 +2,7 @@ Template.control_modal.events({
 	"click #patient_switch" : function(e){
 		e.preventDefault();
 		//Meteor.logout();
-		Meteor.loginWithPassword("demo", "demo", function(error){
+		Meteor.loginWithPassword({email:"demo"}, "demo", function(error){
 			if(error){
 				alert("login failed!");
 			}
@@ -15,7 +15,7 @@ Template.control_modal.events({
 	"click #staff_switch" : function(e){
 		e.preventDefault();
 		//Meteor.logout();
-		Meteor.loginWithPassword("demo", "demo", function(error){
+		Meteor.loginWithPassword({email:"demo"}, "demo", function(error){
 			if(error){
 				alert("login failed!");
 			}
