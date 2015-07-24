@@ -62,8 +62,8 @@ function startup_data(){
 		
 		
 		Accounts.createUser({
-			email:"gh@fake.com",
-			password:"teststaff",
+			email:"demo",
+			password:"demo",
 			profile : {
 				name: "Gregory House",
 				phone_number : "555-888-9999"}, 
@@ -81,7 +81,7 @@ function startup_data(){
 
 
 		//get Dr. House's id
-		var doctor_id = Meteor.users.findOne({'emails.address':'gh@fake.com'})._id;
+		var doctor_id = Meteor.users.findOne({'emails.address':'demo'})._id;
 
 		//Medical procedure sample information-------------------------------------------------------------------
 		medicalInfo.insert({
