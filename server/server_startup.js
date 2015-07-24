@@ -30,7 +30,7 @@ function startup_data(){
 			profile :{
 				name: "Ella Amaryllis",
 				phone_number : "555-111-2222",
-				dob:new Date("1 Aug 2000"),
+				dob:new Date("1 Aug 1990"),
 				mrn:"12983102",
 				gender:"female"},
 			user_type:"patient"
@@ -110,7 +110,7 @@ function startup_data(){
 		var ultrasound_appointment_id = appointments.insert({
 			user_id : ella_object._id,
 			user_name : "Ella Amaryllis",
-			user_dob: (new Date("1 Aug 2000")).toLocaleDateString(),
+			user_dob: (new Date("1 Aug 1990")).toLocaleDateString(),
 			user_mrn: "12983102",
 			proc_type : "Ultrasound",
 			accession: "5674567",
