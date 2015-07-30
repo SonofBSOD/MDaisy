@@ -1,0 +1,293 @@
+Daisy App Design Spec
+
+Where file extension is not explicitly mentioned, it is taken to mean
+both .html and .js files. 
+
+Staff Mode:
+      1) staff_appointment_list
+        contains the list view 
+      2) staff_appointment_detail_status_tab
+        contains the controllable checkbox status tab
+      3) staff_appointment_detail_message_tab
+        contains the message list status tab
+
+Patient Mode:
+      1) client_control_appointment_list
+        contains the patient hardset list view
+      2) client_appointment_detail_status_tab
+        contains the staff-controlled checkbox status tab
+      3) client_appointment_detail_message_tab
+        contains the message list status tab
+      4) client_appointment_detail_info_tab
+        contains medical information detail/media tab
+
+Other Relevant Templates:
+1) client_tab_bar.html, staff_tab_bar.html
+ contains the HTML templates for the tab bar icons in the respective views
+2) layout.html
+ contains the generic template for all tabbed views (i.e., where the
+ tabbed view yields in the entire display)
+3) common_info_card
+ contains the HTML template and javascript code to load a patient's
+ exam details in a "card" display on the top of a page.
+4) control_modal
+ contains the "control panel" HTML template and javascript code to
+ switch between patient and staff accounts
+5) login
+ contains the login template seen on initialization (i.e. before
+ the landing route)
+6) message_listener
+ contains a dummy template to implement in-app message notification
+ alerts for the hardset patient view
+7) staff_list_message_listener
+  contains a dummy template to implement in-app message notification
+ alerts for the staff view
+8) on_ready_player
+  contains a dummy template to implement in-app message notification
+ alerts for the staff LIST view
+9) client_message_reporter
+  contains a dummy template to implement in-app message read label
+  status on the hardset patient's message log
+10) staff_message_reporter
+  contains a dummy template to implement in-app message read label
+  status on the staff's message log
+11) toggle_button
+  contains the template that opens the control panel to allow
+  switching between staff and patient views
+
+General Design
+In-App Messages
+  1) Sound Notifications
+    In both patient and staff view, if the user is on the messages tab
+    when a message arrives, then a "drip" sound pointed to by DRIP_LINK
+    in both/resources.js is played.
+
+    On the other hand, if the patient is on either the info or status tab,
+    or the staff is on the status tab, then a popup will be displayed
+    with the following text "You have received a new message!," followed
+    by a playing a "knock" sound, pointed to by KNOCK_LINK in both/resources.js
+
+    Lastly, if the staff is on the staff list view when a message is received
+    on ANY of the patient appointments, a red number reflecting the number
+    of unread messages will be updated on the right side of the corresponding
+    list item. Additionally, the same "knock" sound under KNOCK_LINK will be played,
+    but with no popup.
+
+  2) Implementation
+    Each in app message is a Mongo-DB document as indicated in the
+    DatabaseSchemaSpec with the following properties: text, to_id, from_id,
+    appointment_id, and read. Upon clicking the send button, each client
+    uses the following RPC call in both/collection.js: send_message, in
+    order to insert the document into the database.
+
+    A second point to take note of is that since the Audio objects
+    are constructed with the link of the deployed site, it is important
+    to update the links in both/resources.js upon changing the deployment
+    domain so that sound will continue to play correctly.
+
+    Third, message alert popups are implemented with the help of empty
+    templates that register a database listener on the Mongo "messages"
+    table. The listener is run when the template is first rendered
+    into the webpage (i.e. when each tab is loaded; you can see inclusion
+    of a {{> message_listener}} or {{> staff_message_listener}} template
+    in the tabs), and then destroyed when tabs are switched and the DOM
+    is cleared. The relevant code is client/templates/message_listener,
+    and client/templates/staff_message_listener. The conditional for
+    the "ignore" flag is in both files because observeChange will first
+    run for all initial results of a query, and we only want the handler
+    to fire for new data. There is also a third template contained in
+    client/templates/staff_list_message_listener that implements this
+    functionality, but on the primary list view in staff mode, that
+    calls observeChange on the entire messages database, so that whenver
+    anyone sends a message, the knock sound specified in KNOCK_LINK
+    will play.
+
+    Fourth, a similar trick is employed in updating patient and staff
+    messag log with "READ BY PATIENT" or "READ BY STAFF" labels. An
+    empty template and code contained in
+    client/templates/client_message_reporter and
+    client/templates/staff_message_reporter is rendered into the HTML
+    for each message. Upon rendering and displaying, it will call
+    the RPC "set_message_addressed_to_id" defined in both/collections
+    to set the "read" flag of each displayed message.
+
+Push Notifications
+  1) Behavior
+  An apple push notification is sent every time a staff marks a patient's
+  exam status as ready. On receive, a patient's hardset view background
+  will turn from yellow to green (and so will their list item in the
+  patient list view), a ding sound specified by DING_LINK in both/resources.js
+  will play. If the patient is in the app, then they will additionally
+  receive a popup stating "Hi patient! Your exam is ready", or if they
+  are out of app, then they will receive a configurable push notification
+  that will bring them back in.
+
+  2) Implementation
+  Push notifications are implemented with the raix:push package. Essentially,
+  once the SSL certificates have been configured, a config.push.json file
+  must be put in the root of the project directory with the following
+  format:
+  {
+	"apn":{
+		"passphrase":<certificate password here>,
+		"key":<ssl key here>,
+		"cert":<ssl push certificate here>,
+		"gateway":"gateway.push.apple.com"
+	},"gcm":{
+		"apiKey":"",
+		"projectNumber":""
+	},
+	"production":true,
+	"sound":true,
+	"alert":true,
+	"vibrate":true
+ }
+
+ The two .pem files containing the key and certificate must be placed
+ in a /private folder in the root of the project directory. Additionally,
+ if production is true, then gateway for apn must be specified as above.
+ If production is false (i.e. development mode), then the gateway is
+ given by "gateway.sandbox.push.apple.com"
+
+ In sending push notifications, the typical call is given as:
+ Push.send({
+  from: 'Test',
+  title: 'Hello',
+  text: 'World',
+  query: {}});,
+
+ while the call in Daisy's code looks like the following (can be found
+ in the "staff_set_and_notify_appointment_exam_status" RPC call
+ in both/collections.js):
+ 
+ Push.send({from:"Radiology Staff", 
+ 	    title:"Exam Status", 
+	    text:"Hi! You are ready for your exam!", 
+	    query:{userId:appointment.user_id}, 
+	    sound:"test.wav",
+	    alert:true,
+	    vibrate:true});
+
+ The additional changes are the specification of a title, the alert,
+ vibrate, sound, and query attributes. The sound file given to the
+ sound attribute need not be a matching name; the presence of this
+ attribute will cause the package to play the default iOS sound
+ on out of app notification. Due to a issue possibly with the project build,
+ (and cordova not being defined on builds with an iPad)
+ setting vibrate:true causes a received notification to vibrate on the
+ iPhone, but not on the iPad. The alert attribute is then set to true
+ so that an event-listener for received notifications can be run, which
+ will display the popup. This listener can be found in both/mobile.js,
+ where we call Push.addListener("alert"...). Lastly, a key setting
+ is to only send the push notification to a certain user, as specified
+ in the query. The "userId" mentioned in the MongoDB assigned _id of
+ a user document in Meteor.users(). This has the effect of sending
+ the push notification only to the devices in which a certain patient
+ is hardset/currently logged in.
+
+ Additionally, the following links were consulted in configuring the
+ push notifications package:
+ 
+ https://github.com/raix/push/wiki/iOS-Micro-Walkthrough
+ https://github.com/raix/push/tree/master/docs
+ http://www.raywenderlich.com/32960/apple-push-notification-services-in-ios-6-tutorial-part-1
+ https://github.com/raix/push/issues/36
+ http://www.brianjcoleman.com/testflight-vs-enterprise-distribution/
+
+ 3) Staff/Patient Mode Behavior
+ Because push notifications rely on the relevant user being logged-in,
+ the app switches between accounts in different views. On the primary
+ staff list view and any of the staff detail tabbed views, the user is logged
+ in under a staff account. On the primary patient mode list view, the
+ user is first logged in as staff, but upon clicking a patient's
+ appointment list item, the app will log in under the patient's account.
+ This is so that targeted push notifications will be sent to the correct,
+ hardset devices for a particular patient. Lastly, the code for the control
+ panel buttons, which can be found in client/templates/control_modal.js,
+ contains code which logs back into the "demo" account (i.e. the staff
+ account).
+
+ There are several points to be aware of: 1) since the original login
+ form used email sign-in, the code in those buttons needs to specify
+ a json object with "email" attribute set to the "demo" value (which
+ really looks like a username, not email) in order for loginWithPassword
+ to behave correctly; otherwise, it tries to guess that the value
+ is a username and uses that to login instead, which won't work;
+ 2) under the existing implementation, this means every patient has an
+ account with either a "dummy" or preset password for logging in
+ upon clicking an appointment list item on the patient mode list view,
+ and that currently, the control panel buttons log back into the demo
+ staff account on switching to the staff's primary list view (there
+ used to be code that created a PopUp requiring staff to first login
+ with their own credentials before allowing switching; this was
+ removed for the purposes of the demo). This code can be repurposed
+ for additional authentication; please see the event function
+ handling the "click #change_appointment_button" event in
+ client/templates/control_modal.js for more details.
+
+
+Miscellaneous Gotchas
+  1) IonIcon template inclusion. In choosing the icons for the tab bars,
+  the component automatically appends "ion" to the front of the icon name,
+  so it must be omitted when specifying the name attribute (i.e. "ion-flower"
+  becomes "flower")
+  2) IonTabs do not have support for a data attribute, and so there is
+  no way to set their data context, short of either defining a parameterized
+  iron:router route, and then performing DB queries in the template helper,
+  or setting Session variables to pass the required data; Daisy currently
+  chooses the second option. (However, attempting to pass too large an object
+  will lead to Meteor giving a "stack overflow" error in the console).
+  3) Most of the time, if custom css for certain meteor components don't work,
+  it's a precedence issue, and attaching "!important" will do the trick
+  4) Use the Xcode device logs to debug iOS app connect problems
+  5) Hotcode refreshes cause a refresh on the browser tab, which will wreck
+  the currently loaded session variables in any of the detail tab views; it is 
+  best to close the tab and revisit the page if this happens.
+
+Installation/Run Instructions
+  1) Upon downloading from the repo, the .git folder contains an old
+  version of the meteor build, and these must be updated as follows.
+  2) First install the following plugins:
+    accounts-password      
+    autopublish            
+    fourseven:scss         
+    insecure              
+    iron:router             
+    meteor-platform         
+    meteoric:ionic         
+    meteoric:ionic-sass     
+    meteoric:ionicons-sass 
+    percolate:synced-cron   
+    raix:cordova            
+    raix:eventstate        
+    raix:push             
+    random                
+    tracker                 
+    useraccounts:ionic   
+    steeve:jquery-barcode
+  3) Next, the old mongo database must be cleared by connecting to the live
+  meteor instance through meteor mongo, and then running "db.dropDatabase()".
+  On success, the meteor instance must be restarted, and it will load
+  with the new data.
+
+Build/Archive+Deploy Instructions
+  1) In the root of the project directory, run 
+  "meteor build [build folder] --server=[domain name]", where the brackets
+  should be replaced with their correct argument.
+  2) cd to the build folder, and go into ios/project, and run "open MDaisy.xproject"
+  3) Build/archive normally in XCode: set the Team to the relevant apple accounts team,
+  followed by the correct bundleID.
+  4) Go to "Build Settings," and under "Code Signing", select the MDaisy In-House Distribution
+  provisioning profile, and select the correct iPhone developer identity for the iOS developer account
+  on XCode for Debug and Release Builds
+  5) Click Product > Archive, create the .ipa file
+  6) Upload to dropbox, update the download.html and .plist file to reflect the 
+  location of the new .ipa file.
+  Please note that when using links from dropbox, they MUST be converted from, for example
+  "www.dropbox.com/...." to "dl.dropboxusercontent.com/...."
+ 
+  Additionally, if any download links do not register correctly on the ipad, any
+  link parameters, typically ("?dl=0") might need to be added or removed at the end of the links.
+
+  
+  
