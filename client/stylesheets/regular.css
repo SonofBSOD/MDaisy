@@ -227,3 +227,12 @@ div .bar.bar-header.item-input-inset{
 #search_box{
 	z-index: 9;
 }
+
+.yt-div {
+	text-align: center;
+}
+
+.yt-iframe {
+	width: 700px;
+	height: 400px;
+}
