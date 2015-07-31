@@ -52,6 +52,10 @@ appointments
 		reason:
 			a string indicating why the appointment was ordered
 		last_checked:
+			[DEPRECATED]
+			[This field is no longer used. Was originally used to implement highlighting list views
+			 for appointments whose obligation checklist changed]
+
 			Javascript Date timestamp indicating when all obligations have been last viewed
 			by medical staff. see entry under "preparations".
 		updated_by_client:
@@ -70,72 +74,8 @@ medicalInfo
 		text :
 			contains textual description
 			NOTE: all text is escaped and rendered as is
-
-preparations
-	contains preparation requirements for each appointment
-	Document Format:
-		appointment_id : 
-			the Mongo assigned _id of the appointment under which this preparation is grouped
-		completed: 
-			a boolean indicating whether the patient has fulfilled this requirement, either "true", "false"
-		text: 
-			the requirement, in text
-		date_by: 
-			the day this requirement is filed under, represented by a Javascript date object
-		last_updated:
-			a Javascript Date timestamp indicating when this obligation was last updated by the user.
-			is initialized to date of creation.
-		last_checked:
-			a Javascript Date timestamp indicating when this obligation was last viewed by medical staff.
-			**[PROPOSED/CURRENTLY IMPLEMENTED CHANGE]
-			since all obligations share the same last_checked timestamp, i.e. they're all "viewed" when
-			staff read an appointment_detail page, this field should be stored in an appointment 
-			document.
-		previous_completed:
-			a boolean that contains the previous value of the completed field; on initialization, contains the
-			value "undefined"
-		notify_on_complete:
-			a boolean that controls whether or not a push notification should be sent to the patient account described
-			in the user_id field of the appointment document with id appointment_id whenever the preparation is marked as
-			"completed".
-		notify_options:
-			if notify_on_complete is true, it is an object of the following form:
-				{from:string, title:string, text:string}, corresponding to three raix:push notification options
-			if notify_on_complete is false, it is an empty object.
-		permission:
-			a string that controls which type of account can set this preparation. current possible values are: "patient",
-			"staff", or "both"
-		
-user_to_push_id_map
-	contains documents mapping users to which instances of the mobile version of the app we should send 
-	push notifications to. since raix:push generates a unique application id for each android app, when a user logs in,
-	their account is associated with that app id.
-
-	Document Format:
-		user_id:
-			a string containing the **Meteor.accounts** userId of a target user
-		push_app_id:
-			a string containing the unique id of a certain instance of the mobile app
-		
-
-notifications
-	contains notification documents that the server needs to send out
-	in the future. Their purpose is further explained in Section 3, Notifications,
-	of the PatientClientDesignSpec.
-
-	Document Format:
-		notification_type:
-			a string indicating the type of the appointment: either "appointment" or "obligation"
-		user_id:
-			a string containing the **Meteor.accounts** userId of target user to send the notification to.
-		from:
-			a string containing text for the "from" field in the Push.send API call
-		title:
-			a string containing text for the "title" field in the Push.send API call
-		text: 
-			a string containing text for the "title" field in the Push.send API call
-		send_by:
-			a Javascript Date object indicating the approximate deadline for sending the notification
+		youtube_src :
+			contains a youtube link for the iframe in the patient's information tab view
 
 messages
 	contains a sequence of messages sent from a patient to the ordering physician responsible for 
@@ -154,7 +94,7 @@ messages
 			a string containing the Mongo-assigned _id of the appointment that this message
 			was sent under.
 		read_at:
-			[UNUSED]
+			[UNUSED/UNIMPLEMENTED]
 			a Javascript Date object indicating when this message was seen by the staff
 		read:
 			a boolean indicating whether this message has been accessed through the "messages"
@@ -162,8 +102,3 @@ messages
 		sender_status:
 			[UNUSED/UNIMPLEMENTED]
 			can be implicitly referenced via from_id.
-======EXPERIMENTAL=====
-user_to_push_id_map
-	unused as of 6/11
-		
-
