@@ -13,7 +13,7 @@ var session_object_name = undefined;
 	}
 });*/
 
-function get_appointment_object(){
+function get_appointment_object_reactive(){
 	if(Meteor.user() != null){
 		var user_type = Meteor.user().user_type;
 		switch(user_type){
@@ -30,6 +30,10 @@ function get_appointment_object(){
 	}
 	
 	return undefined;
+}
+
+function get_appointment_object(){
+	return Tracker.nonreactive(get_appointment_object_reactive);
 }
 
 Template.common_info_card.onRendered(function () {
