@@ -243,6 +243,19 @@ Miscellaneous Gotchas
   5) Hotcode refreshes cause a refresh on the browser tab, which will wreck
   the currently loaded session variables in any of the detail tab views; it is 
   best to close the tab and revisit the page if this happens.
+  6) Meteor.users by default does not expose all fields of a user object; for example,
+  the Daisy code uses the "user_type" attribute added to a user object in order to 
+  determine whether they are patient or staff. These fields must be exposed by
+  defining a custom publication for the Meteor.users database. Please see
+  server/publications.js for an example.
+  7) The search box functionality (for example, in staff_search_box.js) works as follows:
+  upon typing something into the search box, a Session variable is updated; this Session variable
+  is used, for example, in the template helper (e.g. app_list in staff_appointment_list.js) to
+  run a case insensitive regular expression query over appointment type, patient mrn, and patient name.
+  This means that, as indicated in the DatabaseSchemaSpec, copies of a patient's mrn and name MUST be
+  kept in an appointment document!!!
+
+
 
 Installation/Run Instructions
   1) Upon downloading from the repo, the .git folder contains an old
