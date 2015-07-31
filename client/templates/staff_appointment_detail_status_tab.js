@@ -11,7 +11,7 @@ Template.staff_appointment_detail_status_tab.helpers({
 	appointment_patient_name : function(){
 		var appointment_object = Session.get("staff.tab.appointment_object");
 		if(appointment_object == undefined){
-			alert("Error! Could not load session appointment object!");
+			// alert("Error! Could not load session appointment object!");
 		}
 		else{
 			var user = Meteor.users.findOne({_id:appointment_object.user_id});
@@ -26,7 +26,7 @@ Template.staff_appointment_detail_status_tab.helpers({
 	appointment_patient_mrn : function(){
 		var appointment_object = Session.get("staff.tab.appointment_object");
 		if(appointment_object == undefined){
-			alert("Error! Could not load session appointment object!");
+			// alert("Error! Could not load session appointment object!");
 		}
 		else{
 			var user = Meteor.users.findOne({_id:appointment_object.user_id});
@@ -41,7 +41,7 @@ Template.staff_appointment_detail_status_tab.helpers({
 	appointment_date : function(){
 		var appointment_object = Session.get("staff.tab.appointment_object");
 		if(appointment_object == undefined){
-			alert("Error! Could not load session appointment object!");
+			// alert("Error! Could not load session appointment object!");
 		}
 		else{
 			return appointment_object.date;
@@ -50,7 +50,7 @@ Template.staff_appointment_detail_status_tab.helpers({
 	appointment_department : function(){
 		var appointment_object = Session.get("staff.tab.appointment_object");
 		if(appointment_object == undefined){
-			alert("Error! Could not load session appointment object!");
+			// alert("Error! Could not load session appointment object!");
 		}
 		else{
 			return appointment_object.department;
@@ -59,7 +59,7 @@ Template.staff_appointment_detail_status_tab.helpers({
 	appointment_reason : function(){
 		var appointment_object = Session.get("staff.tab.appointment_object");
 		if(appointment_object == undefined){
-			alert("Error! Could not load session appointment object!");
+			// alert("Error! Could not load session appointment object!");
 		}
 		else{
 			return appointment_object.reason;
@@ -68,7 +68,7 @@ Template.staff_appointment_detail_status_tab.helpers({
 	appointment_type : function(){
 		var appointment_object = Session.get("staff.tab.appointment_object");
 		if(appointment_object == undefined){
-			alert("Error! Could not load session appointment object!");
+			// alert("Error! Could not load session appointment object!");
 		}
 		else{
 			return appointment_object.proc_type;
@@ -77,7 +77,7 @@ Template.staff_appointment_detail_status_tab.helpers({
 	exam_ready : function(){
 		var appointment_object = Session.get("staff.tab.appointment_object");
 		if(appointment_object == undefined){
-			alert("Error! Could not load session appointment object!");
+			// alert("Error! Could not load session appointment object!");
 		}
 		else{
 			//fetch this from the database; we want reactive updates for this.
@@ -94,7 +94,7 @@ Template.staff_appointment_detail_status_tab.helpers({
 	exam_checked : function(){
 		var appointment_object = Session.get("staff.tab.appointment_object");
 		if(appointment_object == undefined){
-			alert("Error! Could not load session appointment object!");
+			// alert("Error! Could not load session appointment object!");
 		}
 		else{
 			//fetch this from the database; we want reactive updates for this.
@@ -127,7 +127,7 @@ Template.staff_appointment_detail_status_tab.events({
 	"click #exam_status_update" : function(e, tmp_inst){
 		var appointment_object = Session.get("staff.tab.appointment_object");
 		if(appointment_object == undefined){
-			alert("Error! Could not load session appointment object!");
+			// alert("Error! Could not load session appointment object!");
 		}
 		else{
 			var exam_checkbox = tmp_inst.$("#exam_checkbox");
@@ -193,7 +193,7 @@ Template.staff_appointment_detail_status_tab.events({
 						Session.set("staff_appointment_detail_status.hide_var", false);
 						var appointment_object = Session.get("staff.tab.appointment_object");
 						if(appointment_object == undefined){
-							alert("Error! Could not load session appointment object!");
+							// alert("Error! Could not load session appointment object!");
 						}
 						else{
 						Meteor.call("staff_delete_appointment", appointment_object._id, Meteor.userId(),

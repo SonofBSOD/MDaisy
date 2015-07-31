@@ -93,7 +93,7 @@ Template.common_info_card.helpers({
     exam_ready : function(){
         var appointment_object = get_appointment_object();
         if(appointment_object == undefined){
-            alert("Error! Could not load session appointment object!");
+            // alert("Error! Could not load session appointment object!");
         }
         else{
             //fetch this from the database; we want reactive updates for this.
