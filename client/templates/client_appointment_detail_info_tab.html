@@ -47,52 +47,51 @@
 	{{/contentFor}}
 	
 	{{#ionContent class=ready_background_class}}
-	    {{> common_info_card}}
-        
-        
-        <div class="list card">
-<!--         
-        <div class="row exam_info" >
-            <div class="col col-10"></div>
-            <div class="col col-80">{{{appointment_exam_info}}}</div>
-            <div class="col col-10"></div>  
-        </div>
- -->        
+		{{> common_info_card}}
+		
+		
+		<div class="list card">
 
-		<body>
 			<div class="yt-div">
-				<iframe class="yt-iframe" src="//www.youtube.com/embed/8mUaXmFi6Hc" frameborder="0" allowfullscreen></iframe>
+				<iframe class="yt-iframe" src={{appointment_exam_video}} frameborder="0" allowfullscreen></iframe>
 			</div>
-		</body>        
-        <!--<div class="row">-->
-        <!--    <div class="col col-10"></div>-->
-        <!--    <div class="col col-80">-->
-        <!--        <p>-->
-        <!--            <a href="#" class="subdued">1 Like</a>-->
-        <!--            <a href="#" class="subdued">5 Comments</a>-->
-        <!--        </p>-->
-        <!--    </div>-->
-        <!--    <div class="col col-10"></div>  -->
-        <!--</div>-->
-            
-        
-          
-        <!--<div class="item tabs tabs-secondary tabs-icon-left">-->
-        <!--    <a class="tab-item" href="#">-->
-        <!--    <i class="icon ion-thumbsup"></i>-->
-        <!--        Like-->
-        <!--    </a>-->
-        <!--    <a class="tab-item" href="#">-->
-        <!--    <i class="icon ion-chatbox"></i>-->
-        <!--        Comment-->
-        <!--    </a>-->
-        <!--    <a class="tab-item" href="#">-->
-        <!--    <i class="icon ion-share"></i>-->
-        <!--        Share-->
-        <!--    </a>-->
-        <!--</div>-->
-        
-        </div>	
+
+			
+			<div class="row exam_info" >
+				<div class="col col-10"></div>
+				<div class="col col-80">{{{appointment_exam_info}}}</div>
+				<div class="col col-10"></div>  
+			</div>
+	 
+		<!--<div class="row">-->
+		<!--    <div class="col col-10"></div>-->
+		<!--    <div class="col col-80">-->
+		<!--        <p>-->
+		<!--            <a href="#" class="subdued">1 Like</a>-->
+		<!--            <a href="#" class="subdued">5 Comments</a>-->
+		<!--        </p>-->
+		<!--    </div>-->
+		<!--    <div class="col col-10"></div>  -->
+		<!--</div>-->
+			
+		
+		  
+		<!--<div class="item tabs tabs-secondary tabs-icon-left">-->
+		<!--    <a class="tab-item" href="#">-->
+		<!--    <i class="icon ion-thumbsup"></i>-->
+		<!--        Like-->
+		<!--    </a>-->
+		<!--    <a class="tab-item" href="#">-->
+		<!--    <i class="icon ion-chatbox"></i>-->
+		<!--        Comment-->
+		<!--    </a>-->
+		<!--    <a class="tab-item" href="#">-->
+		<!--    <i class="icon ion-share"></i>-->
+		<!--        Share-->
+		<!--    </a>-->
+		<!--</div>-->
+		
+		</div>	
 		
 		{{> message_listener}}
 		{{> on_ready_player}}

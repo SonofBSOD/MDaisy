@@ -86,19 +86,22 @@ function startup_data(){
 		//Medical procedure sample information-------------------------------------------------------------------
 		medicalInfo.insert({
 			proc_type:"Ultrasound", 
-			text: sample_US_data
+			text: sample_US_data,
+			youtube_src: "//www.youtube.com/embed/xZ1hcEQl7ks"
 		});
 
 		medicalInfo.insert({
 			proc_type:"MRI",
-			text: sample_MRI_data
+			text: sample_MRI_data,
+			youtube_src: "//www.youtube.com/embed/LaAjrPbahBA"
 		});
 
 
 		//sample_CT_data is defined in both/sample_data_strings.js
 		medicalInfo.insert({
 			proc_type:"CT", 
-			text: sample_CT_data
+			text: sample_CT_data,
+			youtube_src: "//www.youtube.com/embed/BRPD-B_hpbo"
 		});
 		
 		

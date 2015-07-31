@@ -14,6 +14,22 @@ Template.client_appointment_detail_info_tab.helpers({
 			}
 		}
 	},
+	appointment_exam_video : function(){
+		var appointment_object = Session.get("client.tab.appointment_object");
+		if(appointment_object == undefined){
+			alert("Error! Could not load session appointment in exam object!");
+		}
+		else{
+			var medical_info = medicalInfo.findOne({proc_type:Session.get("client.tab.appointment_object").proc_type});
+			console.log(medical_info.youtube_src);
+			if(medical_info != null){
+				return medical_info.youtube_src;
+			}
+			else{
+				alert("Error! Could not load exam medical exam video!");
+			}
+		}
+	},
 	ready_background_class : function(){
 		var appointment_object = Session.get("client.tab.appointment_object");
 		if(appointment_object == undefined){
@@ -52,3 +68,4 @@ Template.client_appointment_detail_info_tab.helpers({
 		}
 	}
 });
+
