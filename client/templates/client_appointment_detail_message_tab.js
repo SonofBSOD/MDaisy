@@ -98,7 +98,7 @@ Template.client_appointment_detail_message_tab.helpers({
 	ready_background_class : function(){
 		var appointment_object = Session.get("client.tab.appointment_object");
 		if(appointment_object == undefined){
-			// alert("Error! Could not load session appointment object!");
+			alert("Error! Could not load session appointment object!");
 		}
 		else{
 			//fetch this from the database; we want reactive updates for this.
@@ -119,7 +119,7 @@ Template.client_appointment_detail_message_tab.helpers({
 	exam_ready : function(){
 		var appointment_object = Session.get("client.tab.appointment_object");
 		if(appointment_object == undefined){
-			// alert("Error! Could not load session appointment object!");
+			alert("Error! Could not load session appointment object!");
 		}
 		else{
 			//fetch this from the database; we want reactive updates for this.

@@ -2,7 +2,7 @@ Template.client_appointment_detail_info_tab.helpers({
 	appointment_exam_info : function(){
 		var appointment_object = Session.get("client.tab.appointment_object");
 		if(appointment_object == undefined){
-			// alert("Error! Could not load session appointment object!");
+			alert("Error! Could not load session appointment object!");
 		}
 		else{
 			var medical_info = medicalInfo.findOne({proc_type:Session.get("client.tab.appointment_object").proc_type});
@@ -33,7 +33,7 @@ Template.client_appointment_detail_info_tab.helpers({
 	ready_background_class : function(){
 		var appointment_object = Session.get("client.tab.appointment_object");
 		if(appointment_object == undefined){
-			// alert("Error! Could not load session appointment object!");
+			alert("Error! Could not load session appointment object!");
 		}
 		else{
 			//fetch this from the database; we want reactive updates for this.
@@ -54,7 +54,7 @@ Template.client_appointment_detail_info_tab.helpers({
 	exam_ready : function(){
 		var appointment_object = Session.get("client.tab.appointment_object");
 		if(appointment_object == undefined){
-			// alert("Error! Could not load session appointment object!");
+			alert("Error! Could not load session appointment object!");
 		}
 		else{
 			//fetch this from the database; we want reactive updates for this.
