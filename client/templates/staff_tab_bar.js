@@ -1,20 +1,4 @@
 /*
-	obligation_tab_link
-		provides a route of form "/staff_obligation_tab/:appointment_id"
-	message_tab_link
-		provides a route of form "/staff_message_tab/:ordering_physician",
-		
-*/
-Template.staff_tab_bar.helpers({
-	obligation_tab_data : function(){
-		return {appointment_id:"dummyaptid"};
-	},
-	message_tab_data : function(){
-		return {appointment_id:"dummy_apt_id", staff_id:"dummy_staff_id"}; 
-	}
-});
-
-/*
 	set the ionTab.current and the clicked tab's path attribute to the same value;
 	this will force the highlight that we want.
 */
