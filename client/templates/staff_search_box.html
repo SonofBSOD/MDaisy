@@ -1,6 +1,6 @@
 <!--
 	staff_search_box.html
-	contains the html template for the search box at the top of the staff view
+	contains the html template for the search box and filter option at the top of the staff view
 -->
 <template name="staff_search_box">
 	<div id="search_box" class="bar bar-header item-input-inset">
@@ -11,20 +11,20 @@
 
 	</div>
 
-	<!-- TODO: Add Filter for CT, MRI, Ultrasound -->
+	<!-- Filter for CT, MRI, Ultrasound -->
 	<div id="proc_filter">
-  		<span class="proc_selected">CT</span><!-- 
-  		 --><span class="proc_selected">MRI</span><!-- 
-  		 --><span class="proc_selected">Ultrasound</span>
+  		<span>CT</span><!-- 
+  		 --><span>MRI</span><!-- 
+  		 --><span>Ultrasound</span>
 	</div>
 
 
-	<!-- TODO: Add Dropdown list for location -->
-	<div class="list">
+	<!-- Dropdown Filter for location -->
+	<div id="organization_filter" class="list">
 
 	  <label class="item item-input item-select">
 	    <div class="input-label">
-	      Location
+	      Organization
 	    </div>
 	    <select>
 	      <option selected>Weill Cornell Imaging at NewYork-Presbyterian</option>
