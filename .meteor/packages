@@ -8,9 +8,16 @@ meteor-platform
 autopublish
 iron:router
 meteoric:ionic
-fourseven:scss@=2.1.1
+fourseven:scss
 meteoric:ionic-sass
 meteoric:ionicons-sass
 useraccounts:ionic
 accounts-password
 insecure
+percolate:synced-cron
+raix:cordova
+raix:eventstate
+raix:push
+random
+tracker
+steeve:jquery-barcode
