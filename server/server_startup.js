@@ -20,7 +20,8 @@ function startup_data(){
 				phone_number : "555-666-7777",
 				dob:new Date("12 Jun 1990"),
 				mrn:"16182369",
-				gender:"male"},
+				gender:"male",
+				in_app_passcode:"12345"},
 			user_type:"patient"
 		});
 
@@ -28,11 +29,12 @@ function startup_data(){
 			email:"ella.amaryllis@fake.com",
 			password:"testpatient",
 			profile :{
-				name: "Ella Amaryllis",
+				name: "Ellaaaa Amaryllis",
 				phone_number : "555-111-2222",
 				dob:new Date("1 Aug 1990"),
 				mrn:"12983102",
-				gender:"female"},
+				gender:"female",
+				in_app_passcode:"12345"},
 			user_type:"patient"
 		});
 		
@@ -44,7 +46,8 @@ function startup_data(){
 				phone_number : "555-222-3333",
 				dob:new Date("3 Feb 1986"),
 				mrn:"36193716",
-				gender:"male"},
+				gender:"male",
+				in_app_passcode:"12345"},
 			user_type:"patient"
 		});
 		
@@ -56,7 +59,8 @@ function startup_data(){
 				phone_number : "555-777-8888",
 				dob:new Date("27 Jan 1970"),
 				mrn:"81730183",
-				gender:"male"},
+				gender:"male",
+				in_app_passcode:"12345"},
 			user_type:"patient"
 		});
 		
@@ -66,7 +70,8 @@ function startup_data(){
 			password:"demo",
 			profile : {
 				name: "Gregory House",
-				phone_number : "555-888-9999"}, 
+				phone_number : "555-888-9999",
+				in_app_passcode:"12345"},
 			user_type: "staff"
 		});
 		
@@ -75,7 +80,8 @@ function startup_data(){
 			password:"teststaff",
 			profile : {
 				name: "Polly Robinson",
-				phone_number : "555-888-9999"}, 
+				phone_number : "555-888-9999",
+				in_app_passcode:"12345"},
 			user_type: "staff"
 		});
 

@@ -21,17 +21,18 @@
 		{{/ionItem}}
 		--}}
 		<!--<div class="navbar_normal_buttons">
-		{{> toggle_button}}
+
 		</div>-->
-		<!--{{> toggle_button}}-->
+
 	{{/contentFor}}
 
-	{{#contentFor "headerButtonRight"}}
-		{{!--
-		{{> atNavButton}}
-		--}}
-		{{> toggle_button}}
-	{{/contentFor}}
+    {{#contentFor "headerButtonRight"}}
+    {{!--
+    {{> atNavButton}}
+    --}}
+        <!--{{> toggle_button}}-->
+        {{> toggle_button_for_patient}}
+    {{/contentFor}}
 
 
 	{{#contentFor "headerTitle"}}
