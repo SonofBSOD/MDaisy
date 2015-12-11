@@ -28,7 +28,7 @@ AccountsTemplates.configure({
 	Precondition: 
 		the "options" object passed to Accounts.CreateUser
 		MUST contain a "user_type" attribute with one of the following values:
-		"patient", or "staff".
+		"staff".
 
 	Postcondition: 
 		returns a user document with a "user_type" attribute matching the value,
@@ -41,7 +41,7 @@ if(Meteor.isServer){
 	Accounts.onCreateUser(function(options, user) {
 		if(AT_CONFIG_DEBUG){
 			if((!options.hasOwnProperty("user_type")) || 
-			((options.user_type !== "patient") && (options.user_type !== "staff"))){
+			((options.user_type !== "staff"))){
 				alert("at_config.js, Accounts.onCreateUser precondition violation");
 			}
 		}

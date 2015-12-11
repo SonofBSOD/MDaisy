@@ -54,8 +54,9 @@ function startup_data(){
 		var ultrasound_appointment_id = appointments.insert({
 			user_id : staff_user_object._id,
 			user_name : "Ella Amaryllis",
-			user_dob: (new Date("1 Aug 1990")).toLocaleDateString(),
+			user_dob: new Date("1 Aug 1990"),
 			user_mrn: "12983102",
+			user_gender: "female",
 			proc_type : "Ultrasound",
 			accession: "5674567",
 			date : new Date("31 May 2017 12:00:00 EDT"),//"5/31/2017, 12:00 PM",
@@ -75,8 +76,9 @@ function startup_data(){
 		var mri_appointment_id = appointments.insert({
 			user_id : staff_user_object._id,
 			user_name : "Bob Jones",
-			user_dob: (new Date("12 Jun 1990")).toLocaleDateString(),
+			user_dob: new Date("12 Jun 1990"),
 			user_mrn: "16182369",
+			user_gender: "male",
 			proc_type : "CT",
 			accession: "5671234",
 			date : new Date("4 July 2016 3:00:00 EDT"),//"7/4/2016, 3:00 PM",
@@ -96,8 +98,9 @@ function startup_data(){
 		var barium_appointment_id = appointments.insert({
 			user_id : staff_user_object._id,
 			user_name : "Thamar Goran",
-			user_dob: (new Date("27 Jan 1970")).toLocaleDateString(),
+			user_dob: new Date("27 Jan 1970"),
 			user_mrn: "81730183",
+			user_gender: "male",
 			proc_type : "MRI",
 			accession: "5672345",
 			date : new Date("12 June 2016 2:00:00 EDT"),//"6/12/2016, 2:00 PM",
@@ -116,8 +119,9 @@ function startup_data(){
 		var ct_appointment_id = appointments.insert({
 			user_id : staff_user_object._id,
 			user_name : "Davor Fionnbarra",
-			user_dob: (new Date("3 Feb 1986")).toLocaleDateString(),
+			user_dob: new Date("3 Feb 1986"),
 			user_mrn: "36193716",
+			user_gender: "male",
 			proc_type : "MRI",
 			accession: "5673456",
 			date : new Date("6 Jun 2016 2:00:00 EDT"),//"6/12/2016, 2:00 PM",
