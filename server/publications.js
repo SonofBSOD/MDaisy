@@ -26,10 +26,6 @@ Meteor.publish("all_medical_info", function(){
 	return medicalInfo.find({});
 });
 
-Meteor.publish("all_preparations", function(){
-	return preparations.find({});
-});
-
 Meteor.publish("all_notifications", function(){
 	return notifications.find({});
 });
