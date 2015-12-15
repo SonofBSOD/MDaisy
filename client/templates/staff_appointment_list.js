@@ -5,7 +5,7 @@
 		of a patient's appointment. Uses the "query" Session variable
 		to determine which appointments to show up. If query is undefined
 		or the empty string, returns all of the user's appointments.
-
+		
 	get_id_data
 		Returns an object with three id's that will be used to set 
 		Session variables for the tabbed interfaces.
@@ -21,7 +21,7 @@
 Template.staff_appointment_list.helpers({
 	app_list : function(){
 		var user_id = Meteor.userId();
-
+		
 		if(user_id !== null){
 			//return everything if nothing searched for, else 
 			//do a regular expression search!
@@ -37,8 +37,10 @@ Template.staff_appointment_list.helpers({
 																					{organization:query_exp}, {department:query_exp}, {user_dob:query_exp},
 																						{user_mrn:query_exp}, {user_name:query_exp}
 																					]}]});*/
-				var db_list = appointments.find({$or: [{proc_type:query_exp}, {user_mrn:query_exp}, {user_name:query_exp}]});
-
+				var db_list = appointments.find({$and: [{'ordering_physician':user_id}, {$or: [ 
+																						{proc_type:query_exp}, {user_mrn:query_exp}, {user_name:query_exp}
+																					]}]});
+				
 				/*var final_list = [];
 				db_list.forEach(function(e){
 					var user = Meteor.users.findOne({_id:e.user_id});
@@ -48,11 +50,11 @@ Template.staff_appointment_list.helpers({
 						}
 					}
 				});
-
+				
 				return final_list;*/
 				return db_list;
 			}
-
+			
 		}
 		else{
 			return [];
@@ -93,26 +95,48 @@ Template.staff_appointment_list.helpers({
 		return unread_messages.count();
 	},
 	patient_name : function(){
-		return this.user_name;
+		var user = Meteor.users.findOne({_id:this.user_id});
+		if(user != undefined){
+			return user.profile.name;
+		}
 	},
 	patient_dob : function(){
-		return this.user_dob.toLocaleDateString().replace(/\//g, "-");
+		var user = Meteor.users.findOne({_id:this.user_id});
+		if(user != undefined){
+			return user.profile.dob.toLocaleDateString().replace(/\//g, "-");
+		}
 	},
 	patient_gender : function(){
-        if (this.user_gender == 'female') {
-            return 'F';
-        } else {
-            return 'M';
+        var user = Meteor.users.findOne({_id:this.user_id});
+        if (user != undefined){
+                    if (user.profile.gender == 'female') {
+                        return 'F';
+                    } else {
+                        return 'M';
+                    }
+                
         }
-
+        else{
+                console.log("common_info_card: could not fetch user associated with this appointment");
+        }
     },
     patient_age : function(){
-        var diff = Date.now() - this.user_dob.getTime();
-        var yrs = Math.abs((new Date(diff)).getUTCFullYear() - 1970);
-        return yrs + "";
+        var user = Meteor.users.findOne({_id:this.user_id});
+        if (user != undefined){
+            var diff = Date.now() - user.profile.dob.getTime();
+            var yrs = Math.abs((new Date(diff)).getUTCFullYear() - 1970);
+            return yrs + "";
+            // return yrs + " yrs";
+        }
+        else{
+            console.log("common_info_card: could not fetch user associated with this appointment");
+        }
     },
 	patient_mrn : function(){
-		return this.user_mrn;
+		var user = Meteor.users.findOne({_id:this.user_id});
+		if(user != undefined){
+			return user.profile.mrn;
+		}
 	},
 	formatted_date : function(){
 		return this.date.toLocaleDateString().replace(/\//g, "-");
@@ -126,7 +150,7 @@ Template.staff_appointment_list.helpers({
 		"updated_by_client" flag to false; this is because the staff is going to view it.
 		if this fails, we issue a prompt to try again. otherwise, we set the current
 		appointment_view_time and continue on to the staff detail page.
-
+		
 */
 Template.staff_appointment_list.events({
 	"click .staff_list_button":function(e, tmp_inst){
@@ -136,7 +160,7 @@ Template.staff_appointment_list.events({
 		var patient_id = this.data.user_id;
 		var physician_id = this.data.ordering_physician;
 		var appointment_object = this.data;
-
+		
 		Meteor.call("set_updated_by_client_false", appointment_id, function(error, res){
 			if(res){
 				Session.set("staff.tab.appointment_object", appointment_object);
