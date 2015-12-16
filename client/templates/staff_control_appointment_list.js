@@ -28,7 +28,9 @@ Template.staff_control_appointment_list.helpers({
 			var query = Session.get("query");
 			if(query === undefined || query === ""){
 				// return appointments.find({'ordering_physician':user_id});
-				return appointments.find({});
+				return appointments.find({}, {
+					sort: ['user_name']
+				});
 			}
 			else{
 				var query_exp = new RegExp(query.text, "i");
