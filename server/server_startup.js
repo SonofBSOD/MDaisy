@@ -29,6 +29,7 @@ function startup_data(){
 			password:"demo",
 			profile : {
 				name: "John Doe",
+				in_app_passcode:"12345"
 			},
 			user_type:"staff"
 		});
