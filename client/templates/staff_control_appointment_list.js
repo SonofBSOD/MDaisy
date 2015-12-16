@@ -27,18 +27,20 @@ Template.staff_control_appointment_list.helpers({
 			//do a regular expression search!
 			var query = Session.get("query");
 			if(query === undefined || query === ""){
-				return appointments.find({'ordering_physician':user_id});
+				// return appointments.find({'ordering_physician':user_id});
+				return appointments.find({});
 			}
 			else{
-				var query_exp = new RegExp(query, "i");
+				var query_exp = new RegExp(query.text, "i");
 				//and then filter the list to make sure we get a match on user name, dob, or mrn
 				/*var db_list = appointments.find({$and: [{'ordering_physician':user_id}, {$or: [{proc_type:query_exp}, {date:query_exp}, {location:query_exp},
 																					{organization:query_exp}, {department:query_exp}, {user_dob:query_exp},
 																						{user_mrn:query_exp}, {user_name:query_exp}
 																					]}]});*/
-				var db_list = appointments.find({$and: [{'ordering_physician':user_id}, {$or: [ 
-																						{proc_type:query_exp}, {user_mrn:query_exp}, {user_name:query_exp}
-																					]}]});
+				var db_list = appointments.find({ ordering_physician: user_id,
+												  proc_type: { $in: query.procs },
+												  user_name: query_exp,
+												  organization: query.organization })
 				
 				return db_list;
 			}

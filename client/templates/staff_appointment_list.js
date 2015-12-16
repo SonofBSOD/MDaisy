@@ -31,27 +31,22 @@ Template.staff_appointment_list.helpers({
 				return appointments.find({});
 			}
 			else{
-				var query_exp = new RegExp(query, "i");
+				var query_exp = new RegExp(query.text, "i");
 				//and then filter the list to make sure we get a match on user name, dob, or mrn
 				/*var db_list = appointments.find({$and: [{'ordering_physician':user_id}, {$or: [{proc_type:query_exp}, {date:query_exp}, {location:query_exp},
 																					{organization:query_exp}, {department:query_exp}, {user_dob:query_exp},
 																						{user_mrn:query_exp}, {user_name:query_exp}
 																					]}]});*/
-				var db_list = appointments.find({$and: [{'ordering_physician':user_id}, {$or: [ 
-																						{proc_type:query_exp}, {user_mrn:query_exp}, {user_name:query_exp}
-																					]}]});
+				// var db_list = appointments.find({$and: [{'ordering_physician':user_id}, {$or: [ 
+				// 																		{proc_type:query_exp}, {user_mrn:query_exp}, {user_name:query_exp}
+				// 																	]}]});
 				
-				/*var final_list = [];
-				db_list.forEach(function(e){
-					var user = Meteor.users.findOne({_id:e.user_id});
-					if(user != undefined){
-						if(query_exp.test(user.profile.name) || query_exp.test(user.profile.dob.toLocaleString()) || query_exp.test(user.profile.mrn)){
-							final_list.push(e);
-						}
-					}
-				});
-				
-				return final_list;*/
+
+				var db_list = appointments.find({ ordering_physician: user_id,
+												  proc_type: { $in: query.procs },
+												  user_name: query_exp,
+												  organization: query.organization })
+
 				return db_list;
 			}
 			

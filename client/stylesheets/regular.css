@@ -238,3 +238,39 @@ div .bar.bar-header.item-input-inset{
 	width: 700px;
 	height: 400px;
 }
+
+
+
+/*staff_search_box*/
+#proc_filter span{
+	display: inline-block;
+	text-align: center;
+	width: 33.333%;
+	padding: 10px 0;
+
+}
+
+#proc_filter span ~ span{ 
+	border-left: 1px solid lightgrey;
+}
+
+
+/*#proc_filter first-child{
+	display: inline-block;
+	text-align: center;
+	width: 33%;
+	border: 1px solid lightgrey;
+}*/
+
+
+#proc_filter {
+	text-align: center;
+}
+
+#proc_filter .proc_selected {
+	background-color: #387ef5;
+	color: white;
+}
+
+
+

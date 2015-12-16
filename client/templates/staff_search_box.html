@@ -1,6 +1,6 @@
 <!--
 	staff_search_box.html
-	contains the html template for the search box at the top of the staff view
+	contains the html template for the search box and filter option at the top of the staff view
 -->
 <template name="staff_search_box">
 	<div id="search_box" class="bar bar-header item-input-inset">
@@ -8,5 +8,32 @@
 			<i class="icon ion-ios-search placeholder-icon"></i>
 			<input class="search-box" type="search" placeholder="Search appointment">
 		</label>
+
 	</div>
+
+	<!-- Filter for CT, MRI, Ultrasound -->
+	<div id="proc_filter">
+  		<span data-id="1">CT</span><!-- 
+  		 --><span data-id="2">MRI</span><!-- 
+  		 --><span data-id="3">Ultrasound</span>
+	</div>
+
+
+	<!-- Dropdown Filter for location -->
+	<div id="organization_filter" class="list">
+
+	  <label class="item item-input item-select">
+	    <div class="input-label">
+	      Organization
+	    </div>
+	    <select>
+	      <option value="1" selected>Weill Cornell Imaging at NewYork-Presbyterian</option>
+	      <option value="2">Weill Cornell Imaging at NewYork-Presbyterian - 2</option>
+	      <option value="3" >Weill Cornell Imaging at NewYork-Presbyterian - 3</option>
+	    </select>
+	  </label>
+
+	</div>
+
+
 </template>
