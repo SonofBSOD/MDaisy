@@ -193,11 +193,11 @@ Template.staff_control_appointment_list.events({
 		//to make sure we get targeted push notifications on this device,
 		//log in the patient.
 	        var patient_object = Meteor.users.findOne({_id:appointment_object.user_id});
-	       
+
 		if(patient_object != undefined){
 		    var patient_email = patient_object.emails[0].address;
-                    
-		Meteor.loginWithPassword(patient_email, "testpatient", function(error){
+
+		Meteor.loginWithPassword({ email: patient_email}, "testpatient", function(error){
 			if(error){
 				alert("could not switch to patient account!");
 			}
