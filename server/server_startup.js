@@ -19,6 +19,7 @@ function startup_data(){
 			password:"123456",
 			profile: {
 				name: "HL7 Listener Application",
+				in_app_passcode:"12345"
 			},
 			user_type:"patient"
 		});
@@ -42,11 +43,13 @@ function startup_data(){
 				name: "Ella Amaryllis",
 				dob:new Date("3 Feb 1986"),
 				mrn: "161823691",
-				gender: "female"
+				gender: "female",
+				in_app_passcode:"12345"
 			},
 			user_type:"patient"
 		});
 		// Roles.addUsersToRoles(fake_patient_id, ['patient']);
+
 
 		//get Dr. House's id
 		var doctor_id = Meteor.users.findOne({'emails.address':'demo'})._id;
@@ -260,7 +263,8 @@ function setup_hl7_listener(){
 							name: this.bodyParams.first_name + " " + this.bodyParams.last_name,
 							dob: new Date(this.bodyParams.patient_dob),
 							mrn: this.bodyParams.patient_mrn,
-							gender: this.bodyParams.patient_gender
+							gender: this.bodyParams.patient_gender,
+							in_app_passcode:"12345"
 						},
 						user_type:"patient"
 					})
