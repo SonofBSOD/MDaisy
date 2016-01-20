@@ -245,6 +245,11 @@ function setup_hl7_listener(){
 		return GENDER_MAP[gender];
 	}
 
+
+	function parse_accsession(accession) {
+		return accession.split("-")[0];
+	}
+
 	// Global API configuration
 	var Api = new Restivus({
 	useDefaultAuth: true,
@@ -297,21 +302,21 @@ function setup_hl7_listener(){
 					patient_id = Meteor.users.findOne({'profile.mrn': this.bodyParams.patient_mrn})._id;
 				}
 
-				if(appointments.findOne({ 'accession': this.bodyParams.accession})) {
+				if(appointments.findOne({ 'accession': parse_accsession(this.bodyParams.accession)})) {
 					if (this.bodyParams.result_status == RESULT_STATUS_CODE["cancelled"] || this.bodyParams.result_status == RESULT_STATUS_CODE["cancelled"]) {
 						appointments.update({
-							accession: this.bodyParams.accession},
+							accession: parse_accsession(this.bodyParams.accession)},
 							{$set: {exam_ready: true}
 						});
 					};
 				} else {
 					var location = this.bodyParams.site + ", " + this.bodyParams.point_of_care;
 					appointments.insert({
-						accession: this.bodyParams.accession,
+						accession: parse_accsession(this.bodyParams.accession),
 						user_id:  patient_id,
 						user_name: this.bodyParams.first_name + " " + this.bodyParams.last_name,
 						user_dob: moment(this.bodyParams.patient_dob, "YYYYMMDD").toDate(),
-						user_mrn: this.bodyParams.patient_mrn.split("-")[0],
+						user_mrn: this.bodyParams.patient_mrn,
 						proc_type: parse_modality_from_service(this.bodyParams.service),
 						date: moment(this.bodyParams.scheduled_time, "YYYYMMDDHHmmss").toDate(),
 						location: location,
