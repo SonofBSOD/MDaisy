@@ -220,6 +220,31 @@ function send_notifications(){
 
 function setup_hl7_listener(){
 
+	function parse_modality_from_service(service) {
+		const REGEXP_MODALITY_MAP = {
+			'\\b(MRA|MRI|MR)\\b' : 'MRI',
+			'\\b(CT|CTA)\\b' : 'CT',
+			'\\bUS\\b' : 'Ultrasound'
+		}
+
+		for (var regexp in REGEXP_MODALITY_MAP) {
+			if (REGEXP_MODALITY_MAP.hasOwnProperty(regexp)) {
+				if(service.search(new RegExp(regexp)) != -1) {
+					return REGEXP_MODALITY_MAP[regexp];
+				}
+			}
+		}
+		return null;
+	}
+
+	function parse_gender(gender) {
+		const GENDER_MAP = {
+			'M' : 'male',
+			'F' : 'female'
+		};
+		return GENDER_MAP[gender];
+	}
+
 	// Global API configuration
 	var Api = new Restivus({
 	useDefaultAuth: true,
@@ -249,10 +274,10 @@ function setup_hl7_listener(){
 
 				var patient_id;
 
-				if(this.bodyParams.patient_class != OUTPATIENT_CLASS_CODE) {
+				if(this.bodyParams.patient_class != OUTPATIENT_CLASS_CODE || parse_modality_from_service(this.bodyParams.service) == null) {
 					return {
 						status: 'success',
-						data: {message: 'Patient Class is OutPatient appointment not added'}};
+						data: {message: 'Patient Class is OutPatient or unknown modality. appointment not added'}};
 				}
 
 				if (Meteor.users.findOne({'profile.mrn': this.bodyParams.patient_mrn}) === undefined) {
@@ -261,9 +286,9 @@ function setup_hl7_listener(){
 						password: "testpatient",
 						profile: {
 							name: this.bodyParams.first_name + " " + this.bodyParams.last_name,
-							dob: new Date(this.bodyParams.patient_dob),
+							dob: moment(this.bodyParams.patient_dob, "YYYYMMDD").toDate(),
 							mrn: this.bodyParams.patient_mrn,
-							gender: this.bodyParams.patient_gender,
+							gender: parse_gender(this.bodyParams.patient_gender),
 							in_app_passcode:"12345"
 						},
 						user_type:"patient"
@@ -285,10 +310,10 @@ function setup_hl7_listener(){
 						accession: this.bodyParams.accession,
 						user_id:  patient_id,
 						user_name: this.bodyParams.first_name + " " + this.bodyParams.last_name,
-						user_dob: new Date(this.bodyParams.user_dob),
-						user_mrn: this.bodyParams.user_mrn,
-						proc_type: "MRI",
-						date: new Date(this.bodyParams.scheduled_time),
+						user_dob: moment(this.bodyParams.patient_dob, "YYYYMMDD").toDate(),
+						user_mrn: this.bodyParams.patient_mrn.split("-")[0],
+						proc_type: parse_modality_from_service(this.bodyParams.service),
+						date: moment(this.bodyParams.scheduled_time, "YYYYMMDDHHmmss").toDate(),
 						location: location,
 						organization: ORGANIZATION,
 						department: DEPARTMENT,
