@@ -318,7 +318,7 @@ function setup_hl7_listener(){
 						user_dob: moment(this.bodyParams.patient_dob, "YYYYMMDD").toDate(),
 						user_mrn: this.bodyParams.patient_mrn,
 						proc_type: parse_modality_from_service(this.bodyParams.service),
-						date: moment(this.bodyParams.scheduled_time, "YYYYMMDDHHmmss").toDate(),
+						date: moment(this.bodyParams.scheduled_date, "YYYYMMDDHHmmss").toDate(),
 						location: location,
 						organization: ORGANIZATION,
 						department: DEPARTMENT,
