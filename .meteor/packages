@@ -13,7 +13,6 @@ meteoric:ionic-sass
 meteoric:ionicons-sass
 useraccounts:ionic
 accounts-password
-insecure
 percolate:synced-cron
 raix:cordova
 raix:eventstate
